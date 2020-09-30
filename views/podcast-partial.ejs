@@ -1,0 +1,14 @@
+<div class="card mt-4 mr-4 ml-2" style="width: 20rem;">
+  <img src="<%= podcast.image %>" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title"><%= podcast.title %></h5>
+    <p class="card-text"><%= podcast.description %></p>
+    <p class="card-text"><%= podcast.category %></p>
+    
+    <a href = "/podcasts/<%- podcast.podcastID%>"
+      <button type="submit" class="btn btn-primary">View</button>
+    </a>
+
+
+  </div>
+</div>

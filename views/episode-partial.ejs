@@ -1,0 +1,14 @@
+<div class="card mt-4 mr-4 ml-2" style="width: 20rem;">
+  <div class="card-body">
+    <h5 class="card-title"><%= episode.title %></h5>
+    <p class="card-text"><%= episode.description %></p>
+
+    <form method="POST" action="/episode">
+      <input type="hidden" name="episodeID" value="<%- episode.episodeID %>">
+      <button type="submit" class="btn btn-primary">WatchPost</button>
+    </form>
+    <a href = "/episode/<%- episode.episodeID%>"
+      <button type="submit" class="btn btn-primary">Watch</button>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<%- include('header', {title, active: 'register'}); -%>
+
+<main class="container-fluid mt-3">
+    <div class="row">
+      <div class="col-8 mx-auto">
+        <form method="POST" action="/register" id="register-form" name="register-fom" class="col-6 mx-auto">            
+          <div class="form-group">
+              <label for="username">Username</label>
+              <input type="username"  id ="username" name="username" class="form-control" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id = "email" name="email" class="form-control" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id = "password" name="password" class="form-control" required autocomplete/>
+          </div>
+          <div class="form-group">
+            <label for="password2">Password</label>
+            <input type="password" id = "password2" name="password2" class="form-control" required />
+          </div>
+          <div class="form-group">
+            <label for="creator">Creator</label>
+            <div class="form-check">
+              <input type="checkbox" id = "creator" name="creator" class="form-check-input"/>
+              <label class = "form-check-label" for ="creator">
+                checkbox
+              </label>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">register</button>
+        </form>
+      </div>
+    </div>
+</main>
+
+<%- include('footer'); -%>

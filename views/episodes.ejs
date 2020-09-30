@@ -1,0 +1,23 @@
+<%- include('header', { title, active: 'episodes'}); -%>
+<main class="container-fluid mt-3">
+  <head>
+    <div class="jumbotron">
+      <h1 class="display-4">Hello, world!</h1>
+      <p class="lead">description</p>
+      <hr class="my-4">
+      <p>description</p>
+      <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+    </div>
+  </head>
+    <div class="row">
+      <div class = "col">
+        <tbody>
+          <% episodes.forEach((episode) => { %>
+            <%- include('episode-partial', {episode}); -%>
+          <% }); %>
+        </tbody>
+      </div>  
+    </div>
+</main>
+
+<%- include('footer'); -%>

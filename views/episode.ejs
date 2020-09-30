@@ -1,0 +1,20 @@
+
+      <%- include('header', { title, active: 'episode'}); -%>
+      <h5 class="card-title"><%= episode.title %></h5>
+      <p class="card-text"><%= episode.description %></p>
+      <tbody>
+
+            <form name = "comment" method="POST" action ="/episode/comment">
+              <input type ="hidden" name = episodeID id= "episodeID" value =<%- episode.episodeID%>
+                  <div class="form-group">
+                    <label for="Textarea">Insert your comment</label>
+                    <input type ="Text" name = "text" class = "form-constrol" id="text" placeholder= "text" required>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+
+            <% comments.forEach((comment) => { %>
+                  <%- include('comment-partial', {comment}); -%>
+                <% }); %>
+      </tbody>

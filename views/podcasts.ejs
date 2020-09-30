@@ -1,0 +1,16 @@
+<%- include('header', {title, active: 'podcasts'}); -%>
+
+<main class="container-fluid mt-3">
+    <div class="row">
+          
+            <tbody>
+              <% podcasts.forEach((podcast) => { %>
+                <%- include('podcast-partial', {podcast}); -%>
+              <% }); %>
+            </tbody>
+          
+      
+    </div>
+</main>
+
+<%- include('footer'); -%>
