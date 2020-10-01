@@ -20,4 +20,12 @@ router.get('/dashboard', function(req, res, next) {
 
 });
 
+router.post('/dashboard/addPodcast', function(req, res, next) {
+    console.log(req.params.newTitle, req.body.inputNewDescription,req.user.id);
+    podcastdao.addPodcast(req.body.title, req.body.creator,req.body.description,req.body.category,req.body.image, req.user.id)
+    .then((newpodcast)=> {
+      res.redirect('back');
+    });
+  });
+
 module.exports = router;

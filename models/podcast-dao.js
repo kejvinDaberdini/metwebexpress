@@ -48,3 +48,18 @@ exports.getPodcastsByText = function(text) {
     });
   });
 };
+
+exports.addPodcast = function(title,creator,description,category,image,userID){
+  return new Promise((resolve, reject)=>{
+    const sql = 'INSERT INTO podcast( title, creator, description, category, image, creatorID) VALUES( $title,$creator,$description,$category,$image, $creatorID)';
+    const param= {$title:title, $creator:creator, $description:description, $category:category, $image:image, $creatorID:userID};
+    db.run(sql, param, function(err){
+      if(err){
+        reject(err);
+      }
+      else{
+        resolve(this.lastID);
+      }
+    });
+  });
+}

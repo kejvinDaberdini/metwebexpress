@@ -4,7 +4,7 @@ const db = require('../db.js');
 
 exports.getAllEpisodes = function(id) {
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM episode JOIN podcast ON episode.podcastID=podcast.podcastID WHERE podcastID=?';
+    const sql = 'SELECT * FROM episode  WHERE podcastID=?';
     db.all(sql, [id], (err, rows) => {
       if (err) {
         reject(err);

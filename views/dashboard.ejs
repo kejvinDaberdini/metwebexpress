@@ -3,7 +3,7 @@
 <main class="container-fluid mt-3">
     <div class="row">
       <h1>
-        HEllo
+        UserPage
       </h1>
             <tbody>
               <% podcasts.forEach((podcast) => { %>
@@ -13,6 +13,72 @@
           
       
     </div>
+    <div class="col-lg-3">   <!--spazio da dedicare alle opzioni da seguire-->
+      <h3>Options:</h3>
+      <div class="container-fluid">
+          <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                  <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#addPodcastModal">Add Podcast</button>
+                  <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#addEpModal">Add Episode</button>
+                  
+              </li>
+              <li class="list-group-item">
+                <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#delSeriesModal">Delete series</button>
+                <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#delEpModal">Delete Episode</button>
+              </li>
+              <li class="list-group-item">
+                <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#updateSeriesModal">Update Series</button>
+                  <button class="btn btn-primary" type="submit">Update Ep.</button>
+              </li>
+              
+            </ul>
+      </div>
+  </div>
+   <!--  add Modal -->
+   <div class="modal fade" id="addPodcastModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ModalLongTitle1">add podcast</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="/dashboard/addPodcast" method="POST" enctype="multipart/form-data">
+          <div class="modal-body">
+
+
+            <div class="form-group">
+              <label for="inputNewTitle">New Title</label>
+              <input type="text" name="newTitle" class="form-control" id="inputNewTitle" placeholder="Enter new title" required>
+            </div>
+
+            <div class="form-group">
+              <label for="inputNewDescription">New Description</label>
+              <textarea class="form-control" name="newDesc" id="inputNewDescription" rows="3"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="inputNewImage">New Image</label>
+              <input type="file" name="newImg" class="form-control-file" id="inputNewImage">
+            </div>
+
+            <div class="form-group">
+              <label for="inputNewCategory">New Category</label>
+              <textarea class="form-control" name="newCategory" id="inputNewCategory" rows="3"></textarea>
+            </div>
+            
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form> 
+        
+      </div>
+    </div>
+  </div>
 </main>
 
 <%- include('footer'); -%>
