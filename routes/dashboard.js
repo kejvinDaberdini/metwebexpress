@@ -14,18 +14,25 @@ router.get('/dashboard', function(req, res, next) {
   //else {
   //  logged = false;
   //}
-      podcastdao.getPodcastsByUser(req.user.id).then((podcasts)=>{
+      podcastdao.getPodcastsByUser(req.user.userID).then((podcasts)=>{
           res.render('dashboard', {title: 'Dashboard', podcasts:podcasts})
       })
 
 });
 
 router.post('/dashboard/addPodcast', function(req, res, next) {
-    console.log(req.params.newTitle, req.body.inputNewDescription,req.user.id);
-    podcastdao.addPodcast(req.body.title, req.body.creator,req.body.description,req.body.category,req.body.image, req.user.id)
-    .then((newpodcast)=> {
+    
+    userdao.getUserById(req.user.userID).then((creator)=>{
+      console.log(req.body.newTitle, creator.username, req.body.newDesc,req.user.userID);
+      podcastdao.addPodcast(req.body.newTitle, creator.username,req.body.newDesc,req.body.newCategory,req.body.newImg, creator.userID)
+    .then(()=> {
       res.redirect('back');
-    });
+    })
+    })
+    
+    /*.catch(()=>{
+      res.redirect('/');
+    });*/
   });
 
 module.exports = router;

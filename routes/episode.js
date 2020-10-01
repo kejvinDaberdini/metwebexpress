@@ -33,8 +33,8 @@ router.get('/episode/:episodeID', function(req, res, next) {
 });
 
 router.post('/episode/comment', function(req, res, next) {
-  console.log(req.body.episodeID, req.user.id, req.body.text);
-  dao.addComment(req.body.text, req.body.episodeID, req.user.id)
+  console.log(req.body.episodeID, req.user.userID, req.body.text);
+  dao.addComment(req.body.text, req.body.episodeID, req.user.userID)
   .then((comments)=> {
     res.redirect('back');
   });

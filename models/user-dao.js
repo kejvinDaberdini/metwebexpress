@@ -12,7 +12,7 @@ exports.getUserById = function(id) {
           else if (row === undefined)
               resolve({error: 'User not found.'});
           else {
-              const user = {id: row.userID, username: row.email}
+              const user = {userID: row.userID, username: row.username, email: row.email, creator: row.creator}
               resolve(user);
           }
       });
