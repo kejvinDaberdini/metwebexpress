@@ -63,3 +63,19 @@ exports.addPodcast = function(title,creator,description,category,image,userID){
     });
   });
 }
+
+exports.getAllCategories = function() {
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT * FROM category';
+    db.all(sql, (err, rows) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+
+      //const podcasts = rows.map((e) => ({title: e.title, description: e.description, category: e.category, image: e.image, podcastID: e.podcastID}));
+      //resolve(podcasts);
+      resolve(rows);
+    });
+  });
+};

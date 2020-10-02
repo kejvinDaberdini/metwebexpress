@@ -14,10 +14,11 @@ router.get('/dashboard', function(req, res, next) {
   //else {
   //  logged = false;
   //}
-      podcastdao.getPodcastsByUser(req.user.userID).then((podcasts)=>{
-          res.render('dashboard', {title: 'Dashboard', podcasts:podcasts})
-      })
-
+  podcastdao.getAllCategories().then((categories)=>{
+    podcastdao.getPodcastsByUser(req.user.userID).then((podcasts)=>{
+      res.render('dashboard', {title: 'Dashboard', podcasts:podcasts})
+    })
+  })
 });
 
 router.post('/dashboard/addPodcast', function(req, res, next) {
