@@ -71,10 +71,7 @@ exports.getAllCategories = function() {
       if (err) {
         reject(err);
         return;
-      }
-
-      //const podcasts = rows.map((e) => ({title: e.title, description: e.description, category: e.category, image: e.image, podcastID: e.podcastID}));
-      //resolve(podcasts);
+      };
       resolve(rows);
     });
   });

@@ -15,6 +15,7 @@ router.get('/dashboard', function(req, res, next) {
   //  logged = false;
   //}
   podcastdao.getAllCategories().then((categories)=>{
+    console.log(categories);
     podcastdao.getPodcastsByUser(req.user.userID).then((podcasts)=>{
       res.render('dashboard', {title: 'Dashboard', podcasts:podcasts})
     })

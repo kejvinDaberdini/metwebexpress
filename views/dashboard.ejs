@@ -6,9 +6,21 @@
         UserPage
       </h1>
             <tbody>
-              <% podcasts.forEach((podcast) => { %>
-                <%- include('podcast-partial', {podcast}); -%>
-              <% }); %>
+             
+                <% podcasts.forEach((podcast) => { %>
+                  <%- include('podcast-partial', {podcast}); -%>
+                     <!--spazio da dedicare alle opzioni da seguire-->
+                    <h3>Options:</h3>
+                    
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                              <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#updateSeriesModal">Update Podcast</button>
+                              <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#delSeriesModal">Delete Podcast</button>       
+                            </li> 
+                          </ul>
+                <% }); %>
+            
+              
             </tbody>
           
       
@@ -71,14 +83,6 @@
             <div class="form-group">
               <label for="inputNewCategory">New Category</label>
               
-              <select class="custom-select" name="newCategoty" id="inputNewCategory">
-                <option value="<%- podcast.category%>" selected><%= data.categories[0].nome%></option>
-                <%categories.slice(1).forEach((category)=>{%>
-                  <%- include("../snippets/modalCatElement",{category:category})%>
-                <%})%>
-              </select>
-            </div>
-            
 
           </div>
           <div class="modal-footer">
