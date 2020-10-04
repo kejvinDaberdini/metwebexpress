@@ -8,33 +8,55 @@ const router = express.Router();
 
 router.get('/dashboard', function(req, res, next) {
   let logged = req.isAuthenticated();
-  //if(req.isAuthenticated()){
-  //  logged = true;
-  //} 
-  //else {
-  //  logged = false;
-  //}
   podcastdao.getAllCategories().then((categories)=>{
-    //console.log(categories);
     podcastdao.getPodcastsByUser(req.user.userID).then((podcasts)=>{
-      res.render('dashboard', {title: 'Dashboard', podcasts:podcasts, categories:categories})
+      episodedao.getEpisodesByUser(req.user.userID).then((episodes)=>{
+        res.render('dashboard', {title: 'Dashboard', podcasts:podcasts, categories:categories, episodes:episodes})
+      })   
     })
   })
 });
 
-router.post('/dashboard/addPodcast', function(req, res, next) {
-    
-    userdao.getUserById(req.user.userID).then((creator)=>{
-      console.log(req.body.newTitle, creator.username, req.body.newDesc,req.body.newCategory, req.user.userID);
-      podcastdao.addPodcast(req.body.newTitle, creator.username,req.body.newDesc,req.body.newCategory,req.body.newImg, creator.userID)
+router.post('/dashboard/addPodcast', function(req, res, next) {   
+  userdao.getUserById(req.user.userID).then((creator)=>{
+    podcastdao.addPodcast(req.body.newTitle, creator.username,req.body.newDesc,req.body.newCategory,req.body.newImg, creator.userID)
     .then(()=> {
       res.redirect('back');
     })
-    })
-    
-    /*.catch(()=>{
-      res.redirect('/');
-    });*/
-  });
+  })
+});
+
+router.post('/dashboard/updatePodcast', function(req, res, next) {  
+    //console.log(req.body.newTitle, req.body.newDesc,req.body.newCategory, req.body.oldPodcast);
+  podcastdao.updatePodcast(req.body.newTitle, req.body.newDesc, req.body.newCategory, req.body.newImg, req.body.oldPodcast)
+  .then(()=> {
+    res.redirect('back');
+  })    
+});
+
+  router.post('/dashboard/deletePodcast', function(req, res, next) {  
+    console.log(req.body.oldPodcast);
+    podcastdao.deletePodcast(req.body.oldPodcast)
+  .then(()=> {
+    res.redirect('back');
+  })    
+});
+
+router.post('/dashboard/addEpisode', function(req, res, next) {   
+  episodedao.addEpisode(req.body.newTitle, req.body.newDesc, req.body.newFile, req.body.newPrice, req.body.podcastID)
+  .then(()=> {
+    res.redirect('back');
+  })
+});
+
+router.post('/dashboard/updateEpisode', function(req, res, next) {  
+  //console.log(req.body.newTitle, req.body.newDesc,req.body.newCategory, req.body.oldPodcast);
+podcastdao.updateEpisode(req.body.newTitle, req.body.newDesc, req.body.newFile, req.body.newPrice, req.body.episodeID)
+.then(()=> {
+  res.redirect('back');
+})    
+});
+
+
 
 module.exports = router;

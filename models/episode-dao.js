@@ -1,6 +1,7 @@
 'use strict';
 
 const db = require('../db.js');
+const moment = require('moment');
 
 exports.getAllEpisodes = function(id) {
   return new Promise((resolve, reject) => {
@@ -45,6 +46,21 @@ exports.getEpisode = function(id) {
       ));*/
 
       resolve(row);
+    });
+  });
+};
+
+exports.getEpisodesByUser = function(id) {
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT episode.episodeID, episode.title, episode.file, episode.dataCaricamento, episode.price, episode.description FROM episode JOIN podcast ON episode.podcastID=podcast.podcastID WHERE creatorID=?';
+    db.all(sql,[id], (err, rows) => {
+      if (err) {
+        reject(err);
+      };
+
+      //const podcasts = rows.map((e) => ({title: e.title, description: e.description, category: e.category, image: e.image, podcastID: e.podcastID}));
+      //resolve(podcasts);
+      resolve(rows);
     });
   });
 };
@@ -101,6 +117,38 @@ exports.deleteComment = function(id){
       }
       else{
         resolve(err);
+      }
+    });
+  });
+}
+
+exports.addEpisode = function(title, description, file, price, podcastID){
+  return new Promise((resolve, reject)=>{
+    const sql = 'INSERT INTO episode( title, description, file, dataCaricamento, price, podcastID) VALUES( $title, $description, $file, $date, $price, $podcastID)';
+    const time = moment().format('DD-MM-YYYY');
+    console.log();
+    const param= {$title:title, $description:description, $file:file, $date:time, $price:price, $podcastID:podcastID};
+    db.run(sql, param, function(err){
+      if(err){
+        reject(err);
+      }
+      else{
+        resolve(this.lastID);
+      }
+    });
+  });
+}
+
+exports.updateEpisode = function(title, description, file, price, episodeID){
+  return new Promise((resolve, reject)=>{
+    const sql = 'UPDATE episode SET title=$title, description=$description, file=$file, price=$price WHERE episodeID=$episodeID';
+    const param= {$title:title, $description:description, $file:file, $price:price, $episodeID:episodeID};
+    db.run(sql, param, function(err){
+      if(err){
+        reject(err);
+      }
+      else{
+        resolve(this.lastID);
       }
     });
   });

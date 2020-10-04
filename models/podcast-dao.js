@@ -65,6 +65,37 @@ exports.addPodcast = function(title,creator,description,category,image,userID){
   });
 }
 
+exports.updatePodcast = function(title,description,category,image,podcastID){
+  return new Promise((resolve, reject)=>{
+    const sql = 'UPDATE podcast SET title=$title, description=$description, category=$category, image=$image WHERE podcastID=$podcastID';
+    console.log(title,description,category,image,podcastID);
+    const param= {$title:title, $description:description, $category:category, $image:image, $podcastID:podcastID};
+    db.run(sql, param, function(err){
+      if(err){
+        reject(err);
+      }
+      else{
+        resolve(this.lastID);
+      }
+    });
+  });
+}
+
+exports.deletePodcast = function(podcastID){
+  return new Promise((resolve, reject)=>{
+    const sql = 'DELETE  FROM podcast WHERE podcastID=?';
+    console.log(podcastID); 
+    db.run(sql, [podcastID], function(err){
+      if(err){
+        reject(err);
+      }
+      else{
+        resolve(this.lastID);
+      }
+    });
+  });
+}
+
 exports.getAllCategories = function() {
   return new Promise((resolve, reject) => {
     const sql = 'SELECT * FROM category';
