@@ -15,9 +15,9 @@ router.get('/dashboard', function(req, res, next) {
   //  logged = false;
   //}
   podcastdao.getAllCategories().then((categories)=>{
-    console.log(categories);
+    //console.log(categories);
     podcastdao.getPodcastsByUser(req.user.userID).then((podcasts)=>{
-      res.render('dashboard', {title: 'Dashboard', podcasts:podcasts})
+      res.render('dashboard', {title: 'Dashboard', podcasts:podcasts, categories:categories})
     })
   })
 });
@@ -25,7 +25,7 @@ router.get('/dashboard', function(req, res, next) {
 router.post('/dashboard/addPodcast', function(req, res, next) {
     
     userdao.getUserById(req.user.userID).then((creator)=>{
-      console.log(req.body.newTitle, creator.username, req.body.newDesc,req.user.userID);
+      console.log(req.body.newTitle, creator.username, req.body.newDesc,req.body.newCategory, req.user.userID);
       podcastdao.addPodcast(req.body.newTitle, creator.username,req.body.newDesc,req.body.newCategory,req.body.newImg, creator.userID)
     .then(()=> {
       res.redirect('back');
