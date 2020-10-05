@@ -2,10 +2,11 @@
   <div class="card-body">
     <h5 class="card-title"><%= episode.title %></h5>
     <p class="card-text"><%= episode.description %></p>
+    <p class="card-text"><%= episode.price %></p>
 
-    <form method="POST" action="/episode">
+    <form method="POST" action="/episode/favorite">
       <input type="hidden" name="episodeID" value="<%- episode.episodeID %>">
-      <button type="submit" class="btn btn-primary">WatchPost</button>
+      <button type="submit" class="btn btn-primary">favorite</button>
     </form>
     <a href = "/episode/<%- episode.episodeID%>" >
       <button type="submit" class="btn btn-primary">Watch</button>

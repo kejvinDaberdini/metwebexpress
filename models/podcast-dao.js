@@ -1,7 +1,7 @@
 'use strict';
 
 const db = require('../db.js');
-
+//function to get all podcasts from the database
 exports.getAllPodcasts = function() {
   return new Promise((resolve, reject) => {
     const sql = 'SELECT * FROM podcast';
@@ -17,7 +17,29 @@ exports.getAllPodcasts = function() {
     });
   });
 };
+//function to get a podcast from its id
+exports.getPodcast = function(id) {
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT * FROM podcast WHERE podcastID=?';
+    db.get(sql, [id], (err, row) => {
+      if (err) {
+        reject(err);
+      }
+      /*const episode = row.map((e) => (
+        {
+          episodeID: e.episodeID,
+          title: e.title, 
+          description: e.description, 
+          file: e.file,
+          price: e.price,
+        }
+      ));*/
 
+      resolve(row);
+    });
+  });
+};
+//function to get all podcasts from a creator
 exports.getPodcastsByUser = function(id) {
   return new Promise((resolve, reject) => {
     const sql = 'SELECT * FROM podcast WHERE creatorID=?';
@@ -32,7 +54,7 @@ exports.getPodcastsByUser = function(id) {
     });
   });
 };
-
+//function to get all podcasts that contain an input text in their title or description
 exports.getPodcastsByText = function(text) {
   return new Promise((resolve, reject) => {
     const sql = 'SELECT * FROM podcast WHERE title OR description LIKE ?';
@@ -48,7 +70,7 @@ exports.getPodcastsByText = function(text) {
     });
   });
 };
-
+//function to add a new podcast into the database
 exports.addPodcast = function(title,creator,description,category,image,userID){
   return new Promise((resolve, reject)=>{
     const sql = 'INSERT INTO podcast( title, creator, description, category, image, creatorID) VALUES( $title,$creator,$description,$category,$image, $creatorID)';
@@ -64,7 +86,7 @@ exports.addPodcast = function(title,creator,description,category,image,userID){
     });
   });
 }
-
+//function to update the podcast from the database
 exports.updatePodcast = function(title,description,category,image,podcastID){
   return new Promise((resolve, reject)=>{
     const sql = 'UPDATE podcast SET title=$title, description=$description, category=$category, image=$image WHERE podcastID=$podcastID';
@@ -80,7 +102,7 @@ exports.updatePodcast = function(title,description,category,image,podcastID){
     });
   });
 }
-
+//function to delete the podcast from the database
 exports.deletePodcast = function(podcastID){
   return new Promise((resolve, reject)=>{
     const sql = 'DELETE  FROM podcast WHERE podcastID=?';
@@ -95,7 +117,7 @@ exports.deletePodcast = function(podcastID){
     });
   });
 }
-
+//function to get all categories from the database
 exports.getAllCategories = function() {
   return new Promise((resolve, reject) => {
     const sql = 'SELECT * FROM category';
@@ -108,3 +130,30 @@ exports.getAllCategories = function() {
     });
   });
 };
+
+exports.followPodcast = function(userID,podcastID){
+  return new Promise((resolve, reject)=>{
+    console.log(userID,podcastID);
+    const sql = 'INSERT INTO follow(userID, podcastID) VALUES(?, ?)';
+    db.run(sql,[userID, podcastID],(err,row)=>{
+      if(err){
+        reject(err);
+        return;
+      };
+      resolve(row);
+    })    
+  })
+}
+
+exports.getFollowedPodcasts = function(userID){
+  return new Promise((resolve, reject)=>{
+    const sql= 'SELECT * FROM podcast JOIN follow WHERE podcast.podcastID=follow.podcastID AND follow.userID=?';
+    db.all(sql,[userID],(err,rows)=>{
+      if(err){
+        reject(err);
+        return;
+      };
+      resolve(rows);
+    })
+  })
+}

@@ -170,3 +170,17 @@ exports.deleteEpisode = function(episodeID){
     });
   });
 }
+
+exports.favoriteEpisode = function(userID,episodeID){
+  return new Promise((resolve, reject)=>{
+    const sql ="INSERT INTO favorite(userID,episodeID) VALUES(?,?)";
+    db.run(sql,[userID,episodeID],function(err){
+      if(err){
+        reject(err);
+      }
+      else{
+        resolve(this.lastID);
+      }
+    })
+  })
+}

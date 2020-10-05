@@ -1,5 +1,16 @@
 <%- include('header', {title, active: 'dashboard'}); -%>
+<div class="row">
+  <h1>
+    Podcasts your follow
+  </h1>
+  <tbody>
+           
+    <% followed.forEach((podcast) => { %>
+      <%- include('podcast-partial', {podcast}); -%>                
+    <% }); %>         
+  </tbody>  
 
+<%if(creator==1){%>
 <main class="container-fluid mt-3">
   <div class="row">
     <h1>
@@ -184,7 +195,7 @@
               <label for="inputEpisode">Episode</label>
               <select class="custom-select" name="episodeID" id="inputEpisode">  
                   <% for(let i=0; i < episodes.length; i++){%>
-                    <option value ="<%- episodes[i].podcastID %>" ><%= episodes[i].title%> </option>
+                    <option value ="<%- episodes[i].episodeID %>" ><%= episodes[i].title%> </option>
                   <%}%>
               </select>
             </div>
@@ -209,10 +220,13 @@
         </div>
         <form action="/dashboard/updateEpisode" method="POST" >
           <div class="modal-body">
+
+            
+
             <div class="form-group">
               <label for="inputEpisode">Episode</label>
               <select class="custom-select" name="episodeID" id="inputEpisode">  
-                <% for(let i=0; i < episodes.length; i++){%>
+                <% for(let i=0; i < episodes.length; i++){%>   
                   <option value ="<%- episodes[i].episodeID %>" ><%= episodes[i].title%> </option>
                 <%}%>
               </select>
@@ -299,10 +313,7 @@
     </div>
   </div>
 
- 
- 
-
-  
 </main>
+<%}%>
 
 <%- include('footer'); -%>

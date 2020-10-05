@@ -1,0 +1,17 @@
+-follow e favorite nel db non hanno vincolo di unic tra coppia(userID,podcastID) e(userID,episodeID): 
+	ricreare queste entita mettendo come primary key le coppie (userID,podcastID) e(userID,episodeID).
+	
+-fare  le funzioni Unfullow e Unfavorite e avere i bottoni inverti nel caso sia o non sia gia seguito/favorito
+-fare bottone login e renderlo invertito con i bottoni logout 
+-fare invertimento con bottone register e logout
+-gestire i file di audio 
+-fare i controlli divalidazione inserimenti in tutti i form/modali
+-fare modale di acquisto
+-modifica e rimmozione commento
+-fare tutto il css e rimodellare l'html
+-aggiungere date ai commenti e a tutto penso
+
+
+
+
+	

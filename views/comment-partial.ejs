@@ -3,6 +3,12 @@
     <div class="media-body">
       <h5 class="mt-0"><%= comment.username %></h5>
       <%= comment.commentText %>
+      <%if(comment.username== username){%>
+        <form method="POST" action="/comment/update">
+          <input type="hidden" name="commentID" value="<%- comment.commentID %>">
+          <button type="submit" class="btn btn-primary">update</button>
+        </form>
+        <%}%>
     </div>
     
   </div>

@@ -22,15 +22,24 @@ router.post('/episode', function(req, res, next) {
 */
 router.get('/episode/:episodeID', function(req, res, next) {
   console.log(req.body);
+  const username=req.user.username;
     dao.getEpisode(req.params.episodeID)
   .then((episode) => {
     console.log(req.body);
     dao.getComments(req.params.episodeID)
     .then((comments)=> {
-      res.render('episode', {title : 'Episode', episode:episode, comments:comments});
+      res.render('episode', {title : 'Episode', episode:episode, comments:comments, username:username});
     });
   });
 });
+
+router.post('/episode/favorite', function(req,res,next){
+  dao.favoriteEpisode(req.user.userID,req.body.episodeID)
+  .then(()=>{
+    res.redirect('back');
+  })
+})
+
 
 router.post('/episode/comment', function(req, res, next) {
   console.log(req.body.episodeID, req.user.userID, req.body.text);

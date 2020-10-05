@@ -2,11 +2,12 @@
 <main class="container-fluid mt-3">
   <head>
     <div class="jumbotron">
-      <h1 class="display-4">Hello, world!</h1>
-      <p class="lead">description</p>
+      <h1 class="display-4"><%= podcast.title %></h1>
+      <p class="lead"><%= podcast.description %></p>
       <hr class="my-4">
-      <p>description</p>
-      <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+      <form method="POST" action="/podcast/follow">
+        <input type="hidden" name="podcastID" value="<%- podcast.podcastID %>">
+        <button type="submit" class="btn btn-primary">follow</button>
     </div>
   </head>
     <div class="row">

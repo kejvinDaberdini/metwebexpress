@@ -8,11 +8,14 @@ const router = express.Router();
 
 router.get('/dashboard', function(req, res, next) {
   let logged = req.isAuthenticated();
+  const creator = req.user.creator;
   podcastdao.getAllCategories().then((categories)=>{
     podcastdao.getPodcastsByUser(req.user.userID).then((podcasts)=>{
-      episodedao.getEpisodesByUser(req.user.userID).then((episodes)=>{
-        res.render('dashboard', {title: 'Dashboard', podcasts:podcasts, categories:categories, episodes:episodes})
-      })   
+      podcastdao.getFollowedPodcasts(req.user.userID).then((followed)=>{
+        episodedao.getEpisodesByUser(req.user.userID).then((episodes)=>{
+          res.render('dashboard', {title: 'Dashboard', podcasts:podcasts, categories:categories, episodes:episodes, creator:creator, followed:followed})
+        }) 
+      })        
     })
   })
 });
@@ -58,6 +61,7 @@ episodedao.updateEpisode(req.body.newTitle, req.body.newDesc, req.body.newFile, 
 });
 
 router.post('/dashboard/deleteEpisode', function(req, res, next) {  
+  console.log("this is the id");
   console.log(req.body.episodeID);
   episodedao.deleteEpisode(req.body.episodeID)
 .then(()=> {

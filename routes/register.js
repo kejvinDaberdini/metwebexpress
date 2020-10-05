@@ -14,7 +14,7 @@ router.post('/register', function(req, res, next){
     const username = req.body.username;
     const password = req.body.password;
     const password2 = req.body.password2;
-    const creator = (req.body.creator='on')? 1:0;
+    const creator = (req.body.creator=='on')? 1:0;
 
       const newUser = {
         

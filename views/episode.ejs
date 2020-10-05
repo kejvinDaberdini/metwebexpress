@@ -2,6 +2,12 @@
       <%- include('header', { title, active: 'episode'}); -%>
       <h5 class="card-title"><%= episode.title %></h5>
       <p class="card-text"><%= episode.description %></p>
+      <p class="card-text"><%= episode.price %></p>
+
+      <form method="POST" action="/episode/favorite">
+        <input type="hidden" name="episodeID" value="<%- episode.episodeID %>">
+        <button type="submit" class="btn btn-primary">favorite</button>
+      </form>
       <tbody>
 
             <form name = "comment" method="POST" action ="/episode/comment">
