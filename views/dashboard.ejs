@@ -23,7 +23,7 @@
         <% }); %>    
       </tbody>  
   </div>
-  <div class="col-lg-2 "%>>   <!--spazio da dedicare alle opzioni da seguire-->
+  <div class="col-lg-6 ">   <!--spazio da dedicare alle opzioni da seguire-->
     <h3>Options:</h3>
     <div class="container-fluid">
       <ul class="list-group list-group-flush">
@@ -168,6 +168,86 @@
       </div>
     </div>
 
+    <!--  delete  Episode Modal -->
+  <div class="modal fade" id="deleteEpisodeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ModalLongTitle1">delete episode</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="/dashboard/deleteEpisode" method="POST" >
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="inputEpisode">Episode</label>
+              <select class="custom-select" name="episodeID" id="inputEpisode">  
+                  <% for(let i=0; i < episodes.length; i++){%>
+                    <option value ="<%- episodes[i].podcastID %>" ><%= episodes[i].title%> </option>
+                  <%}%>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>            
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>        
+      </div>
+    </div>
+  </div>
+   <!--  update  Episode Modal -->
+   <div class="modal fade" id="updateEpisodeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ModalLongTitle1">update episode</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="/dashboard/updateEpisode" method="POST" >
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="inputEpisode">Episode</label>
+              <select class="custom-select" name="episodeID" id="inputEpisode">  
+                <% for(let i=0; i < episodes.length; i++){%>
+                  <option value ="<%- episodes[i].episodeID %>" ><%= episodes[i].title%> </option>
+                <%}%>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="inputNewTitle">New Title</label>
+              <input type="text" name="newTitle" class="form-control" id="inputNewTitle" placeholder="Enter new title" required>
+            </div>
+
+            <div class="form-group">
+              <label for="inputNewDescription">New Description</label>
+              <textarea class="form-control" name="newDesc" id="inputNewDescription" rows="3"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="inputNewFile">New File</label>
+              <input type="file" name="newFile" class="form-control-file" id="inputNewFile">
+            </div>
+
+            <div class="form-group">
+              <label for="inputNewTitle">Price</label>
+              <input type="text" name="price" class="form-control" id="inputPrice" placeholder="Enter Price " required>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>            
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>        
+      </div>
+    </div>
+  </div>
+
+
     <!--  add Episode Modal -->
    <div class="modal fade" id="addEpisodeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -219,80 +299,10 @@
     </div>
   </div>
 
-  <!--  update  Episode Modal -->
-  <div class="modal fade" id="updateEpisodeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="ModalLongTitle1">update episode</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <form action="/dashboard/updateEpisode" method="POST" >
-          <div class="modal-body">
-            <div class="form-group">
-              <label for="inputEpisode">Episode</label>
-              <select class="custom-select" name="newEp" id="inputEpisode">  
-                <% for(let i=0; i < episodes.length; i++){%>
-                  <option value ="<%- episodes[i].episodeID %>" ><%= episodes[i].title%> </option>
-                <%}%>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="inputNewTitle">New Title</label>
-              <input type="text" name="newTitle" class="form-control" id="inputNewTitle" placeholder="Enter new title" required>
-            </div>
+ 
+ 
 
-            <div class="form-group">
-              <label for="inputNewDescription">New Description</label>
-              <textarea class="form-control" name="newDesc" id="inputNewDescription" rows="3"></textarea>
-            </div>
-
-            <div class="form-group">
-              <label for="inputNewFile">New File</label>
-              <input type="file" name="newFile" class="form-control-file" id="inputNewFile">
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>            
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </div>
-        </form>        
-      </div>
-    </div>
-  </div>
-
-      <!--  delete  Episode Modal -->
-      <div class="modal fade" id="deleteEpisodeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="ModalLongTitle1">delete episode</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <form action="/dashboard/deleteEpisode" method="POST" >
-              <div class="modal-body">
-                <div class="form-group">
-                  <label for="inputEpisode">Episode</label>
-                  <select class="custom-select" name="episodeID" id="inputEpisode">  
-                    <% for(let i=0; i < episodes.length; i++){%>
-                      <option value ="<%- episodes[i].podcastID %>" ><%= episodes[i].title%> </option>
-                    <%}%>
-                  </select>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>            
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
-            </form>        
-          </div>
-        </div>
-      </div>
-
+  
 </main>
 
 <%- include('footer'); -%>

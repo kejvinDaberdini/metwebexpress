@@ -34,7 +34,7 @@ router.post('/dashboard/updatePodcast', function(req, res, next) {
   })    
 });
 
-  router.post('/dashboard/deletePodcast', function(req, res, next) {  
+router.post('/dashboard/deletePodcast', function(req, res, next) {  
     console.log(req.body.oldPodcast);
     podcastdao.deletePodcast(req.body.oldPodcast)
   .then(()=> {
@@ -50,8 +50,16 @@ router.post('/dashboard/addEpisode', function(req, res, next) {
 });
 
 router.post('/dashboard/updateEpisode', function(req, res, next) {  
-  //console.log(req.body.newTitle, req.body.newDesc,req.body.newCategory, req.body.oldPodcast);
-podcastdao.updateEpisode(req.body.newTitle, req.body.newDesc, req.body.newFile, req.body.newPrice, req.body.episodeID)
+  console.log(req.body.newTitle, req.body.newDesc, req.body.episodeID);
+episodedao.updateEpisode(req.body.newTitle, req.body.newDesc, req.body.newFile, req.body.price, req.body.episodeID)
+.then(()=> {
+  res.redirect('back');
+})    
+});
+
+router.post('/dashboard/deleteEpisode', function(req, res, next) {  
+  console.log(req.body.episodeID);
+  episodedao.deleteEpisode(req.body.episodeID)
 .then(()=> {
   res.redirect('back');
 })    

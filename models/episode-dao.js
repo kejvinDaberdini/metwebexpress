@@ -141,9 +141,26 @@ exports.addEpisode = function(title, description, file, price, podcastID){
 
 exports.updateEpisode = function(title, description, file, price, episodeID){
   return new Promise((resolve, reject)=>{
+    
     const sql = 'UPDATE episode SET title=$title, description=$description, file=$file, price=$price WHERE episodeID=$episodeID';
     const param= {$title:title, $description:description, $file:file, $price:price, $episodeID:episodeID};
+    console.log(episodeID,title,description,file,price);
     db.run(sql, param, function(err){
+      if(err){
+        reject(err);
+      }
+      else{
+        resolve(this.lastID);
+      }
+    });
+  });
+}
+
+exports.deleteEpisode = function(episodeID){
+  return new Promise((resolve, reject)=>{
+    const sql = 'DELETE  FROM episode WHERE episodeID=?';
+    console.log(episodeID); 
+    db.run(sql, [episodeID], function(err){
       if(err){
         reject(err);
       }
