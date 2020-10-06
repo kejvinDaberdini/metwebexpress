@@ -4,11 +4,62 @@
       <h5 class="mt-0"><%= comment.username %></h5>
       <%= comment.commentText %>
       <%if(comment.username== username){%>
-        <form method="POST" action="/comment/update">
-          <input type="hidden" name="commentID" value="<%- comment.commentID %>">
-          <button type="submit" class="btn btn-primary">update</button>
-        </form>
+        <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#editCommentModal<%-comment.commentID%>">edit</button>
+        <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#deleteCommentModal<%-comment.commentID%>">delete</button>
+        
         <%}%>
-    </div>
-    
+    </div>   
   </div>
+
+
+     <!--  update  comment Modal -->
+     <div class="modal fade" id="editCommentModal<%-comment.commentID%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="ModalLongTitle1">edit comment</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form action="/episode/updateComment" method="POST" >
+            <div class="modal-body">
+
+              <input type="hidden" name="commentID" value="<%- comment.commentID %>">
+  
+              <div class="form-group">
+                <label for="inputNewtext">New Text</label>
+                <textarea class="form-control" name="newText" id="inputNewText" rows="3"></textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">cancel</button>            
+              <button type="submit" class="btn btn-primary">edit</button>
+            </div>
+          </form>        
+        </div>
+      </div>
+    </div>
+
+         <!--  delete comment Modal -->
+         <div class="modal fade" id="deleteCommentModal<%-comment.commentID%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="ModalLongTitle1">delete comment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form action="/episode/deleteComment" method="POST" >
+                <div class="modal-body">
+                  <input type="hidden" name="commentID" value="<%- comment.commentID %>">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">cancel</button>            
+                  <button type="submit" class="btn btn-primary">delete</button>
+                </div>
+              </form>        
+            </div>
+          </div>
+        </div>

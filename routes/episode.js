@@ -1,6 +1,7 @@
 'use strict';
 
 const dao = require('../models/episode-dao.js');
+const purchasedao = require('../models/purchase-dao.js');
 const express = require('express');
 const { route } = require('./episodes.js');
 const router = express.Router();
@@ -45,6 +46,29 @@ router.post('/episode/comment', function(req, res, next) {
   console.log(req.body.episodeID, req.user.userID, req.body.text);
   dao.addComment(req.body.text, req.body.episodeID, req.user.userID)
   .then((comments)=> {
+    res.redirect('back');
+  });
+});
+
+router.post('/episode/updateComment', function(req, res, next){
+  console.log(req.body.newText, req.body.commentID);
+  dao.updateComment(req.body.newText, req.body.commentID)
+  .then(()=> {
+    res.redirect('back');
+  });
+})
+
+router.post('episode/deleteComment', function(req, res, next){
+  console.log(req.params.commentID);
+  dao.deleteComment(req.params.commentID)
+  .then(()=> {
+    res.redirect('back');
+  });
+})
+
+router.post('/purchase/:episodeID', function(req, res, next){
+  purchasedao.buyEpisode(req.body.episodeID, req.user.userID)
+  .then(()=>{
     res.redirect('back');
   });
 });

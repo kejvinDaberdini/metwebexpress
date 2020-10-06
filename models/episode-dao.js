@@ -95,14 +95,16 @@ exports.addComment = function(text, episodeID, userID){
 
 exports.updateComment = function(newText, commentID){
   return new Promise((resolve, reject)=>{
-    
-    const sql = 'UPDATE comment SET commentText=? WHERE commentID=?';
+    console.log(newText, commentID);
+    const sql = 'UPDATE comment SET commentText= $newText WHERE commentID= $commmentID';
+    const params={$newText:newText, $commentID:commentID}
+   
     db.run(sql,[newText, commentID], function(err){
       if(err){
         reject(err);
       }
       else{
-        resolve(err);
+        resolve(this.lastID);
       }
     });
   });
@@ -116,7 +118,7 @@ exports.deleteComment = function(id){
         reject(err);
       }
       else{
-        resolve(err);
+        resolve(this.lastID);
       }
     });
   });
