@@ -3,6 +3,7 @@
       <h5 class="card-title"><%= episode.title %></h5>
       <p class="card-text"><%= episode.description %></p>
       <p class="card-text"><%= episode.price %></p>
+      <p class="card-text"><%= episode.sponsor %></p> 
 
       <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#buyEpisodeModal<%-episode.episodeID%>">buy</button>
 
@@ -39,7 +40,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form action="/purchase/:episodeID" method="POST" >
+          <form action="/episode/purchase" method="POST" >
             <div class="modal-body">
 
               <input type="hidden" name="episodeID" value="<%- episode.episodeID %>">

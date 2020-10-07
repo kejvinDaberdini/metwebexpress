@@ -147,7 +147,7 @@ exports.followPodcast = function(userID,podcastID){
 
 exports.getFollowedPodcasts = function(userID){
   return new Promise((resolve, reject)=>{
-    const sql= 'SELECT * FROM podcast JOIN follow WHERE podcast.podcastID=follow.podcastID AND follow.userID=?';
+    const sql= 'SELECT podcast.title FROM podcast JOIN follow WHERE podcast.podcastID=follow.podcastID AND follow.userID=?';
     db.all(sql,[userID],(err,rows)=>{
       if(err){
         reject(err);

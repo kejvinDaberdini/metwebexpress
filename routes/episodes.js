@@ -36,9 +36,11 @@ router.post('/podcast/follow',function(req,res,next){
     }); 
 });
 
-router.post('/purchase/:episodeID', function(req, res, next){
-  console.log(req.body.episodeID, req.user.userID)
-  purchasedao.buyEpisode(req.body.episodeID, req.user.userID)
+
+
+router.post('/episode/purchase', function(req, res, next){
+  console.log(req.body.episodeID, req.user.userID, req.body.newName, req.body.newSurname, req.body.newCardType, req.body.newCardNumber, req.body.newCardCCV);
+  purchasedao.buyEpisode(req.body.episodeID, req.user.userID, req.body.newName, req.body.newSurname, req.body.newCardType, req.body.newCardNumber, req.body.newCardCCV)
   .then(()=>{
     res.redirect('back');
   });

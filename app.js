@@ -112,9 +112,9 @@ app.use(function (req, res, next) {
 
 app.use('/',  sessionsRouter);
 app.use('/',  podcastsRouter);
-app.use('/', registerRouter);
-app.use('/', isLoggedIn, episodesRouter);
-app.use('/', isLoggedIn, episodeRouter);
+app.use('/',  registerRouter);
+app.use('/',  episodesRouter);
+app.use('/',  episodeRouter);
 app.use('/', isLoggedIn, dashboardRouter);
 // catch 404 and forward to error handler
 app.use('/', function(req, res, next) {

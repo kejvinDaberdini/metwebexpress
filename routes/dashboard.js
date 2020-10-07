@@ -7,15 +7,15 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/dashboard', function(req, res, next) {
-  let logged = req.isAuthenticated();
+  let logged = req.isAuthenticated();  
   const creator = req.user.creator;
   podcastdao.getAllCategories().then((categories)=>{
     podcastdao.getPodcastsByUser(req.user.userID).then((podcasts)=>{
       podcastdao.getFollowedPodcasts(req.user.userID).then((followed)=>{
         episodedao.getEpisodesByUser(req.user.userID).then((episodes)=>{
-          res.render('dashboard', {title: 'Dashboard', podcasts:podcasts, categories:categories, episodes:episodes, creator:creator, followed:followed})
+          res.render('dashboard', {title: 'Dashboard', podcasts:podcasts, categories:categories, episodes:episodes, creator:creator, followed:followed, logged:logged})
         }) 
-      })        
+     })        
     })
   })
 });

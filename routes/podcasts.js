@@ -7,10 +7,10 @@ const router = express.Router();
 
 
 router.get('/', function(req, res, next) {
-  let logged = req.isAuthenticated();
+let logged = req.isAuthenticated();  
   dao.getAllPodcasts()
   .then((podcasts) => {
-    res.render('podcasts', {title: 'Podcasts', podcasts});
+    res.render('podcasts', {title: 'Podcasts', podcasts, logged:logged});
   });
 });
 router.post('/podcast/follow',function(req,res,next){

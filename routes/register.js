@@ -3,13 +3,15 @@ const express = require('express');
 const passport = require('passport');
 const router = express.Router();
 
+
 router.get('/register', function(req,res,next){
-  res.render('register', {title: 'Registration page'});
+  let logged = req.isAuthenticated();  
+  res.render('register', {title: 'Registration page', logged:logged});
 });
 
 /* register ancora da implementare */
 router.post('/register', function(req, res, next){
-
+  let logged = req.isAuthenticated(); 
     const email = req.body.email;
     const username = req.body.username;
     const password = req.body.password;
@@ -27,12 +29,12 @@ router.post('/register', function(req, res, next){
       dao.createUser(newUser).then (err =>{
         if(err)
         {
-          res.render('register', {title: 'register page', 'message':'registration succesful'});
+          res.render('login', {title: 'login page', 'message':'registration succesful',logged:logged});
           
         }
         else
         {
-          res.render('register', {title: 'register page', 'message':'wrong data , try again'});
+          res.render('register', {title: 'register page', 'message':'wrong data , try again',logged:logged});
         }
       });
 
