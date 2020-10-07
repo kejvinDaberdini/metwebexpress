@@ -4,6 +4,10 @@
       <p class="card-text"><%= episode.description %></p>
       <p class="card-text"><%= episode.price %></p>
 
+      <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#buyEpisodeModal<%-episode.episodeID%>">buy</button>
+
+
+
       <form method="POST" action="/episode/favorite">
         <input type="hidden" name="episodeID" value="<%- episode.episodeID %>">
         <button type="submit" class="btn btn-primary">favorite</button>
@@ -24,3 +28,49 @@
                   <%- include('comment-partial', {comment}); -%>
                 <% }); %>
       </tbody>
+
+      <!--  buy Episode Modal -->
+     <div class="modal fade" id="buyEpisodeModal<%-episode.episodeID%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="ModalLongTitle1">episode purchase</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form action="/purchase/:episodeID" method="POST" >
+            <div class="modal-body">
+
+              <input type="hidden" name="episodeID" value="<%- episode.episodeID %>">
+
+              <div class="form-group">
+                <label for="inputName">name</label>
+                <input type="text" name="newName" class="form-control" id="inputName" placeholder="Insert your Name" required>
+              </div>
+              <div class="form-group">
+                <label for="inputSurname">surname</label>
+                <input type="text" name="newSurname" class="form-control" id="inputSurname" placeholder="Insert your Surname" required>
+              </div>
+              <div class="form-group">
+                <label for="inputCardType">card type</label>
+                <input type="text" name="newCardType" class="form-control" id="inputCardType" placeholder="Insert Card Type" required>
+              </div>
+              <div class="form-group">
+                <label for="inputCardNumber">card number</label>
+                <input type="number" name="newCardNumber" class="form-control" id="inputCardNumber" placeholder="Insert your card number" required>
+              </div>
+              <div class="form-group">
+                <label for="inputCardCCV">card ccv</label>
+                <input type="number" name="newCardCCV" class="form-control" id="inputCardCCV" placeholder="Insert your card CCV" required>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">cancel</button>            
+              <button type="submit" class="btn btn-primary">Buy</button>
+            </div>
+          </form>        
+        </div>
+      </div>
+    </div>

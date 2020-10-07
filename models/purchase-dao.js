@@ -1,3 +1,7 @@
+'use strict';
+
+const db = require('../db.js');
+
 exports.buyEpisode = function(episodeID,userID){
     return new Promise((resolve, reject)=>{
       //console.log(episodeID,userID);
