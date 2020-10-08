@@ -21,7 +21,7 @@ router.post('/sessions', function(req, res, next) {
     req.login(user, function(err) {
       if (err) { return next(err); }
       // req.user contains the authenticated user
-      res.redirect('/');
+      res.redirect('/homepage');
     });
   })(req, res, next);
 });

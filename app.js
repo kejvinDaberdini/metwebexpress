@@ -19,6 +19,7 @@ const episodeRouter  = require('./routes/episode');
 const sessionsRouter = require('./routes/sessions');
 const registerRouter = require('./routes/register');
 const dashboardRouter = require('./routes/dashboard');
+const homepageRouter = require('./routes/homepage');
 
 const app = express();
 
@@ -115,6 +116,7 @@ app.use('/',  podcastsRouter);
 app.use('/',  registerRouter);
 app.use('/',  episodesRouter);
 app.use('/',  episodeRouter);
+app.use('/',  isLoggedIn, homepageRouter);
 app.use('/', isLoggedIn, dashboardRouter);
 // catch 404 and forward to error handler
 app.use('/', function(req, res, next) {

@@ -5,10 +5,10 @@
     <p class="card-text"><%= episode.price %></p>
     <p class="card-text"><%= episode.sponsor %></p> 
    
-      <%if(episode.price != "0"){%>
+     <!-- <%if(episode.price != "0"){%>
         <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#buyEpisodeModal<%-episode.episodeID%>">buy</button>
       <%}%>
-  
+     -->
 
     <form method="POST" action="/episode/favorite">
       <input type="hidden" name="episodeID" value="<%- episode.episodeID %>">
@@ -20,7 +20,7 @@
   </div>
 </div>
 
-     <!--  buy Episode Modal -->
+     <!--  buy Episode Modal 
      <div class="modal fade" id="buyEpisodeModal<%-episode.episodeID%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -65,3 +65,5 @@
         </div>
       </div>
     </div>
+  -->
+  

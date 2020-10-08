@@ -1,0 +1,17 @@
+<%- include('header', {title, active: 'homepage'}); -%>
+<div class="row">
+
+  <tbody>
+    <h3>Podcasts your follow</h3>
+         
+    <% podcasts.forEach((podcast) => { %>
+      <%- include('podcast-partial', {podcast}); -%>                
+    <% }); %>  
+    
+    <h3>Your Favorite Episodes</h3>
+    <% episodes.forEach((episode) => { %>
+        <%- include('episode-partial', {episode}); -%>                
+      <% }); %>  
+  </tbody>  
+
+<%- include('footer'); -%>

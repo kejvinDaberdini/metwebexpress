@@ -1,16 +1,19 @@
 'use strict';
 
-const dao = require('../models/episode-dao.js');
-const dao2 = require('../models/podcast-dao.js');
+const episodedao = require('../models/episode-dao.js');
+const podcastdao = require('../models/podcast-dao.js');
 const express = require('express');
 const router = express.Router();
 
-router.post('podcasts/search', function(req, res, next){
-    const logged = req.isAuthenticated();
-    dao.getPodcastByText()
-    .then((search)=> {
-        res.render('podcasts',{title: 'Podcasts', podcasts});
-    });
-});
+router.get("/search", function(req,res,next){
+    let logged = req.isAuthenticated();  
+    podcastdao.getPodcastsByText(text, category)
+        .then((resultPodcasts)=>{
+            episodedao.getEpisodesByText(text)
+            .then((resultEpisodes)=>{
+                res.render('search', {title: 'Search', podcasts:resultPodcasts, episodes:resultEpisodes, logged:logged});
+                })
+            })  
+})
 
-module.exports = router;
+module.exports = router;  

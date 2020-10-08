@@ -54,22 +54,7 @@ exports.getPodcastsByUser = function(id) {
     });
   });
 };
-//function to get all podcasts that contain an input text in their title or description
-exports.getPodcastsByText = function(text) {
-  return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM podcast WHERE title OR description LIKE ?';
-    db.all(sql, [text], (err, rows) => {
-      if (err) {
-        reject(err);
-        return;
-      }
 
-      //const podcasts = rows.map((e) => ({title: e.title, description: e.description, category: e.category, image: e.image, podcastID: e.podcastID}));
-      //resolve(podcasts);
-      resolve(rows);
-    });
-  });
-};
 //function to add a new podcast into the database
 exports.addPodcast = function(title,creator,description,category,image,userID){
   return new Promise((resolve, reject)=>{
@@ -157,3 +142,29 @@ exports.getFollowedPodcasts = function(userID){
     })
   })
 }
+
+//function to get all podcasts that contain an input text in their title or description
+exports.getPodcastsByText = function(text, category) {
+  let param;
+  return new Promise((resolve, reject) => {
+    if(category=="All"){
+      const sql = 'SELECT * FROM podcast WHERE title OR description LIKE ?';
+      param= {$text:text};
+
+    }else{
+      const sql = 'SELECT * FROM podcast WHERE title OR description LIKE $text and category=$category';
+      param= {$text:text,$category:category};
+    }
+ 
+    db.all(sql, param, (err, rows) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+
+      //const podcasts = rows.map((e) => ({title: e.title, description: e.description, category: e.category, image: e.image, podcastID: e.podcastID}));
+      //resolve(podcasts);
+      resolve(rows);
+    });
+  });
+};

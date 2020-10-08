@@ -24,14 +24,18 @@ router.post('/episode', function(req, res, next) {
 */
 router.get('/episode/:episodeID', function(req, res, next) {
   let logged = req.isAuthenticated();
-
+  let username;
+  if (!logged){
+     username="";
+  }
+  else username=req.user.username;
   //const username=req.user.username;
   episodedao.getEpisode(req.params.episodeID)
   .then((episode) => {
     console.log(req.body);
     commentdao.getComments(req.params.episodeID)
     .then((comments)=> {
-      res.render('episode', {title : 'Episode', episode:episode, comments:comments, logged:logged });
+      res.render('episode', {title : 'Episode', episode:episode, comments:comments, logged:logged , username:username});
     });
   });
 });

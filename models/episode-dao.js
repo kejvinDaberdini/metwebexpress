@@ -116,3 +116,33 @@ exports.favoriteEpisode = function(userID,episodeID){
     })
   })
 }
+
+exports.getFavoriteEpisodes = function(userID){
+  return new Promise((resolve, reject)=>{
+    const sql= 'SELECT * FROM episode JOIN favorite WHERE favorite.userID=?';
+    db.all(sql,[userID],(err,rows)=>{
+      if(err){
+        reject(err);
+        return;
+      };
+      resolve(rows);
+    })
+  })
+}
+
+//function to get all podcasts that contain an input text in their title or description
+exports.getEpisodeByText = function(text) {
+  return new Promise((resolve, reject) => {
+      const sql = 'SELECT * FROM podcast WHERE title OR description LIKE ?';
+    db.all(sql, [text], (err, rows) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+
+      //const podcasts = rows.map((e) => ({title: e.title, description: e.description, category: e.category, image: e.image, podcastID: e.podcastID}));
+      //resolve(podcasts);
+      resolve(rows);
+    });
+  });
+};

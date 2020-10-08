@@ -1,6 +1,36 @@
 <%- include('header', {title, active: 'podcasts'}); -%>
 <h1><%=logged%></h1>
 
+<div class="container-fluid">
+  <div class="row">
+    <form calss="form-inline md-form mr-auto mb-4" action="/search" method="POST">
+      <div>
+        <input class="form-controll mr-sm-2" type="text" name="searchText" placeholder="search" aria-label="Search">
+      </div>
+      <div>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="buttoon" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Category
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="category" id="All" value="All" checked>
+              <label class ="form-check-label" for="All">All</label>
+            </div>
+            <%for(let i =0; i < categories.lenght; i++){%>
+              <div class="form-check-input" type="radio" name="category" id="<%-categories[i].name%>" value="<%=categories[i].name%>">
+              <label class ="form-check-label" for="<%-categories[i].name%>"><%-categories[i].name%></label>
+              </div>
+              <%}%>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
 <main class="container-fluid mt-3">
     <div class="row">
           
