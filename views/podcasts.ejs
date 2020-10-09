@@ -1,7 +1,7 @@
 <%- include('header', {title, active: 'podcasts'}); -%>
 <h1><%=logged%></h1>
 
-<div class="container-fluid">
+<!--<div class="container-fluid">
   <div class="row">
     <form calss="form-inline md-form mr-auto mb-4" action="/search" method="POST">
       <div>
@@ -27,7 +27,14 @@
       </div>
     </form>
   </div>
-</div>
+</div>-->
+
+<nav class="navbar navbar-light bg-light">
+  <form class="form-inline" action="/search" method="POST">
+    <input class="form-control mr-sm-2" type="search" name="text" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+</nav>
 
 
 

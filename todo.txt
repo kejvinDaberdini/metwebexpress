@@ -6,6 +6,8 @@
 -fare tutto il css e rimodellare l'html
 -aggiungere date ai commenti e a tutto penso
 -cambiare tutte le post e get sbagliato con le delete e put quando server
+-finire logica per vedere se un utente ha gia un episodio seguito o meno
+
 
 
 

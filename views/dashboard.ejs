@@ -1,14 +1,4 @@
 <%- include('header', {title, active: 'dashboard'}); -%>
-<div class="row">
-  <h1>
-    Podcasts your follow
-  </h1>
-  <tbody>
-           
-    <% followed.forEach((podcast) => { %>
-      <%- include('podcast-partial', {podcast}); -%>                
-    <% }); %>         
-  </tbody>  
 
 <%if(creator==1){%>
 <main class="container-fluid mt-3">

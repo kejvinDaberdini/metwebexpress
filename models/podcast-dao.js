@@ -146,14 +146,19 @@ exports.getFollowedPodcasts = function(userID){
 //function to get all podcasts that contain an input text in their title or description
 exports.getPodcastsByText = function(text, category) {
   let param;
+  let sql;
+  const search='%'+text+'%';
+  console.log("questi è il testo ricevuto dal controller",text);
   return new Promise((resolve, reject) => {
     if(category=="All"){
-      const sql = 'SELECT * FROM podcast WHERE title OR description LIKE ?';
-      param= {$text:text};
+      param= {$text:search};
+      sql = 'SELECT * FROM podcast WHERE title LIKE $text OR description LIKE $text   ';
+      
 
     }else{
-      const sql = 'SELECT * FROM podcast WHERE title OR description LIKE $text and category=$category';
-      param= {$text:text,$category:category};
+      param= {$text:search,$category:category};
+      sql = 'SELECT * FROM podcast WHERE title LIKE $text OR description LIKE $text   and category="Arts"';
+      
     }
  
     db.all(sql, param, (err, rows) => {

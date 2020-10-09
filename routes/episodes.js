@@ -3,6 +3,7 @@
 const episodedao = require('../models/episode-dao.js');
 const podcastdao = require('../models/podcast-dao.js');
 const purchasedao = require('../models/purchase-dao.js');
+const followdao = require('../models/follow-dao');
 
 const express = require('express');
 const router = express.Router();
@@ -30,7 +31,7 @@ router.get('/podcasts/:podcastID', function(req, res, next){
 router.post('/podcast/follow',function(req,res,next){
   //console.log(req.body.podcastID,req.user.userID);
   let logged= req.isAuthenticated();
-    podcastdao.followPodcast(req.user.userID,req.body.podcastID)
+    followdao.followPodcast(req.user.userID,req.body.podcastID)
     .then((follows) =>{
       res.redirect('back');
     }); 

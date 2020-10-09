@@ -131,10 +131,11 @@ exports.getFavoriteEpisodes = function(userID){
 }
 
 //function to get all podcasts that contain an input text in their title or description
-exports.getEpisodeByText = function(text) {
+exports.getEpisodesByText = function(text) {
   return new Promise((resolve, reject) => {
-      const sql = 'SELECT * FROM podcast WHERE title OR description LIKE ?';
-    db.all(sql, [text], (err, rows) => {
+      const sql = 'SELECT * FROM podcast WHERE title LIKE $text OR description LIKE $search ';
+      const search ='%'+text+'%';
+    db.all(sql, search, (err, rows) => {
       if (err) {
         reject(err);
         return;
