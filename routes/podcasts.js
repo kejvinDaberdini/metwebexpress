@@ -15,6 +15,7 @@ categorydao.getAllCategories()
   podcastdao.getAllPodcasts()
   .then((podcasts) => {
     console.log(categories.length);
+   
     res.render('podcasts', {title: 'Podcasts', podcasts, categories:categories, logged:logged});
   });
  }); 
@@ -27,9 +28,9 @@ router.post('/podcast/follow',function(req,res,next){
     res.redirect('/login');
   }
   else{
-    followdao.getFollowedPodcasts(req.user.userID)
+    followdao.isFollowing(req.user.userID,req.body.podcastID)
     .then((relation)=>{
-      if(!relation.req.body.podcastID){
+      if(!relation){
         followdao.followPodcast(req.user.userID,req.body.podcastID)
         .then((follows) =>{
           res.redirect('back');
@@ -44,18 +45,20 @@ router.post('/podcast/follow',function(req,res,next){
   
 })
 
-router.post("/search", function(req,res,next){
+router.get("/search", function(req,res,next){
   let logged = req.isAuthenticated();  
-  podcastdao.getPodcastsByText(req.body.text, "All")
-
-      .then((resultPodcasts)=>{
-          episodedao.getEpisodesByText(req.body.text)
+  categorydao.getAllCategories()
+.then((categories)=>{
+  podcastdao.getPodcastsByText(req.query.text, req.query.newCategory)
+      .then((resultPodcasts)=>{     
+          episodedao.getEpisodesByText(req.query.text)
           .then((resultEpisodes)=>{
-            console.log("questi è il testo cercato",req.body.text);
-            console.log("questi sono i podcasts",resultPodcasts);
-              res.render('search', {title: 'Search', podcasts:resultPodcasts, episodes:resultEpisodes, logged:logged});
+            console.log("questi è il testo cercato: ",req.query.text);
+            console.log("questi è la categoria: ",req.query.newCategory);
+              res.render('search', {title: 'Search', podcasts:resultPodcasts, episodes:resultEpisodes, categories:categories, logged:logged});
               })
-          })  
+          }) 
+        }) 
 })
 
 module.exports = router;

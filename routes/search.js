@@ -1,19 +1,24 @@
 'use strict';
-
+const categorydao = require('../models/category-dao.js');
 const episodedao = require('../models/episode-dao.js');
 const podcastdao = require('../models/podcast-dao.js');
 const express = require('express');
 const router = express.Router();
 
+
 router.get("/search", function(req,res,next){
     let logged = req.isAuthenticated();  
-    podcastdao.getPodcastsByText(text, category)
+    console.log("questi è la categoria: ",req.query.newCategory);
+    podcastdao.getPodcastsByText(req.query.text, req.query.newCategory)
+  
         .then((resultPodcasts)=>{
-            episodedao.getEpisodesByText(text)
+          
+            episodedao.getEpisodesByText(req.query.text)
             .then((resultEpisodes)=>{
+              console.log("questi è il testo cercato: ",req.query.text);
+              console.log("questi è la categoria: ",req.query.newCategory);
                 res.render('search', {title: 'Search', podcasts:resultPodcasts, episodes:resultEpisodes, logged:logged});
                 })
             })  
-})
-
+  })
 module.exports = router;  

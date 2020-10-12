@@ -1,18 +1,29 @@
 <%- include('header', {title, active: 'homepage'}); -%>
-<div class="row">
 
-  <tbody>
+
+<main class="container-fluid mt-3">
+  <div class="row">
     <h3>Podcasts your follow</h3>
-         
+     
     <% podcasts.forEach((podcast) => { %>
-      <%- include('podcast-partial', {podcast}); -%>                
-    <% }); %>  
- 
+      <%- include('podcast-partial', {podcast}); -%> 
+      <form method="POST" action="/podcast/unfollow">
+        <input type="hidden" name="podcastID" value="<%- podcast.podcastID %>">
+        <button type="submit" class="btn btn-primary">unfollow</button>
+
+      
     
+    <% }); %>  
+  </div>
+  </main>
+  <main class="container-fluid mt-3">
+    <div class="row">
     <h3>Your Favorite Episodes</h3>
     <% episodes.forEach((episode) => { %>
         <%- include('episode-partial', {episode}); -%>                
       <% }); %>  
-  </tbody>  
+    </div> 
+  </main>
+
 
 <%- include('footer'); -%>

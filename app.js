@@ -20,6 +20,7 @@ const sessionsRouter = require('./routes/sessions');
 const registerRouter = require('./routes/register');
 const dashboardRouter = require('./routes/dashboard');
 const homepageRouter = require('./routes/homepage');
+const searchRouter = require('./routes/search');
 
 const app = express();
 
@@ -116,6 +117,7 @@ app.use('/',  podcastsRouter);
 app.use('/',  registerRouter);
 app.use('/',  episodesRouter);
 app.use('/',  episodeRouter);
+app.use('/', searchRouter);
 app.use('/',  isLoggedIn, homepageRouter);
 app.use('/', isLoggedIn, dashboardRouter);
 // catch 404 and forward to error handler

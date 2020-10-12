@@ -12,15 +12,17 @@ exports.followPodcast = function(userID,podcastID){
           reject(err);
           return;
         };
+        console.log(row);
         resolve(row);
       })    
     })
   }
 
-  exports.deleteFollow = function(id){
+  exports.unfollowPodcast = function(user, podcast){
     return new Promise((resolve, reject)=>{
-      const sql = 'DELETE FROM follow WHERE followID=?';
-      db.run(sql, [id], function(err){
+      console.log("sto cancellando:",user,podcast);
+      const sql = 'DELETE FROM follow WHERE userID=? and podcastID=?';
+      db.run(sql, [user,podcast], function(err){
         if(err){
           reject(err);
         }
@@ -39,7 +41,24 @@ exports.followPodcast = function(userID,podcastID){
           reject(err);
           return;
         };
+        console.log(rows);
         resolve(rows);
       })
     })
   }
+
+exports.isFollowing = function(user,podcast){
+  return new Promise((resolve,reject)=>{
+    const sql = "SELECT * FROM follow WHERE userID=? AND podcastID=?";
+    db.get(sql,[user,podcast],(err,row)=>{
+        if(err){
+          reject(err);
+        }
+        else if(row==undefined){
+          resolve (false);
+        }
+        else
+          resolve(row);
+    })
+  })
+}

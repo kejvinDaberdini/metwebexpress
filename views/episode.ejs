@@ -20,7 +20,7 @@
         <button type="submit" class="btn btn-primary">favorite</button>
       </form>
       <tbody>
-
+        <%if(logged){%>
             <form name = "comment" method="POST" action ="/episode/comment">
               <input type ="hidden" name = "episodeID" id= "episodeID" value =<%- episode.episodeID%>
                   <div class="form-group">
@@ -30,10 +30,16 @@
 
                   <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
+                <%}else{%>
+                  <a href="/login">
+                    <button type="submit" class="btn btn-primary">login to comment</button>
+                  </a>
+                  <%}%>
 
             <% comments.forEach((comment) => { %>
                   <%- include('comment-partial', {comment}); -%>
                 <% }); %>
+         
       </tbody>
 
       <!--  buy Episode Modal -->

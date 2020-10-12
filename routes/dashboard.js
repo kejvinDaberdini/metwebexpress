@@ -13,7 +13,7 @@ router.get('/dashboard', function(req, res, next) {
   categorydao.getAllCategories().then((categories)=>{
     podcastdao.getPodcastsByUser(req.user.userID).then((podcasts)=>{
         episodedao.getEpisodesByUser(req.user.userID).then((episodes)=>{
-          res.render('dashboard', {title: 'Dashboard', podcasts:podcasts, categories:categories, episodes:episodes, creator:creator, followed:followed, logged:logged})
+          res.render('dashboard', {title: 'Dashboard', podcasts:podcasts, categories:categories, episodes:episodes, creator:creator, logged:logged})
         }) 
      })        
   })

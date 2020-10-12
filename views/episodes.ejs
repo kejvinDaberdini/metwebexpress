@@ -5,9 +5,25 @@
       <h1 class="display-4"><%= podcast.title %></h1>
       <p class="lead"><%= podcast.description %></p>
       <hr class="my-4">
-      <form method="POST" action="/podcast/follow">
-        <input type="hidden" name="podcastID" value="<%- podcast.podcastID %>">
-        <button type="submit" class="btn btn-primary">follow</button>
+      <%if (logged){%>
+       <%if(following == false){%>
+        <form method="POST" action="/podcast/follow">
+          <%following = true;%>
+          <input type="hidden" name="podcastID" value="<%- podcast.podcastID %>">
+          <button type="submit" class="btn btn-primary">follow</button>
+          
+       
+        <%}else{%>
+          <form method="POST" action="/podcast/unfollow">
+            <input type="hidden" name="podcastID" value="<%- podcast.podcastID %>">
+            <button type="submit" class="btn btn-primary">unfollow</button>
+            
+            <% } %>
+        <%}else{%>
+          <a href="/login">
+            <button type="submit" class="btn btn-primary">follow</button>
+          </a>
+        <%}%>
     </div>
   </head>
     <div class="row">

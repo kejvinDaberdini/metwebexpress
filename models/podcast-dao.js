@@ -102,62 +102,22 @@ exports.deletePodcast = function(podcastID){
     });
   });
 }
-//function to get all categories from the database
-exports.getAllCategories = function() {
-  return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM category';
-    db.all(sql, (err, rows) => {
-      if (err) {
-        reject(err);
-        return;
-      };
-      resolve(rows);
-    });
-  });
-};
-
-exports.followPodcast = function(userID,podcastID){
-  return new Promise((resolve, reject)=>{
-    console.log(userID,podcastID);
-    const sql = 'INSERT INTO follow(userID, podcastID) VALUES(?, ?)';
-    db.run(sql,[userID, podcastID],(err,row)=>{
-      if(err){
-        reject(err);
-        return;
-      };
-      resolve(row);
-    })    
-  })
-}
-
-exports.getFollowedPodcasts = function(userID){
-  return new Promise((resolve, reject)=>{
-    const sql= 'SELECT podcast.title FROM podcast JOIN follow WHERE podcast.podcastID=follow.podcastID AND follow.userID=?';
-    db.all(sql,[userID],(err,rows)=>{
-      if(err){
-        reject(err);
-        return;
-      };
-      resolve(rows);
-    })
-  })
-}
 
 //function to get all podcasts that contain an input text in their title or description
 exports.getPodcastsByText = function(text, category) {
   let param;
   let sql;
   const search='%'+text+'%';
-  console.log("questi è il testo ricevuto dal controller",text);
+  console.log("questi è il testo ricevuto dal controller",text, category);
   return new Promise((resolve, reject) => {
-    if(category=="All"){
+    if(category =="All"){
       param= {$text:search};
       sql = 'SELECT * FROM podcast WHERE title LIKE $text OR description LIKE $text   ';
       
 
     }else{
       param= {$text:search,$category:category};
-      sql = 'SELECT * FROM podcast WHERE title LIKE $text OR description LIKE $text   and category="Arts"';
+      sql = 'SELECT * FROM podcast WHERE category == $category AND  title LIKE $text OR description LIKE $text ';
       
     }
  
