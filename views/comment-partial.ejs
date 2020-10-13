@@ -23,7 +23,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form action="/episode/updateComment" method="POST" >
+          <form action="/put/comment/<%-comment.commentID%>?method=PUT" method="POST" >
             <div class="modal-body">
 
               <input type="hidden" name="commentID" value="<%- comment.commentID %>">
@@ -52,7 +52,7 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <form action="/episode/deleteComment" method="POST" >
+              <form action="/delete/comment/<%-comment.commentID%>?method=DELETE" method="POST" >
                 <div class="modal-body">
                   <input type="hidden" name="commentID" value="<%- comment.commentID %>">
                 </div>

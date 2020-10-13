@@ -1,5 +1,4 @@
 
--fare  le funzioni Unfullow e Unfavorite e avere i bottoni inverti nel caso sia o non sia gia seguito/favorito
 -gestire i file di audio 
 -fare i controlli divalidazione inserimenti in tutti i form/modali
 -controllo su click modale di aquisto quando lo fa utente non loggato
@@ -8,7 +7,9 @@
 -cambiare tutte le post e get sbagliato con le delete e put quando server
 -finire logica per vedere se un utente ha gia un episodio seguito o meno
 
+-la ricerca ha problemi con il controllo categoria e va aggiunta il filtro categoria per gli episodi
 
+-strani errori in homepage
 
 
 

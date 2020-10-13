@@ -7,23 +7,30 @@
      
     <% podcasts.forEach((podcast) => { %>
       <%- include('podcast-partial', {podcast}); -%> 
-      <form method="POST" action="/podcast/unfollow">
-        <input type="hidden" name="podcastID" value="<%- podcast.podcastID %>">
-        <button type="submit" class="btn btn-primary">unfollow</button>
 
-      
-    
+        <form method="POST" action="/delete/follow/<%-podcast.podcastID%>?method=DELETE" name="followedDelete">
+          <input type="hidden" name="podcastID" value="<%- podcast.podcastID %>">
+          <button type="submit" class="btn btn-primary">unfollow</button>
+        </form>
     <% }); %>  
   </div>
   </main>
-  <main class="container-fluid mt-3">
-    <div class="row">
     <h3>Your Favorite Episodes</h3>
     <% episodes.forEach((episode) => { %>
-        <%- include('episode-partial', {episode}); -%>                
+      <div class="card mt-4 mr-4 ml-2" style="width: 20rem;">
+        <div class="card-body">
+          <h5 class="card-title"><%= episode.title %></h5>
+          <p class="card-text"><%= episode.description %></p>
+          <p class="card-text"><%= episode.price %></p>
+          <p class="card-text"><%= episode.sponsor %></p> 
+          <a href ="/episode/<%-episode.episodeID%>" >
+            <button type ="submit" class="btn btn-primary">Watch</button>
+          </a>
+        </div>
+      </div>
+   <!--   <%- include('episode-partial', {episode}); -%>  -->              
       <% }); %>  
-    </div> 
-  </main>
+  
 
 
 <%- include('footer'); -%>

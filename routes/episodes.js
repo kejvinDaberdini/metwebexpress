@@ -8,7 +8,6 @@ const followdao = require('../models/follow-dao');
 const express = require('express');
 const router = express.Router();
 
-
 /* GET course (home) page */
 /*
 router.post('/episodes', function(req, res, next) {
@@ -25,8 +24,9 @@ router.get('/podcasts/:podcastID', function(req, res, next){
     podcastdao.getPodcast(req.params.podcastID).then((podcast)=>{
       episodedao.getAllEpisodes(req.params.podcastID).then((episodes) => {
         if(logged){
-           followdao.isFollowing(req.user.userID,req.body.podcastID)
+           followdao.isFollowing(req.user.userID,req.params.podcastID)
             .then((following)=>{  
+              console.log(req.user.userID,req.params.podcastID,following);
                
           res.render('episodes', {title: 'Episodes', episodes: episodes,  podcast:podcast, logged:logged, following:following});
          });
@@ -45,15 +45,14 @@ router.post('/podcast/follow',function(req,res,next){
     }); 
 });
 
-router.post('/podcast/unfollow',function(req,res,next){
+router.delete('/delete/follow/:podcastID',function(req,res,next){
   //console.log(req.body.podcastID,req.user.userID);
-    followdao.unfollowPodcast(req.user.userID,req.body.podcastID)
+    //followdao.unfollowPodcast(req.user.userID,req.body.podcastID)
+    followdao.unfollowPodcast(req.body.followID)
     .then(() =>{
       res.redirect('back');
     }); 
 });
-
-
 
 router.post('/episode/purchase', function(req, res, next){
   console.log(req.body.episodeID, req.user.userID, req.body.newName, req.body.newSurname, req.body.newCardType, req.body.newCardNumber, req.body.newCardCCV);

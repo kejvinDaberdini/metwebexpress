@@ -19,7 +19,7 @@ exports.favoriteEpisode = function(userID,episodeID){
 
 exports.getFavoriteEpisodes = function(userID){
     return new Promise((resolve, reject)=>{
-      const sql= 'SELECT * FROM episode JOIN favorite WHERE favorite.userID=?';
+      const sql= 'SELECT episode.episodeID AS episodeID, episode.title AS title, episode.description AS description, episode.price AS price, episode.sponsor AS sponsor, favorite.favoriteID AS favoriteID FROM episode JOIN favorite WHERE favorite.userID=?';
       db.all(sql,[userID],(err,rows)=>{
         if(err){
           reject(err);
@@ -29,3 +29,38 @@ exports.getFavoriteEpisodes = function(userID){
       })
     })
   }
+
+    //exports.unfollowPodcast = function(user, podcast){
+    exports.unfavoriteEpisode = function(followID){
+      return new Promise((resolve, reject)=>{
+        console.log("sto cancellando:",followID);
+        //const sql = 'DELETE FROM follow WHERE userID=? and podcastID=?';
+        const sql = 'DELETE FROM favorite WHERE favoriteID=?';
+        //db.run(sql, [user,podcast], function(err){
+          db.run(sql, [followID], function(err){
+          if(err){
+            reject(err);
+          }
+          else{
+            resolve(this.lastID);
+          }
+        });
+      });
+    }
+    
+    exports.isFavorite = function(user,episode){
+      return new Promise((resolve,reject)=>{
+        const sql = "SELECT * FROM favorite WHERE userID=? AND episodeID=?";
+        db.get(sql,[user,episode],(err,row)=>{
+            if(err){
+              reject(err);
+            }
+     //       else if(row==undefined){
+     //         resolve (false);
+     //       }
+     //       else
+     //         resolve(true);
+            resolve(row);
+        })
+      })
+    }

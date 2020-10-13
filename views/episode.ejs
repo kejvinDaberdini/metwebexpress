@@ -14,12 +14,27 @@
         <%}%>
 
 
-
-      <form method="POST" action="/episode/favorite">
-        <input type="hidden" name="episodeID" value="<%- episode.episodeID %>">
-        <button type="submit" class="btn btn-primary">favorite</button>
-      </form>
+        <%if(logged){%>
+            <%if(favorite == undefined){%>
+              <form method="POST" action="/episode/favorite">
+                <input type="hidden" name="episodeID" value="<%- episode.episodeID %>">
+                <button type="submit" class="btn btn-primary">favorite</button>
+                </form>
+            
+            <%}else{%>
+              
+                <form method="POST" action="/delete/favorite/<%- favorite.favoriteID %>?method=DELETE">
+                  <input type="hidden" name="favoriteID" value="<%- favorite.favoriteID %>">
+                  <button type="submit" class="btn btn-primary">remove favorite</button>
+                  </form>
+            <%}%>
+      <%}else{%>
+        <a href="/login">
+          <button type="submit" class="btn btn-primary">favorite</button>
+        </a>
+        <%}%>
       <tbody>
+
         <%if(logged){%>
             <form name = "comment" method="POST" action ="/episode/comment">
               <input type ="hidden" name = "episodeID" id= "episodeID" value =<%- episode.episodeID%>

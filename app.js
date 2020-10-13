@@ -21,6 +21,7 @@ const registerRouter = require('./routes/register');
 const dashboardRouter = require('./routes/dashboard');
 const homepageRouter = require('./routes/homepage');
 const searchRouter = require('./routes/search');
+const methodOverride = require('method-override');
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride('method'));
 
 // set up the "username and password" login strategy
 // by setting a function to verify username and password

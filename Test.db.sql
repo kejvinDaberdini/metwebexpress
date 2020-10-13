@@ -79,8 +79,8 @@ CREATE TABLE IF NOT EXISTS `comment` (
 	`uploadDate`	DATE NOT NULL,
 	`userID`		INTEGER NOT NULL,
 	`episodeID`		INTEGER NOT NULL,
-	FOREIGN KEY(`episodeID`) REFERENCES `episode`(`episodeID`)ON DELETE CASCADE,
-	FOREIGN KEY(`userID`) REFERENCES `user`(`userID`)ON DELETE CASCADE
+	FOREIGN KEY(`episodeID`) REFERENCES `episode`(`episodeID`)	ON DELETE CASCADE,
+	FOREIGN KEY(`userID`) REFERENCES `user`(`userID`)			ON DELETE CASCADE
 );
 
 

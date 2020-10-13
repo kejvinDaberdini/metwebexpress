@@ -104,15 +104,17 @@ exports.deleteEpisode = function(episodeID){
 }
 
 //function to get all podcasts that contain an input text in their title or description
-exports.getEpisodesByText = function(text) {
+exports.getEpisodesByText = function(text,category) {
   return new Promise((resolve, reject) => {
-      const sql = 'SELECT * FROM podcast WHERE title LIKE $text OR description LIKE $search ';
+      const sql = 'SELECT * FROM episode JOIN podcast ON episode.podcastID=podcast.podcastID WHERE podcast.category=$category AND episode.title LIKE $text OR episode.description LIKE $search ';
       const search ='%'+text+'%';
+      const params={$search:search, $category:category}
     db.all(sql, search, (err, rows) => {
       if (err) {
         reject(err);
         return;
       }
+      console.log("stampo:",rows);
 
       //const podcasts = rows.map((e) => ({title: e.title, description: e.description, category: e.category, image: e.image, podcastID: e.podcastID}));
       //resolve(podcasts);

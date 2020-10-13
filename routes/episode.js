@@ -19,17 +19,31 @@ router.get('/episode/:episodeID', function(req, res, next) {
   else username=req.user.username;
   //const username=req.user.username;
   episodedao.getEpisode(req.params.episodeID)
-  .then((episode) => {
-    console.log(req.body);
-    commentdao.getComments(req.params.episodeID)
-    .then((comments)=> {
-      res.render('episode', {title : 'Episode', episode:episode, comments:comments, logged:logged , username:username});
-    });
+  .then((episode) => {  
+     commentdao.getComments(req.params.episodeID)
+      .then((comments)=> {
+        if(logged){
+          favoritedao.isFavorite(req.user.userID,req.params.episodeID)
+          .then((favorite)=>{
+                  res.render('episode', {title : 'Episode', episode:episode, comments:comments, logged:logged , username:username, favorite:favorite});
+            });
+        }
+        else
+            res.render('episode', {title : 'Episode', episode:episode, comments:comments, logged:logged , username:username});
+      
+    })  
   });
 });
 
 router.post('/episode/favorite', function(req,res,next){
   favoritedao.favoriteEpisode(req.user.userID,req.body.episodeID)
+  .then(()=>{
+    res.redirect('back');
+  })
+})
+
+router.delete('/delete/favorite/:favoriteID', function(req,res,next){
+  favoritedao.unfavoriteEpisode(req.body.favoriteID)
   .then(()=>{
     res.redirect('back');
   })
@@ -44,7 +58,7 @@ router.post('/episode/comment', function(req, res, next) {
   });
 });
 
-router.post('/episode/updateComment', function(req, res, next){
+router.put('/put/comment/:commentID', function(req, res, next){
   console.log(req.body.newText, req.body.commentID);
   commentdao.updateComment(req.body.newText, req.body.commentID)
   .then(()=> {
@@ -52,7 +66,7 @@ router.post('/episode/updateComment', function(req, res, next){
   });
 })
 
-router.post('/episode/deleteComment', function(req, res, next){
+router.delete('/delete/comment/:commentID', function(req, res, next){
   console.log(req.body.commentID);
   commentdao.deleteComment(req.body.commentID)
   .then(()=> {

@@ -51,7 +51,7 @@ router.get("/search", function(req,res,next){
 .then((categories)=>{
   podcastdao.getPodcastsByText(req.query.text, req.query.newCategory)
       .then((resultPodcasts)=>{     
-          episodedao.getEpisodesByText(req.query.text)
+          episodedao.getEpisodesByText(req.query.text, req.query.newCategory)
           .then((resultEpisodes)=>{
             console.log("questi è il testo cercato: ",req.query.text);
             console.log("questi è la categoria: ",req.query.newCategory);
