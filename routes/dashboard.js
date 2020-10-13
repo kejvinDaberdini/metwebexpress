@@ -13,7 +13,7 @@ router.get('/dashboard', function(req, res, next) {
   categorydao.getAllCategories().then((categories)=>{
     podcastdao.getPodcastsByUser(req.user.userID).then((podcasts)=>{
         episodedao.getEpisodesByUser(req.user.userID).then((episodes)=>{
-          console.log(episodes);
+
           res.render('dashboard', {title: 'Dashboard', podcasts:podcasts, categories:categories, episodes:episodes, creator:creator, logged:logged})
         }) 
      })        
@@ -38,7 +38,7 @@ router.put('/put/podcast', function(req, res, next) {
 });
 
 router.delete('/delete/podcast', function(req, res, next) {  
-    console.log(req.body.oldPodcast);
+
     podcastdao.deletePodcast(req.body.oldPodcast)
   .then(()=> {
     res.redirect('back');
@@ -53,7 +53,7 @@ router.post('/dashboard/addEpisode', function(req, res, next) {
 });
 
 router.put('/put/episode', function(req, res, next) {  
-  console.log(req.body.newTitle, req.body.newDesc, req.body.episodeID);
+
 episodedao.updateEpisode(req.body.newTitle, req.body.newDesc, req.body.newFile, req.body.price, req.body.episodeID)
 .then(()=> {
   res.redirect('back');
@@ -61,8 +61,7 @@ episodedao.updateEpisode(req.body.newTitle, req.body.newDesc, req.body.newFile, 
 });
 
 router.delete('/delete/episode', function(req, res, next) {  
-  console.log("this is the id");
-  console.log(req.body.episodeID);
+
   episodedao.deleteEpisode(req.body.episodeID)
 .then(()=> {
   res.redirect('back');

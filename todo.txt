@@ -1,16 +1,11 @@
 
 -gestire i file di audio 
 -fare i controlli divalidazione inserimenti in tutti i form/modali
--controllo su click modale di aquisto quando lo fa utente non loggato
+-Buy solo se ce un prezzo!
 -fare tutto il css e rimodellare l'html
 -aggiungere date ai commenti e a tutto penso
+-gestire aquisto episodi
 -cambiare tutte le post e get sbagliato con le delete e put quando server
--finire logica per vedere se un utente ha gia un episodio seguito o meno
-
--la ricerca ha problemi con il controllo categoria e va aggiunta il filtro categoria per gli episodi
-
--strani errori in homepage
-
 
 
 

@@ -5,14 +5,14 @@ const db = require('../db.js');
 
 exports.followPodcast = function(userID,podcastID){
     return new Promise((resolve, reject)=>{
-      console.log(userID,podcastID);
+
       const sql = 'INSERT INTO follow(userID, podcastID) VALUES(?, ?)';
       db.run(sql,[userID, podcastID],(err,row)=>{
         if(err){
           reject(err);
           return;
         };
-        console.log(row);
+
         resolve(row);
       })    
     })
@@ -21,7 +21,7 @@ exports.followPodcast = function(userID,podcastID){
   //exports.unfollowPodcast = function(user, podcast){
     exports.unfollowPodcast = function(followID){
     return new Promise((resolve, reject)=>{
-      console.log("sto cancellando:",followID);
+
       //const sql = 'DELETE FROM follow WHERE userID=? and podcastID=?';
       const sql = 'DELETE FROM follow WHERE followID=?';
       //db.run(sql, [user,podcast], function(err){
@@ -44,7 +44,7 @@ exports.followPodcast = function(userID,podcastID){
           reject(err);
           return;
         };
-        console.log(rows);
+
         resolve(rows);
       })
     })

@@ -26,7 +26,7 @@ router.get('/podcasts/:podcastID', function(req, res, next){
         if(logged){
            followdao.isFollowing(req.user.userID,req.params.podcastID)
             .then((following)=>{  
-              console.log(req.user.userID,req.params.podcastID,following);
+            
                
           res.render('episodes', {title: 'Episodes', episodes: episodes,  podcast:podcast, logged:logged, following:following});
          });
@@ -55,7 +55,7 @@ router.delete('/delete/follow/:podcastID',function(req,res,next){
 });
 
 router.post('/episode/purchase', function(req, res, next){
-  console.log(req.body.episodeID, req.user.userID, req.body.newName, req.body.newSurname, req.body.newCardType, req.body.newCardNumber, req.body.newCardCCV);
+
   purchasedao.buyEpisode(req.body.episodeID, req.user.userID, req.body.newName, req.body.newSurname, req.body.newCardType, req.body.newCardNumber, req.body.newCardCCV)
   .then(()=>{
     res.redirect('back');

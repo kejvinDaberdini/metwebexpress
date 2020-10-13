@@ -51,7 +51,7 @@ router.delete('/delete/favorite/:favoriteID', function(req,res,next){
 
 
 router.post('/episode/comment', function(req, res, next) {
-  console.log(req.body.episodeID, req.user.userID, req.body.text);
+
   commentdao.addComment(req.body.text, req.body.episodeID, req.user.userID)
   .then((comments)=> {
     res.redirect('back');
@@ -59,7 +59,7 @@ router.post('/episode/comment', function(req, res, next) {
 });
 
 router.put('/put/comment/:commentID', function(req, res, next){
-  console.log(req.body.newText, req.body.commentID);
+
   commentdao.updateComment(req.body.newText, req.body.commentID)
   .then(()=> {
     res.redirect('back');
@@ -67,7 +67,7 @@ router.put('/put/comment/:commentID', function(req, res, next){
 })
 
 router.delete('/delete/comment/:commentID', function(req, res, next){
-  console.log(req.body.commentID);
+
   commentdao.deleteComment(req.body.commentID)
   .then(()=> {
     res.redirect('back');
@@ -75,7 +75,7 @@ router.delete('/delete/comment/:commentID', function(req, res, next){
 })
 
 router.post('/episode/purchase', function(req, res, next){
-  console.log(req.body.episodeID, req.user.userID, req.body.newName, req.body.newSurname, req.body.newCardType, req.body.newCardNumber, req.body.newCardCCV);
+
   purchasedao.buyEpisode(req.body.episodeID, req.user.userID, req.body.newName, req.body.newSurname, req.body.newCardType, req.body.newCardNumber, req.body.newCardCCV)
   .then(()=>{
     res.redirect('back');

@@ -59,7 +59,7 @@ exports.getPodcastsByUser = function(id) {
 exports.addPodcast = function(title,creator,description,category,image,userID){
   return new Promise((resolve, reject)=>{
     const sql = 'INSERT INTO podcast( title, creator, description, category, image, creatorID) VALUES( $title,$creator,$description,$category,$image, $creatorID)';
-    console.log(title,creator,description,category,image,userID);
+
     const param= {$title:title, $creator:creator, $description:description, $category:category, $image:image, $creatorID:userID};
     db.run(sql, param, function(err){
       if(err){
@@ -75,7 +75,7 @@ exports.addPodcast = function(title,creator,description,category,image,userID){
 exports.updatePodcast = function(title,description,category,image,podcastID){
   return new Promise((resolve, reject)=>{
     const sql = 'UPDATE podcast SET title=$title, description=$description, category=$category, image=$image WHERE podcastID=$podcastID';
-    console.log(title,description,category,image,podcastID);
+
     const param= {$title:title, $description:description, $category:category, $image:image, $podcastID:podcastID};
     db.run(sql, param, function(err){
       if(err){
@@ -91,7 +91,7 @@ exports.updatePodcast = function(title,description,category,image,podcastID){
 exports.deletePodcast = function(podcastID){
   return new Promise((resolve, reject)=>{
     const sql = 'DELETE  FROM podcast WHERE podcastID=?';
-    console.log(podcastID); 
+ 
     db.run(sql, [podcastID], function(err){
       if(err){
         reject(err);
@@ -108,7 +108,7 @@ exports.getPodcastsByText = function(text, category) {
   let param;
   let sql;
   const search='%'+text+'%';
-  console.log("questi è il testo ricevuto dal controller",text, category);
+
   return new Promise((resolve, reject) => {
     if(category =="All"){
       param= {$text:search};

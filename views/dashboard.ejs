@@ -2,29 +2,107 @@
 
 <%if(creator==1){%>
 <main class="container-fluid mt-3">
+ 
+
+
   <div class="row">
-    <h1>
-      Your Podcasts
-    </h1>
-    <tbody>
-             
-      <% podcasts.forEach((podcast) => { %>
-        <%- include('podcast-partial', {podcast}); -%>                
-      <% }); %>         
-    </div>
-    </tbody>  
-  </div>
+    <div class="container">
+      <h1>PODCASTS</h1>
+      <div class="row">
+        <div class="col-12">
+        <table class="table table-image">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Image</th>
+              <th scope="col">Title</th>
+              <th scope="col">Description</th>
+              <th scope="col">Category</th>
+              <th scope="col">Options</th>
+            </tr>
+          </thead>
+          <tbody>
+         
+    <% podcasts.forEach((podcast) => { %>
+
+
+      <tr>
+        <th scope="row"> <%= podcast.podcastID %></th>
+        <td class="w-25">
+          <img src="<%= podcast.image %>" class="img-fluid img-thumbnail" alt="podcastImage">
+        </td>
+        <td><%= podcast.title %></td>
+        <td><%= podcast.description%></td>
+        <td><%= podcast.category %></td>
+        <td>
+          <button class="btn-primary">Edit</button>
+          <button class="btn-primary">Del</button>
+          <a href = "/podcasts/<%- podcast.podcastID%>">
+            <button class="btn-primary">go</button>
+          </a>         
+        </td>
+      </tr>
+     
+
+    <% }); %>    
+  </tbody>
+</table>   
+</div>
+</div>
+</div>    
+</div>  
+
+
+
   <div class="row">
-    <h1>
-      Your Episodes
-    </h1>
-      <tbody>
+        <div class="container">
+          <h1>EPISODES</h1>
+          <div class="row">
+            <div class="col-12">
+            <table class="table table-image">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Podcast</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Sponsor</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Options</th>
+                </tr>
+              </thead>
+              <tbody>
              
         <% episodes.forEach((episode) => { %>
-          <%- include('episode-partial', {episode}); -%>            
+   <!--      <%- include('episode-partial', {episode}); -%>   --> 
+   
+          <tr>
+            <th scope="row"> <%= episode.episodeID %></th>
+            <td><%= episode.podcast %></td>
+            <td><%= episode.title %></td>
+            <td><%= episode.description%></td>
+            <td><%= episode.price %></td>
+            <td><%= episode.sponsor %></td>
+            <td><%= episode.uploadDate %></td>
+            <td>
+              <button class="btn-primary">Edit</button>
+              <button class="btn-primary">Del</button>
+              <a href ="/episode/<%- episode.episodeID%>" >
+                <button class="btn btn-primary">go</button>
+              </a>
+            </td>
+          </tr>
+         
+   
         <% }); %>    
-      </tbody>  
+      </tbody>
+    </table>   
+    </div>
   </div>
+</div>    
+</div>  
+
   <div class="col-lg-6 ">   <!--spazio da dedicare alle opzioni da seguire-->
     <h3>Options:</h3>
     <div class="container-fluid">

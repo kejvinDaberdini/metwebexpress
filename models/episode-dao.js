@@ -41,7 +41,7 @@ exports.getEpisode = function(id) {
 
 exports.getEpisodesByUser = function(id) {
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT episode.episodeID, episode.title, episode.file, episode.uploadDate, episode.price, episode.description  FROM episode JOIN podcast ON episode.podcastID=podcast.podcastID WHERE creatorID=?';
+    const sql = 'SELECT episode.episodeID AS episodeID, episode.title AS title, episode.file AS file, episode.uploadDate AS uploadDate, episode.price AS price, episode.description as description, podcast.title AS podcast, podcast.image AS image  FROM episode JOIN podcast ON episode.podcastID=podcast.podcastID WHERE creatorID=?';
     db.all(sql,[id], (err, rows) => {
       if (err) {
         reject(err);
@@ -76,7 +76,6 @@ exports.updateEpisode = function(title, description, file, price, episodeID){
     
     const sql = 'UPDATE episode SET title=$title, description=$description, file=$file, price=$price WHERE episodeID=$episodeID';
     const param= {$title:title, $description:description, $file:file, $price:price, $episodeID:episodeID};
-    console.log(episodeID,title,description,file,price);
     db.run(sql, param, function(err){
       if(err){
         reject(err);
@@ -91,7 +90,6 @@ exports.updateEpisode = function(title, description, file, price, episodeID){
 exports.deleteEpisode = function(episodeID){
   return new Promise((resolve, reject)=>{
     const sql = 'DELETE  FROM episode WHERE episodeID=?';
-    console.log(episodeID); 
     db.run(sql, [episodeID], function(err){
       if(err){
         reject(err);
@@ -102,19 +100,26 @@ exports.deleteEpisode = function(episodeID){
     });
   });
 }
-
 //function to get all podcasts that contain an input text in their title or description
 exports.getEpisodesByText = function(text,category) {
   return new Promise((resolve, reject) => {
-      const sql = 'SELECT * FROM episode JOIN podcast ON episode.podcastID=podcast.podcastID WHERE podcast.category=$category AND episode.title LIKE $text OR episode.description LIKE $search ';
-      const search ='%'+text+'%';
-      const params={$search:search, $category:category}
-    db.all(sql, search, (err, rows) => {
+    const search ='%'+text+'%';
+    let params;
+    let sql;
+    if(category=="All"){
+      params= {$search:search};
+
+       sql = 'SELECT episode.episodeID AS episodeID, episode.title AS title, episode.description AS description, episode.uploadDate AS uploadDAte ,episode.price AS price, episode.sponsor AS sponsor, podcast.title AS podcast, podcast.image AS image FROM episode JOIN podcast ON episode.podcastID=podcast.podcastID WHERE episode.title LIKE $search OR episode.description LIKE $search ';
+    }
+    else{
+      params={$search:search, $category:category}
+       sql = ' SELECT episode.episodeID AS episodeID, episode.title AS title, episode.description AS description, episode.uploadDate AS uploadDAte , episode.price AS price, episode.sponsor AS sponsor, podcast.title AS podcast, podcast.image AS image FROM episode JOIN podcast ON episode.podcastID=podcast.podcastID WHERE podcast.category=$category AND episode.title LIKE $search OR episode.description LIKE $search '; 
+    }   
+    db.all(sql, params, (err, rows) => {
       if (err) {
         reject(err);
         return;
       }
-      console.log("stampo:",rows);
 
       //const podcasts = rows.map((e) => ({title: e.title, description: e.description, category: e.category, image: e.image, podcastID: e.podcastID}));
       //resolve(podcasts);
