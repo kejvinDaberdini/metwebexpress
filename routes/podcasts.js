@@ -20,6 +20,20 @@ categorydao.getAllCategories()
   });
  }); 
 });
+
+router.get('/podcasts/category/:category', function(req, res, next){
+  let logged = req.isAuthenticated(); 
+  categorydao.getAllCategories()
+  .then((categories)=>{
+    console.log(req.params.category);
+    podcastdao.getPodcastsByCategory(req.params.category)
+    .then((podcasts) => {
+     // console.log(categories.length); 
+      res.render('podcasts', {title: 'Podcasts', podcasts, categories:categories, logged:logged});
+    });
+   }); 
+  });
+
 router.post('/podcast/follow',function(req,res,next){
   //console.log(req.body.podcastID,req.user.userID);
   let logged= req.isAuthenticated();

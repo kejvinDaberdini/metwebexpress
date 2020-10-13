@@ -44,7 +44,25 @@
   </form>
 </nav>
 
-
+<div class="rightside-pannel">
+  <div class="title">
+    <div class="line"></div>
+    <div class="pod">categories</div>
+    <div style="clear:both;"></div>
+    <div class="b-line"></div>
+  </div>
+  <ul>
+    <li>     
+      <a href="/">All</a>
+    </li>
+    <% categories.forEach((category) => { %>
+      <li>     
+        <a href="/podcasts/category/<%-category.name%>"><%=category.name%></a>
+        <input type="hidden" name="category" value="<%- category.name %>">
+      </li>
+      <%});%>
+  </ul>
+</div>
 
 <main class="container-fluid mt-3">
     <div class="row">

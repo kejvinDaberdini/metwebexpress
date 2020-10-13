@@ -103,9 +103,14 @@ exports.deleteEpisode = function(episodeID){
 //function to get all podcasts that contain an input text in their title or description
 exports.getEpisodesByText = function(text,category) {
   return new Promise((resolve, reject) => {
-    const search ='%'+text+'%';
     let params;
     let sql;
+
+    let search;
+  if(text==""){
+    search=text;
+  }
+   else search='%'+text+'%';
     if(category=="All"){
       params= {$search:search};
 

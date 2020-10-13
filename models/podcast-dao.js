@@ -1,6 +1,7 @@
 'use strict';
 
 const db = require('../db.js');
+const { isFollowing } = require('./follow-dao.js');
 //function to get all podcasts from the database
 exports.getAllPodcasts = function() {
   return new Promise((resolve, reject) => {
@@ -107,7 +108,11 @@ exports.deletePodcast = function(podcastID){
 exports.getPodcastsByText = function(text, category) {
   let param;
   let sql;
-  const search='%'+text+'%';
+  let search;
+  if(text==""){
+    search=text;
+  }
+   else search='%'+text+'%';
 
   return new Promise((resolve, reject) => {
     if(category =="All"){
@@ -133,3 +138,17 @@ exports.getPodcastsByText = function(text, category) {
     });
   });
 };
+
+exports.getPodcastsByCategory = function(category){
+  return new Promise((resolve, reject) => {
+     const sql="SELECT * FROM podcast WHERE category=?";
+      db.all(sql,[category],(err,rows)=>{
+        if(err){
+          reject(err);
+          return;
+        }
+        resolve(rows);
+      })
+    })
+  }
+
