@@ -24,14 +24,14 @@
 
         <%if(logged){%>
             <%if(favorite == undefined){%>
-              <form method="POST" action="/episode/favorite">
+              <form method="POST" action="/favorites">
                 <input type="hidden" name="episodeID" value="<%- episode.episodeID %>">
                 <button type="submit" class="btn btn-primary">favorite</button>
                 </form>
             
             <%}else{%>
               
-                <form method="POST" action="/delete/favorite/<%- favorite.favoriteID %>?method=DELETE">
+                <form method="POST" action="/favorites/<%- favorite.favoriteID %>?method=DELETE">
                   <input type="hidden" name="favoriteID" value="<%- favorite.favoriteID %>">
                   <button type="submit" class="btn btn-primary">remove favorite</button>
                   </form>

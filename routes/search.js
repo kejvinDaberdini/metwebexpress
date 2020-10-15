@@ -8,16 +8,16 @@ const router = express.Router();
 
 router.get("/search", function(req,res,next){
     let logged = req.isAuthenticated();  
-
-    podcastdao.getPodcastsByText(req.query.text, req.query.newCategory)
-  
-        .then((resultPodcasts)=>{
-          
+    categorydao.getAllCategories().then((categories)=>{
+        podcastdao.getPodcastsByText(req.query.text, req.query.newCategory) 
+        .then((resultPodcasts)=>{        
             episodedao.getEpisodesByText(req.query.text, req.query.newCategory)
             .then((resultEpisodes)=>{
 
-                res.render('search', {title: 'Search', podcasts:resultPodcasts, episodes:resultEpisodes, logged:logged});
+                res.render('search', {title: 'Search', podcasts:resultPodcasts, episodes:resultEpisodes, logged:logged, categories});
                 })
             })  
+    })
+    
   })
 module.exports = router;  

@@ -21,6 +21,8 @@ const registerRouter = require('./routes/register');
 const dashboardRouter = require('./routes/dashboard');
 const homepageRouter = require('./routes/homepage');
 const searchRouter = require('./routes/search');
+const favoriteRouter = require('./routes/favorite');
+const followRouter = require('./routes/follow');
 const methodOverride = require('method-override');
 
 const app = express();
@@ -62,6 +64,7 @@ passport.deserializeUser(function(id, done) {
   userDao.getUserById(id).then(user => {
     done(null, user);
   });
+
 });
 
 // set up the session
@@ -122,8 +125,12 @@ app.use('/',  registerRouter);
 app.use('/',  episodesRouter);
 app.use('/',  episodeRouter);
 app.use('/', searchRouter);
+app.use('/', favoriteRouter);
+app.use('/', followRouter);
 app.use('/',  isLoggedIn, homepageRouter);
+
 app.use('/', isLoggedIn, dashboardRouter);
+
 // catch 404 and forward to error handler
 app.use('/', function(req, res, next) {
   next(createError(404));

@@ -9,6 +9,12 @@
 }
 .card{
     background-color: teal;
+
+
+
+  transition: 0.5s ease;
+  cursor: pointer;
+  margin:30px;
 }
 
 .card-img-top{
@@ -28,3 +34,8 @@ body{
     background-color: snow;
 
 }
+
+.card:hover {
+    transform: scale(1.15);
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
+  }

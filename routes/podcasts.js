@@ -58,7 +58,7 @@ router.post('/podcast/follow',function(req,res,next){
   }
   
 })
-
+/*
 router.get("/search", function(req,res,next){
   let logged = req.isAuthenticated();  
   categorydao.getAllCategories()
@@ -73,5 +73,5 @@ router.get("/search", function(req,res,next){
           }) 
         }) 
 })
-
+*/
 module.exports = router;

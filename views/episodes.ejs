@@ -7,14 +7,14 @@
       <hr class="my-4">
       <%if (logged){%>
        <%if(following == undefined){%>
-        <form method="POST" action="/podcast/follow">
+        <form method="POST" action="/follows">
           <input type="hidden" name="podcastID" value="<%- podcast.podcastID %>">
           <button type="submit" class="btn btn-primary">follow</button>
         </form>
           
        
         <%}else{%>
-          <form method="POST" action="/delete/follow/<%-following.followID%>?method=DELETE" name="followedDelete">
+          <form method="POST" action="/follows/<%-following.followID%>?method=DELETE" name="followedDelete">
             <input type="hidden" name="followID" value="<%- following.followID %>">
             <button type="submit" class="btn btn-primary">unfollow</button>
           </form>
