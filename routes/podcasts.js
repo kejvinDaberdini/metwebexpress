@@ -14,14 +14,14 @@ categorydao.getAllCategories()
 .then((categories)=>{
   podcastdao.getAllPodcasts()
   .then((podcasts) => {
-    console.log(categories.length);
+    //console.log(categories.length);
    
     res.render('podcasts', {title: 'Podcasts', podcasts, categories:categories, logged:logged});
   });
  }); 
 });
 
-router.get('/podcasts/category/:category', function(req, res, next){
+router.get('/category/:category', function(req, res, next){
   let logged = req.isAuthenticated(); 
   categorydao.getAllCategories()
   .then((categories)=>{

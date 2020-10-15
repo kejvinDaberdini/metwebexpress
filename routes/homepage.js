@@ -20,9 +20,12 @@ router.get('/homepage', function(req, res, next) {
   });
 });
 
+
+
 router.delete('/delete/follow/:podcastID',function(req,res,next){
   //console.log(req.body.podcastID,req.user.userID);
-    followdao.unfollowPodcast(req.user.userID,req.params.podcastID)
+    //followdao.unfollowPodcast(req.user.userID,req.body.podcastID)
+    followdao.unfollowPodcast(req.body.followID)
     .then(() =>{
       res.redirect('back');
     }); 

@@ -6,6 +6,12 @@ const categorydao= require('../models/category-dao');
 const episodedao = require('../models/episode-dao.js');
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
+
+
+
+const fileDestination = multer({ dest: './uploads/' })
+
 
 router.get('/dashboard', function(req, res, next) {
   let logged = req.isAuthenticated();  
@@ -20,9 +26,10 @@ router.get('/dashboard', function(req, res, next) {
   })
 });
 
-router.post('/dashboard/addPodcast', function(req, res, next) {   
+router.post('/dashboard/addPodcast',fileDestination.single('newImg'), function(req, res, next) {   
   userdao.getUserById(req.user.userID).then((creator)=>{
-    podcastdao.addPodcast(req.body.newTitle, creator.username,req.body.newDesc,req.body.newCategory,req.body.newImg, creator.userID)
+    console.log(req.file.path);
+    podcastdao.addPodcast(req.body.newTitle, creator.username,req.body.newDesc,req.body.newCategory,req.file.path, creator.userID)
     .then(()=> {
       res.redirect('back');
     })
@@ -37,9 +44,9 @@ router.put('/put/podcast', function(req, res, next) {
   })    
 });
 
-router.delete('/delete/podcast', function(req, res, next) {  
+router.delete('/delete/podcast/:podcastID', function(req, res, next) {  
 
-    podcastdao.deletePodcast(req.body.oldPodcast)
+    podcastdao.deletePodcast(req.body.podcastID )
   .then(()=> {
     res.redirect('back');
   })    
@@ -60,7 +67,7 @@ episodedao.updateEpisode(req.body.newTitle, req.body.newDesc, req.body.newFile, 
 })    
 });
 
-router.delete('/delete/episode', function(req, res, next) {  
+router.delete('/delete/episode/:episodeID', function(req, res, next) {  
 
   episodedao.deleteEpisode(req.body.episodeID)
 .then(()=> {

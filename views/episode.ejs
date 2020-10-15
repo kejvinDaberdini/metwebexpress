@@ -4,6 +4,14 @@
       <p class="card-text"><%= episode.description %></p>
       <p class="card-text"><%= episode.price %></p>
       <p class="card-text"><%= episode.sponsor %></p> 
+
+
+    <div>
+      <audio controls>
+        <source src="<%- episode.file %>" type="audio/mpeg">
+        </audio>
+    </div>
+
       <%if(logged){%>
       <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#buyEpisodeModal<%-episode.episodeID%>">buy</button>
       <%}else{%>
@@ -102,3 +110,5 @@
         </div>
       </div>
     </div>
+
+    <%- include('footer'); -%>

@@ -3,21 +3,13 @@
 const episodedao = require('../models/episode-dao.js');
 const podcastdao = require('../models/podcast-dao.js');
 const purchasedao = require('../models/purchase-dao.js');
+
 const followdao = require('../models/follow-dao');
 
 const express = require('express');
 const router = express.Router();
 
-/* GET course (home) page */
-/*
-router.post('/episodes', function(req, res, next) {
-  //let logged = req.isAuthenticated();
-  dao.getAllEpisodes(req.body.podcastID)
-  .then((episodes) => {
-    res.render('episodes', {title: 'Episodes', episodes: episodes, logged:logged});
-  });
-});
-*/
+
 router.get('/podcasts/:podcastID', function(req, res, next){
   let logged = req.isAuthenticated();
   
