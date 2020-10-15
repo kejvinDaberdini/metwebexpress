@@ -9,7 +9,7 @@
       <%- include('podcast-partial', {podcast}); -%> 
 
         <form method="POST" action="/delete/follow/<%-podcast.podcastID%>?method=DELETE" name="followedDelete">
-          <input type="hidden" name="podcastID" value="<%- podcast.podcastID %>">
+          <input type="hidden" name="followID" value="<%- podcast.followID %>">
           <button type="submit" class="btn btn-primary">unfollow</button>
         </form>
     <% }); %>  

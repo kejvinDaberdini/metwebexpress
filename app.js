@@ -34,6 +34,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static('public'));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/audiofiles', express.static(path.join(__dirname, 'audiofiles')));
 app.use(methodOverride('method'));
 
 // set up the "username and password" login strategy

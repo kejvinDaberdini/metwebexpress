@@ -10,7 +10,8 @@ const multer = require('multer');
 
 
 
-const fileDestination = multer({ dest: './uploads/' })
+const fileDestination  = multer({ dest: './uploads/' });
+const fileDestination2 = multer({dest: './audiofiles/'});
 
 
 router.get('/dashboard', function(req, res, next) {
@@ -52,8 +53,8 @@ router.delete('/delete/podcast/:podcastID', function(req, res, next) {
   })    
 });
 
-router.post('/dashboard/addEpisode', function(req, res, next) {   
-  episodedao.addEpisode(req.body.newTitle, req.body.newDesc, req.body.newFile, req.body.newPrice, req.body.podcastID)
+router.post('/dashboard/addEpisode',fileDestination2.single('newFile'), function(req, res, next) {   
+  episodedao.addEpisode(req.body.newTitle, req.body.newDesc, req.file.path, req.body.newPrice, req.body.podcastID)
   .then(()=> {
     res.redirect('back');
   })
