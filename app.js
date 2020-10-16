@@ -13,7 +13,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
 const userDao = require('./models/user-dao.js');
-const podcastsRouter = require('./routes/podcasts');
+const indexRouter = require('./routes/index');
 const episodesRouter = require('./routes/episodes');
 const episodeRouter  = require('./routes/episode');
 const sessionsRouter = require('./routes/sessions');
@@ -23,6 +23,8 @@ const homepageRouter = require('./routes/homepage');
 const searchRouter = require('./routes/search');
 const favoriteRouter = require('./routes/favorite');
 const followRouter = require('./routes/follow');
+const commentRouter = require('./routes/comment');
+const podcastRouter = require('./routes/podcast');
 const methodOverride = require('method-override');
 
 const app = express();
@@ -119,19 +121,25 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.use('/',  sessionsRouter);
-app.use('/',  podcastsRouter);
+app.use('/',  indexRouter);
 app.use('/',  registerRouter);
+app.use('/',  sessionsRouter);
+app.use('/',  podcastRouter);
 app.use('/',  episodesRouter);
 app.use('/',  episodeRouter);
-app.use('/', searchRouter);
-app.use('/', favoriteRouter);
-app.use('/', followRouter);
+app.use('/',  searchRouter);
+app.use('/',  favoriteRouter);
+app.use('/',  followRouter);
+app.use('/',  commentRouter);
+
+app.use('/',  isLoggedIn, dashboardRouter);
 app.use('/',  isLoggedIn, homepageRouter);
 
-app.use('/', isLoggedIn, dashboardRouter);
+
+
 
 // catch 404 and forward to error handler
+
 app.use('/', function(req, res, next) {
   next(createError(404));
 });

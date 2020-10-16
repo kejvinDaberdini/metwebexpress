@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.get('/homepage', function(req, res, next) {
   let logged = req.isAuthenticated();  
-  let username = req.user.username;
+  const username = req.user.username;
   categorydao.getAllCategories().then((categories)=>{
     followdao.getFollowedPodcasts(req.user.userID).then((podcasts)=>{
         favoritedao.getFavoriteEpisodes(req.user.userID).then((episodes)=>{
@@ -22,7 +22,7 @@ router.get('/homepage', function(req, res, next) {
 
 
 
-
+/*
 router.delete('/delete/follow/:podcastID',function(req,res,next){
   //console.log(req.body.podcastID,req.user.userID);
     //followdao.unfollowPodcast(req.user.userID,req.body.podcastID)
@@ -31,5 +31,5 @@ router.delete('/delete/follow/:podcastID',function(req,res,next){
       res.redirect('back');
     }); 
 });
-
+*/
 module.exports = router;

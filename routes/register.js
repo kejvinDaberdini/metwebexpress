@@ -29,12 +29,12 @@ router.post('/register', function(req, res, next){
       dao.createUser(newUser).then (err =>{
         if(err)
         {
-          res.render('login', {title: 'login page', 'message':'registration succesful',logged:logged});
+          res.render('login', { 'message':'registration succesful',logged:logged});
           
         }
         else
         {
-          res.render('register', {title: 'register page', 'message':'wrong data , try again',logged:logged});
+          res.render('register', {'message':'wrong data , try again',logged:logged});
         }
       });
 

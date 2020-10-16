@@ -16,7 +16,7 @@
   </form>
 </nav>
 
-<div class="rightside-pannel">
+<aside>
   <div class="title">
     <div class="line"></div>
     <div class="pod">categories</div>
@@ -29,12 +29,12 @@
     </li>
     <% categories.forEach((category) => { %>
       <li>     
-        <a href="/category/<%-category.name%>"><%=category.name%></a>
+        <a href="/categories/<%-category.name%>"><%=category.name%></a>
         <input type="hidden" name="category" value="<%- category.name %>">
       </li>
       <%});%>
-  </ul>
-</div>
+  </ul> 
+</aside>
 
 <main class="container-fluid mt-3">
     <div class="row">

@@ -1,12 +1,12 @@
 'use strict';
 
-const favoritedao = require('../models/favorite-dao');
+const dao = require('../models/favorite-dao');
 const express = require('express');
 const router = express.Router();
 
 
 router.post('/favorites', function(req,res,next){
-    favoritedao.favoriteEpisode(req.user.userID,req.body.episodeID)
+    dao.favoriteEpisode(req.user.userID,req.body.episodeID)
     .then(()=>{
       res.redirect('back');
     });
@@ -14,7 +14,7 @@ router.post('/favorites', function(req,res,next){
 
 
 router.delete('/favorites/:favoriteID', function(req,res,next){
-    favoritedao.unfavoriteEpisode(req.body.favoriteID)
+   dao.unfavoriteEpisode(req.body.favoriteID)
     .then(()=>{
       res.redirect('back');
     });

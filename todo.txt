@@ -1,11 +1,11 @@
 
--gestire i file di audio 
+
 -fare i controlli divalidazione inserimenti in tutti i form/modali
 -Buy solo se ce un prezzo!
 -fare tutto il css e rimodellare l'html
 -aggiungere date ai commenti e a tutto penso
--gestire aquisto episodi
--cambiare tutte le post e get sbagliato con le delete e put quando server
+-controllare i requisiti curd nuovi (purchase, podcast e episode da vedere)
+-fare la parte in public di js per la rimozione/put.
 
 
 

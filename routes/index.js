@@ -1,39 +1,52 @@
 'use strict';
 const categorydao= require('../models/category-dao');
 const podcastdao = require('../models/podcast-dao.js');
-const followdao = require('../models/follow-dao.js');
-const episodedao = require('../models/episode-dao.js');
+//const followdao = require('../models/follow-dao.js');
+//const episodedao = require('../models/episode-dao.js');
 const express = require('express');
 const router = express.Router();
 
 
 
 router.get('/', function(req, res, next) {
-let logged = req.isAuthenticated(); 
+const logged = req.isAuthenticated(); 
+let username;
+if (!logged){
+   username="";
+}
+else{
+  username=req.user.username;
+}
+
 categorydao.getAllCategories()
 .then((categories)=>{
   podcastdao.getAllPodcasts()
-  .then((podcasts) => {
-    //console.log(categories.length);
-   
-    res.render('podcasts', {title: 'Podcasts', podcasts, categories:categories, logged:logged});
+  .then((podcasts) => { 
+    res.render('podcasts', {title: 'Podcasts', podcasts, categories, logged:logged, username});
   });
  }); 
 });
 
-router.get('/category/:category', function(req, res, next){
+router.get('/categories/:category', function(req, res, next){
   let logged = req.isAuthenticated(); 
+  let username;
+  if (!logged){
+     username="";
+  }
+  else{
+    username=req.user.username;
+  }
   categorydao.getAllCategories()
   .then((categories)=>{
     console.log(req.params.category);
     podcastdao.getPodcastsByCategory(req.params.category)
     .then((podcasts) => {
      // console.log(categories.length); 
-      res.render('podcasts', {title: 'Podcasts', podcasts, categories:categories, logged:logged});
+      res.render('podcasts', {title: 'Podcasts', podcasts, categories:categories, logged:logged, username});
     });
    }); 
   });
-
+/*
 router.post('/podcast/follow',function(req,res,next){
   //console.log(req.body.podcastID,req.user.userID);
   let logged= req.isAuthenticated();
@@ -58,6 +71,9 @@ router.post('/podcast/follow',function(req,res,next){
   }
   
 })
+*/
+
+
 /*
 router.get("/search", function(req,res,next){
   let logged = req.isAuthenticated();  

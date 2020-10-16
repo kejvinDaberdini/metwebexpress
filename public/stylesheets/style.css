@@ -1,12 +1,4 @@
-.rightside-pannel{
-    float: right;
-    width: 20%;
-    padding: 30px 10px;
-    padding-top: 30px;
-    padding-right: 10px;
-    padding-bottom: 30px;
-    padding-left: 10px;
-}
+
 .card{
     background-color: teal;
 
@@ -23,11 +15,10 @@
 }
 
 .card-desc{
-    float: center;
+
     height:10%
 }
 .card-cat{
-    float: center;
     height:50%
 }
 body{

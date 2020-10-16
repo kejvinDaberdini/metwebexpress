@@ -1,6 +1,6 @@
 'use strict';
 
-const userdao = require('../models/user-dao.js');
+//const userdao = require('../models/user-dao.js');
 const podcastdao = require('../models/podcast-dao.js');
 const categorydao= require('../models/category-dao');
 const episodedao = require('../models/episode-dao.js');
@@ -10,23 +10,24 @@ const multer = require('multer');
 
 
 
-const fileDestination  = multer({ dest: './uploads/' });
-const fileDestination2 = multer({dest: './audiofiles/'});
+//const fileDestination  = multer({ dest: './uploads/' });
+//const fileDestination2 = multer({dest: './audiofiles/'});
 
 
 router.get('/dashboard', function(req, res, next) {
-  let logged = req.isAuthenticated();  
+  const logged = req.isAuthenticated();  
   const creator = req.user.creator;
+  const username= req.user.username;
+
   categorydao.getAllCategories().then((categories)=>{
     podcastdao.getPodcastsByUser(req.user.userID).then((podcasts)=>{
         episodedao.getEpisodesByUser(req.user.userID).then((episodes)=>{
-
-          res.render('dashboard', {title: 'Dashboard', podcasts:podcasts, categories:categories, episodes:episodes, creator:creator, logged:logged})
-        }) 
-     })        
-  })
+          res.render('dashboard', {title: 'Dashboard', podcasts:podcasts, categories:categories, episodes:episodes, creator:creator, logged:logged, username:username})
+        }); 
+     });        
+  });
 });
-
+/*
 router.post('/dashboard/addPodcast',fileDestination.single('newImg'), function(req, res, next) {   
   userdao.getUserById(req.user.userID).then((creator)=>{
     console.log(req.file.path);
@@ -69,13 +70,12 @@ episodedao.updateEpisode(req.body.newTitle, req.body.newDesc, req.body.newFile, 
 });
 
 router.delete('/delete/episode/:episodeID', function(req, res, next) {  
-
-  episodedao.deleteEpisode(req.body.episodeID)
-.then(()=> {
-  res.redirect('back');
-})    
+    episodedao.deleteEpisode(req.body.episodeID)
+    .then(()=> {
+      res.redirect('back');
+    })    
 });
-
+*/
 
 
 module.exports = router;

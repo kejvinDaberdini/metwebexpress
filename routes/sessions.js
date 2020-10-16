@@ -8,7 +8,6 @@ const passport = require('passport');
 router.get('/login', function(req, res, next) {
   res.render('login');
 });
-
 /* Do the login */
 router.post('/sessions', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {

@@ -7,17 +7,20 @@ const router = express.Router();
 
 
 router.get("/search", function(req,res,next){
-    let logged = req.isAuthenticated();  
+    let logged = req.isAuthenticated(); 
+    let username= "";
+    if(logged){
+        username=req.user.username;
+    }
     categorydao.getAllCategories().then((categories)=>{
         podcastdao.getPodcastsByText(req.query.text, req.query.newCategory) 
         .then((resultPodcasts)=>{        
             episodedao.getEpisodesByText(req.query.text, req.query.newCategory)
             .then((resultEpisodes)=>{
+                res.render('search', {title: 'Search', podcasts:resultPodcasts, episodes:resultEpisodes, logged:logged, categories, username:username});
+             });
+         }); 
+    });  
+});
 
-                res.render('search', {title: 'Search', podcasts:resultPodcasts, episodes:resultEpisodes, logged:logged, categories});
-                })
-            })  
-    })
-    
-  })
 module.exports = router;  
