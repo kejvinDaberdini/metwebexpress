@@ -108,21 +108,20 @@ exports.deletePodcast = function(podcastID){
 exports.getPodcastsByText = function(text, category) {
   let param;
   let sql;
-  let search;
-  if(text==""){
-    search=text;
-  }
-   else search='%'+text+'%';
+  const search='%'+text+'%';
 
   return new Promise((resolve, reject) => {
+    
     if(category =="All"){
+      console.log("hahahaha");
       param= {$text:search};
       sql = 'SELECT * FROM podcast WHERE title LIKE $text OR description LIKE $text   ';
       
 
     }else{
+      console.log(category);
       param= {$text:search,$category:category};
-      sql = 'SELECT * FROM podcast WHERE category == $category AND  title LIKE $text OR description LIKE $text ';
+      sql = 'SELECT * FROM podcast WHERE category=$category AND  (title LIKE $text OR description LIKE $text) ';
       
     }
  
@@ -134,6 +133,7 @@ exports.getPodcastsByText = function(text, category) {
 
       //const podcasts = rows.map((e) => ({title: e.title, description: e.description, category: e.category, image: e.image, podcastID: e.podcastID}));
       //resolve(podcasts);
+      console.log(rows);
       resolve(rows);
     });
   });

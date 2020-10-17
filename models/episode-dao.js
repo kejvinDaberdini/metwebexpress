@@ -118,7 +118,7 @@ exports.getEpisodesByText = function(text,category) {
     }
     else{
       params={$search:search, $category:category}
-       sql = ' SELECT episode.episodeID AS episodeID, episode.title AS title, episode.description AS description, episode.uploadDate AS uploadDAte , episode.price AS price, episode.sponsor AS sponsor, podcast.title AS podcast, podcast.image AS image FROM episode JOIN podcast ON episode.podcastID=podcast.podcastID WHERE podcast.category=$category AND episode.title LIKE $search OR episode.description LIKE $search '; 
+       sql = ' SELECT episode.episodeID AS episodeID, episode.title AS title, episode.description AS description, episode.uploadDate AS uploadDAte , episode.price AS price, episode.sponsor AS sponsor, podcast.title AS podcast, podcast.image AS image FROM episode JOIN podcast ON episode.podcastID=podcast.podcastID WHERE podcast.category=$category AND(episode.title LIKE $search OR episode.description LIKE $search) '; 
     }   
     db.all(sql, params, (err, rows) => {
       if (err) {

@@ -9,11 +9,13 @@ const router = express.Router();
 router.get("/search", function(req,res,next){
     let logged = req.isAuthenticated(); 
     let username= "";
+    console.log(req.query.newCategory)
     if(logged){
         username=req.user.username;
     }
     categorydao.getAllCategories().then((categories)=>{
-        podcastdao.getPodcastsByText(req.query.text, req.query.newCategory) 
+        podcastdao.getPodcastsByText(req.query.text, req.query.newCategory)
+        
         .then((resultPodcasts)=>{        
             episodedao.getEpisodesByText(req.query.text, req.query.newCategory)
             .then((resultEpisodes)=>{
