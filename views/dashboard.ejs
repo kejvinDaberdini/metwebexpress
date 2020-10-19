@@ -38,11 +38,19 @@
         <td><%= podcast.description%></td>
         <td><%= podcast.category %></td>
         <td>
-          <form method="POST" action="/delete/podcast/<%- podcast.podcastID %>?method=DELETE">
+
+          <a href= "/dashboard/updatePodcast/<%- podcast.podcastID%>">
+            <input hidden="<%- podcast.podcastID%>">
+            <button type="submit" class="btn-primary">edit</button>
+          </a>
+          <form method="POST" action="/podcasts/<%- podcast.podcastID %>?method=DELETE">
             <input type="hidden" name="podcastID" value="<%- podcast.podcastID %>">
-            <button type="submit" class="btn-primary">Del</button>
+            <button type="submit" class="btn-primary">delete</button>
           </form>
-          <button class="btn-primary">Edit</button>       
+
+      
+          
+            
         </td>
       </tr>
      
@@ -90,15 +98,18 @@
             <td><%= episode.sponsor %></td>
             <td><%= episode.uploadDate %></td>
             <td>
-              <form method="POST" action="/delete/episode/<%- episode.episodeID %>?method=DELETE">
-                <input type="hidden" name="episodeID" value="<%- episode.episodeID %>">
-                <button type="submit" class="btn-primary">Del</button>
-              </form>
-              <button class="btn-primary">Edit</button>
-             
-              <a href ="/episode/<%- episode.episodeID%>" >
-                <button class="btn btn-primary">view</button>
+
+
+
+              <a href= "/dashboard/updateEpisode/<%- episode.episodeID%>">
+                <input hidden="<%- episode.episodeID%>">
+                <button type="submit" class="btn-primary">edit</button>
               </a>
+              <form method="POST" action="/episodes/<%- episode.episodeID%>?method=DELETE">
+                <input type="hidden" name="episodeID" value="<%- episode.episodeID %>">
+                <button type="submit" class="btn-primary">delete</button>
+              </form>
+
             </td>
           </tr>
          
@@ -135,7 +146,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="/dashboard/addPodcast" method="POST" enctype="multipart/form-data" >
+        <form action="/podcasts" method="POST" enctype="multipart/form-data" >
           <div class="modal-body">
             <div class="form-group">
               <label for="inputNewTitle">New Title</label>
@@ -149,7 +160,7 @@
 
             <div class="form-group" >
               <label for="inputNewImage">New Image</label>
-              <input type="file" name="newImg" class="form-control-file" id="inputNewImage">
+              <input type="file" name="newImg" class="form-control-file" id="inputNewImage" accept="image/*">
             </div>
 
             <div class="form-group">
@@ -314,7 +325,7 @@
 
             <div class="form-group">
               <label for="inputNewFile">New File</label>
-              <input type="file" name="newFile" class="form-control-file" id="inputNewFile">
+              <input type="file" name="newFile" class="form-control-file" id="inputNewFile" accept="audio/*">
             </div>
           </div>
 

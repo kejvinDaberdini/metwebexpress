@@ -11,14 +11,16 @@ const multer = require('multer');
 const fileDestination  = multer({ dest: './uploads/' });
 
 router.post('/podcasts',fileDestination.single('newImg'), function(req, res, next) {   
-    userdao.getUserById(req.user.userID).then((creator)=>{
+
+      const user= req.user.userID;
+      const creator =req.user.username;
       console.log(req.file.path);
-      podcastdao.addPodcast(req.body.newTitle, creator.username,req.body.newDesc,req.body.newCategory,req.file.path, creator.userID)
+      podcastdao.addPodcast(req.body.newTitle, creator,req.body.newDesc,req.body.newCategory,req.file.path, user)
       .then(()=> {
         res.redirect('back');
       })
     })
-  });
+  
 
 router.get('/podcasts/:podcastID', function(req, res, next){
     let logged = req.isAuthenticated();
@@ -45,17 +47,18 @@ router.get('/podcasts/:podcastID', function(req, res, next){
   });
 });
 
-router.put('/put/podcast', function(req, res, next) {  
+router.put('/podcasts/:podcastID',fileDestination.single('newImg'), function(req, res, next) {  
     //console.log(req.body.newTitle, req.body.newDesc,req.body.newCategory, req.body.oldPodcast);
-  podcastdao.updatePodcast(req.body.newTitle, req.body.newDesc, req.body.newCategory, req.body.newImg, req.body.oldPodcast)
+
+  podcastdao.updatePodcast(req.body.newTitle, req.body.newDesc, req.body.newCategory, req.file.path, req.body.podcastID)
   .then(()=> {
-    res.redirect('back');
+    res.redirect('/dashboard');
   })    
 });
 
-router.delete('/delete/podcast/:podcastID', function(req, res, next) {  
-
-    podcastdao.deletePodcast(req.body.podcastID )
+router.delete('/podcasts/:podcastID', function(req, res, next) {  
+    console.log(req.params.podcastID);
+    podcastdao.deletePodcast(req.params.podcastID )
   .then(()=> {
     res.redirect('back');
   })    

@@ -25,6 +25,12 @@ body{
     background-color: snow;
 
 }
+aside{
+    float: left;
+}
+main{
+    float:right;
+}
 
 .card:hover {
     transform: scale(1.15);

@@ -71,11 +71,11 @@ exports.addEpisode = function(title, description, file, price, podcastID){
   });
 }
 
-exports.updateEpisode = function(title, description, file, price, episodeID){
+exports.updateEpisode = function(title, description, file, price, episodeID, sponsor){
   return new Promise((resolve, reject)=>{
     
-    const sql = 'UPDATE episode SET title=$title, description=$description, file=$file, price=$price WHERE episodeID=$episodeID';
-    const param= {$title:title, $description:description, $file:file, $price:price, $episodeID:episodeID};
+    const sql = 'UPDATE episode SET title=$title, description=$description, file=$file, price=$price, sponsor=$sponsor WHERE episodeID=$episodeID';
+    const param= {$title:title, $description:description, $file:file, $price:price, $episodeID:episodeID, $sponsor:sponsor};
     db.run(sql, param, function(err){
       if(err){
         reject(err);

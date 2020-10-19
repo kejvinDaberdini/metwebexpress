@@ -27,6 +27,24 @@ router.get('/dashboard', function(req, res, next) {
      });        
   });
 });
+
+
+router.get('/dashboard/updatePodcast/:podcastID', function(req,res,next){
+  const podcastID= req.params.podcastID;
+  console.log(podcastID);
+  categorydao.getAllCategories().then((categories)=>{
+  res.render('updatePodcast',{podcastID, categories})
+  })
+})
+
+router.get('/dashboard/updateEpisode/:episodeID', function(req,res,next){
+  const episodeID= req.params.episodeID;
+  console.log(episodeID);
+ 
+  res.render('updateEpisode',{episodeID})
+})
+
+
 /*
 router.post('/dashboard/addPodcast',fileDestination.single('newImg'), function(req, res, next) {   
   userdao.getUserById(req.user.userID).then((creator)=>{

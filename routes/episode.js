@@ -92,15 +92,16 @@ router.post('/dashboard/addEpisode',fileDestination.single('newFile'), function(
   })
 });
 
-router.put('/put/episode', function(req, res, next) {  
-
-episodedao.updateEpisode(req.body.newTitle, req.body.newDesc, req.body.newFile, req.body.price, req.body.episodeID)
+router.put('/episodes/:episodeID',fileDestination.single('newFile'),  function(req, res, next) {  
+console.log(req.query);
+console.log(req.body);
+episodedao.updateEpisode(req.body.newTitle, req.body.newDesc, req.file.path, req.body.price, req.body.episodeID, req.body.newSponsor)
 .then(()=> {
-  res.redirect('back');
+  res.redirect('/dashboard');
 })    
 });
 
-router.delete('/delete/episode/:episodeID', function(req, res, next) {  
+router.delete('/episodes/:episodeID', function(req, res, next) {  
 
   episodedao.deleteEpisode(req.body.episodeID)
 .then(()=> {
