@@ -7,8 +7,19 @@ const followdao = require('../models/follow-dao');
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
+const fs= require('fs');
 
 const fileDestination  = multer({ dest: './uploads/' });
+
+
+function deleteLocalFile(oldfile){
+  try {
+   
+      fs.unlinkSync(oldfile)
+    } catch(err) {
+      console.error(err)
+    };
+  }
 
 router.post('/podcasts',fileDestination.single('newImg'), function(req, res, next) {   
 
@@ -52,22 +63,19 @@ router.put('/podcasts/:podcastID',fileDestination.single('newImg'), function(req
   const oldfile= req.body.oldFile;
   podcastdao.updatePodcast(req.body.newTitle, req.body.newDesc, req.body.newCategory, req.file.path, req.body.podcastID)
   .then(()=> {
-    function deleteLocalFile(olfile){
-      try {
-        console.log("deleting", oldfile);
-          fs.unlinkSync(oldfile)
-        } catch(err) {
-          console.error(err)
-        };
-  }
+   
+    deleteLocalFile(oldfile);
+   
     res.redirect('/dashboard');
   })    
 });
 
 router.delete('/podcasts/:podcastID', function(req, res, next) {  
     console.log(req.params.podcastID);
+    const oldfile= req.body.oldFile;
     podcastdao.deletePodcast(req.params.podcastID )
   .then(()=> {
+    deleteLocalFile(oldfile);
     res.redirect('back');
   })    
 });

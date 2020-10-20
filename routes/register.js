@@ -19,6 +19,8 @@ router.post('/register', function(req, res, next){
     const password2 = req.body.password2;
     const creator = (req.body.creator=='on')? 1:0;
 
+    req.check('email','email non valida').isEmail
+
       const newUser = {
         
         username: username,

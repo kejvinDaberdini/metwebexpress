@@ -1,11 +1,7 @@
-
-
--fare i controlli divalidazione inserimenti in tutti i form/modali
--Buy solo se ce un prezzo!
--fare tutto il css e rimodellare l'html
--aggiungere date ai commenti e a tutto penso
--controllare i requisiti curd nuovi (purchase, podcast e episode da vedere)
--fare la parte in public di js per la rimozione/put.
+1)Buy solo se ce un prezzo!
+2) fare i controlli divalidazione inserimenti in tutti i form/modali e in registrazione
+3)aggiungere date ai commenti e a tutto penso
+4)fare tutto il css e rimodellare l'html
 
 
 

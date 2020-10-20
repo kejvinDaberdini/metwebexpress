@@ -32,7 +32,6 @@ router.get('/dashboard', function(req, res, next) {
 router.get('/dashboard/updatePodcast/:podcastID', function(req,res,next){
   const podcastID= req.params.podcastID;
   podcastdao.getPodcast(podcastID).then((oldpodcast)=>{
-    console.log(oldpodcast);
     categorydao.getAllCategories().then((categories)=>{
     res.render('updatePodcast',{podcastID, categories, oldpodcast})
     })
@@ -41,10 +40,14 @@ router.get('/dashboard/updatePodcast/:podcastID', function(req,res,next){
 
 router.get('/dashboard/updateEpisode/:episodeID', function(req,res,next){
   const episodeID= req.params.episodeID;
-  console.log(episodeID);
- 
-  res.render('updateEpisode',{episodeID})
+  episodedao.getEpisode(episodeID).then((oldepisode)=>{
+    res.render('updateEpisode',{episodeID, oldepisode})
+  })
 })
+
+ 
+ 
+
 
 
 /*

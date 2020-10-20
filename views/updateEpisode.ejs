@@ -33,29 +33,29 @@
            
               <div class="form-group">
                 <label for="inputNewTitle">New Title</label>
-                <input type="text" name="newTitle" class="form-control" id="inputNewTitle" placeholder="Enter new title" required>
+                <input type="text" name="newTitle" class="form-control" value="<%=oldepisode.title%>" id="inputNewTitle" placeholder="Enter new title" required>
               </div>
   
               <div class="form-group">
                 <label for="inputNewDescription">New Description</label>
-                <textarea class="form-control" name="newDesc" id="inputNewDescription" rows="3"></textarea>
+                <textarea class="form-control" name="newDesc"  id="inputNewDescription" rows="3"><%=oldepisode.description%></textarea>
               </div>
   
               <div class="form-group" >
                 <label for="inputNewImage">New file</label>
-                <input type="file" name="newFile" class="form-control-file" id="inputNewFile" accept="audio/*">
+                <input type="file" name="newFile" class="form-control-file" id="inputNewFile" accept="audio/*" required>
               </div>
 
               <div class="form-group">
                 <label for="inputNewTitle">Sponsor</label>
-                <input type="text" name="newSponsor" class="form-control" id="inputNewSponsor" placeholder="Enter new sponsor" required>
+                <input type="text" name="newSponsor" class="form-control" value="<%=oldepisode.sponsor%>"  id="inputNewSponsor" placeholder="Enter new sponsor"
               </div>
               
               <div class="form-group">
                 <label for="inputNewTitle">Price</label>
-                <input type="number" min="1" max="999" name="price" class="form-control" id="inputPrice" placeholder="Enter Price " required>
+                <input type="number" min="1" max="999" name="price" class="form-control" value="<%=oldepisode.price%>" id="inputPrice" placeholder="Enter Price " required>
               </div>
-              
+              <input type="hidden" name="oldFile" value="<%-oldepisode.file%>">
               <input type="hidden" name="episodeID" value="<%-episodeID%>">
               <button type="submit">update</button>
          

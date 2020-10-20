@@ -63,6 +63,7 @@
             <button type="submit" class="btn-primary">edit</button>
           </a>
           <form method="POST" action="/podcasts/<%- podcast.podcastID %>?method=DELETE">
+            <input type="hidden" name="oldFile" value="<%-podcast.image%>">
             <input type="hidden" name="podcastID" value="<%- podcast.podcastID %>">
             <button type="submit" class="btn-primary">delete</button>
           </form>
@@ -125,6 +126,7 @@
                 <button type="submit" class="btn-primary">edit</button>
               </a>
               <form method="POST" action="/episodes/<%- episode.episodeID%>?method=DELETE">
+                <input type="hidden" name="oldFile" value="<%-episode.file%>">
                 <input type="hidden" name="episodeID" value="<%- episode.episodeID %>">
                 <button type="submit" class="btn-primary">delete</button>
               </form>

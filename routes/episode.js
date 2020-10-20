@@ -7,6 +7,7 @@ const favoritedao = require('../models/favorite-dao');
 const categorydao = require('../models/category-dao');
 const express = require('express');
 const { route } = require('./episodes.js');
+const fs= require('fs');
 const router = express.Router();
 
 const multer = require('multer');
@@ -14,6 +15,15 @@ const multer = require('multer');
 
 
 const fileDestination = multer({dest: './audiofiles/'});
+
+function deleteLocalFile(file){
+  try {
+   
+      fs.unlinkSync(file)
+    } catch(err) {
+      console.error(err)
+    };
+  }
 
 
 
@@ -102,18 +112,21 @@ router.post('/dashboard/addEpisode',fileDestination.single('newFile'), function(
 });
 
 router.put('/episodes/:episodeID',fileDestination.single('newFile'),  function(req, res, next) {  
-console.log(req.query);
-console.log(req.body);
+const oldfile= req.body.oldFile;
+console.log(oldfile);
 episodedao.updateEpisode(req.body.newTitle, req.body.newDesc, req.file.path, req.body.price, req.body.episodeID, req.body.newSponsor)
 .then(()=> {
+  deleteLocalFile(oldfile);
   res.redirect('/dashboard');
 })    
 });
 
 router.delete('/episodes/:episodeID', function(req, res, next) {  
+  const oldfile= req.body.oldFile;
 
   episodedao.deleteEpisode(req.body.episodeID)
 .then(()=> {
+  deleteLocalFile(oldfile);
   res.redirect('back');
 })    
 });
