@@ -1,38 +1,55 @@
 
-.card{
-    background-color: teal;
-
-
-
-  transition: 0.5s ease;
-  cursor: pointer;
-  margin:30px;
-}
-
-.card-img-top{
-    height:60%;
-    width:100%;
-}
-
-.card-desc{
-
-    height:10%
-}
-.card-cat{
-    height:50%
-}
 body{
     background-color: snow;
+    margin-top: 50px;
 
 }
+
+
 aside{
     float: left;
+    position: fixed;
 }
 main{
     float:right;
+    width:70%;
 }
 
+
+
+
+
+.card{
+    background-color:darkgray;
+    height:20rem;
+    overflow:hidden;
+    transition: 0.5s ease;
+    cursor: pointer;
+    margin:10px;
+    border:5px;
+}
+
+.card-title{
+    font-size: x-large;
+}
+
+.card-img-top{
+    height:50%;
+    width:100%;
+}
+
+
 .card:hover {
-    transform: scale(1.15);
+    transform: scale(1.10);
     box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
+  }
+
+
+  td
+  {
+   max-width: 300px;
+  max-height: fit-content;
+   overflow:auto;
+   text-overflow: ellipsis;
+   white-space: nowrap;
   }

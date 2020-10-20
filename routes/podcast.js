@@ -49,9 +49,17 @@ router.get('/podcasts/:podcastID', function(req, res, next){
 
 router.put('/podcasts/:podcastID',fileDestination.single('newImg'), function(req, res, next) {  
     //console.log(req.body.newTitle, req.body.newDesc,req.body.newCategory, req.body.oldPodcast);
-
+  const oldfile= req.body.oldFile;
   podcastdao.updatePodcast(req.body.newTitle, req.body.newDesc, req.body.newCategory, req.file.path, req.body.podcastID)
   .then(()=> {
+    function deleteLocalFile(olfile){
+      try {
+        console.log("deleting", oldfile);
+          fs.unlinkSync(oldfile)
+        } catch(err) {
+          console.error(err)
+        };
+  }
     res.redirect('/dashboard');
   })    
 });

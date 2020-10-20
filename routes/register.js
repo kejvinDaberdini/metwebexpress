@@ -1,6 +1,7 @@
 const dao = require('../models/user-dao.js');
 const express = require('express');
 const passport = require('passport');
+const validator = require('express-validator');
 const router = express.Router();
 
 

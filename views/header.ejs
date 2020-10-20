@@ -25,10 +25,10 @@
   </head>
   <body>
     <header>
-      <nav class="navbar navbar-expand navbar-dark bg-primary">
+      <nav class="navbar navbar-expand fixed-top navbar-dark bg-dark mr-auto ">
         <span class="navbar-brand mb-0">PodcastHub</span>
         <% if (title !== '') { %>
-        <div class="podcast-dropdown">
+        <div class="dropdownMenuButton">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Podcasts</button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="/">All</a>
@@ -41,9 +41,6 @@
 
               <!--
         <ul class="navbar-nav mr-auto">
-			    <li class="nav-item <%= active==='podcasts' ? 'active' : ''%>">
-            <a class="nav-link" href="/">Podcasts</a>
-          </li>
           <li class="nav-item <%= active==='dashboard' ? 'active' : ''%>">
             <a class="nav-link" href="/dashboard">dashboard</a>
           </li>
@@ -53,25 +50,28 @@
         </ul>
         -->
 
-        <div class="search-container">
+        <div class="search-container mr-auto">
           <form class="form-inline" action="/search" method="GET">
+            <select class="custom-select" name="newCategory" id="inputNewCategory">
+              <option value="All" selected>All</option>  
+              <% for(let i=0; i < categories.length; i++){%>
+                <option value ="<%- categories[i].name %>" ><%= categories[i].name%> </option>
+              <%}%>
+            </select>  
             <input class="form-control mr-sm-2" type="search" name="text" placeholder="Search" aria-label="Search" required>
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
               <label for="inputNewCategory"> </label>   
-              <select class="custom-select" name="newCategory" id="inputNewCategory">
-                <option value="All" selected>All</option>  
-                <% for(let i=0; i < categories.length; i++){%>
-                  <option value ="<%- categories[i].name %>" ><%= categories[i].name%> </option>
-                <%}%>
-              </select>  
+              
           </form>
         </div>
         <% } %>
         <%if(logged){%>
-        <div class="user-dropdown">
+        <div class="user-dropdown ">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= username%></button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="/homepage">Homepage</a>
             <a class="dropdown-item" href="/dashboard">Dashboard</a>
+          
             <a class="dropdown-item" id= "logout" href="#">logout</a>
           </div>
         </div>

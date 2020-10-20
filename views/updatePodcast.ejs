@@ -33,28 +33,31 @@
            
               <div class="form-group">
                 <label for="inputNewTitle">New Title</label>
-                <input type="text" name="newTitle" class="form-control" id="inputNewTitle" placeholder="Enter new title" required>
+                <input type="text" name="newTitle" class="form-control" id="inputNewTitle" value="<%=oldpodcast.title%>" placeholder="Enter new title" required>
               </div>
   
               <div class="form-group">
                 <label for="inputNewDescription">New Description</label>
-                <textarea class="form-control" name="newDesc" id="inputNewDescription" rows="3"></textarea>
+                <textarea class="form-control" name="newDesc" id="inputNewDescription" rows="3"><%=oldpodcast.description%></textarea>
               </div>
   
               <div class="form-group" >
                 <label for="inputNewImage">New Image</label>
-                <input type="file" name="newImg" class="form-control-file" id="inputNewImage" accept="image/*">
+                <input type="file" name="newImg" class="form-control-file" id="inputNewImage" accept="image/*" required  >
               </div>
   
               <div class="form-group">
                 <label for="inputNewCategory">New Category</label>   
                 <select class="custom-select" name="newCategory" id="inputNewCategory">
-                  <option value="<%- categories[0].name %>" selected><%= categories[0].name%></option>  
-                  <% for(let i=1; i < categories.length; i++){%>
+                  <option value="<%=oldpodcast.category%>" selected><%=oldpodcast.category%></option> 
+                  <% for(let i=0; i < categories.length; i++){%>
+                    <% if(categories[i].name!=oldpodcast.category){%>
                     <option value ="<%- categories[i].name %>" ><%= categories[i].name%> </option>
+                  <%}%>
                   <%}%>
                 </select>    
               </div>
+              <input type="hidden" name="oldFile" value="<%-oldpodcast.image%>">
               <input type="hidden" name="podcastID" value="<%-podcastID%>">
               <button type="submit">update</button>
          

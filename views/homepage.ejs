@@ -1,20 +1,36 @@
 <%- include('header', {title, active: 'homepage'}); -%>
 
+<aside>
+  <h1><%=user.username%></h1>
+  <h3><%=user.email%></h3>
+</aside>
 
-<main class="container-fluid mt-3">
+
+<main >
   <div class="row">
     <h3>Podcasts your follow</h3>
      
     <% podcasts.forEach((podcast) => { %>
-      <%- include('podcast-partial', {podcast}); -%> 
-
-        <form method="POST" action="/delete/follow/<%-podcast.podcastID%>?method=DELETE" name="followedDelete">
-          <input type="hidden" name="followID" value="<%- podcast.followID %>">
-          <button type="submit" class="btn btn-primary">unfollow</button>
-        </form>
-    <% }); %>  
-  </div>
-</main>
+     
+      <div class="card mt-4 mr-4 ml-2" style="width: 20rem;">
+        <div class="card-body">
+          <h5 class="card-title"><%= podcast.title %></h5>
+          <a href = "/podcasts/<%- podcast.podcastID%>">
+            <img src="/<%-podcast.image %>" class="card-img-top" alt="...">
+          </a>
+          <p class="card-desc"><%= podcast.description %></p>
+          <p class="card-cat"><%= podcast.category %></p>
+          <form method="POST" action="/delete/follow/<%-podcast.podcastID%>?method=DELETE" name="followedDelete">
+            <input type="hidden" name="followID" value="<%- podcast.followID %>">
+            <button type="submit" class="btn btn-primary">unfollow</button>
+          </form>
+        </div>
+      </div>  
+ 
+    <% }); %> 
+  </div>  
+ 
+  <div class="row">
     <h3>Your Favorite Episodes</h3>
     <% episodes.forEach((episode) => { %>
       <div class="card mt-4 mr-4 ml-2" style="width: 20rem;">
@@ -24,14 +40,15 @@
           <p class="card-text"><%= episode.price %></p>
           <p class="card-text"><%= episode.sponsor %></p> 
           <p class="card-text"><%= episode.episodeID %></p> 
-          <a href ="/episode/<%-episode.episodeID%>" >
+          <a href ="/episodes/<%-episode.episodeID%>" >
             <button type ="submit" class="btn btn-primary">Watch</button>
           </a>
         </div>
       </div>
+    </div>
    <!--   <%- include('episode-partial', {episode}); -%>  -->              
       <% }); %>  
   
-
+    </main>
 
 <%- include('footer'); -%>

@@ -17,12 +17,12 @@ const multer = require('multer');
 router.get('/dashboard', function(req, res, next) {
   const logged = req.isAuthenticated();  
   const creator = req.user.creator;
-  const username= req.user.username;
+  const user= req.user;
 
   categorydao.getAllCategories().then((categories)=>{
     podcastdao.getPodcastsByUser(req.user.userID).then((podcasts)=>{
         episodedao.getEpisodesByUser(req.user.userID).then((episodes)=>{
-          res.render('dashboard', {title: 'Dashboard', podcasts:podcasts, categories:categories, episodes:episodes, creator:creator, logged:logged, username:username})
+          res.render('dashboard', {title: 'Dashboard', podcasts:podcasts, categories:categories, episodes:episodes, creator:creator, logged:logged, user, username:user.username})
         }); 
      });        
   });
@@ -31,9 +31,11 @@ router.get('/dashboard', function(req, res, next) {
 
 router.get('/dashboard/updatePodcast/:podcastID', function(req,res,next){
   const podcastID= req.params.podcastID;
-  console.log(podcastID);
-  categorydao.getAllCategories().then((categories)=>{
-  res.render('updatePodcast',{podcastID, categories})
+  podcastdao.getPodcast(podcastID).then((oldpodcast)=>{
+    console.log(oldpodcast);
+    categorydao.getAllCategories().then((categories)=>{
+    res.render('updatePodcast',{podcastID, categories, oldpodcast})
+    })
   })
 })
 

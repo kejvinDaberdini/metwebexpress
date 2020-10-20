@@ -33,7 +33,7 @@ router.get('/podcasts/:podcastID', function(req, res, next){
   });
 });
 });
-
+/*
 router.post('/podcast/follow',function(req,res,next){
   //console.log(req.body.podcastID,req.user.userID);
     followdao.followPodcast(req.user.userID,req.body.podcastID)
@@ -58,5 +58,5 @@ router.post('/episode/purchase', function(req, res, next){
     res.redirect('back');
   });
 });
-
+*/
 module.exports = router;

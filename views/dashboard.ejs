@@ -1,7 +1,26 @@
 <%- include('header', {title, active: 'dashboard'}); -%>
 
 <%if(creator==1){%>
-<main class="container-fluid mt-3">
+  <aside>
+    <h1><%=user.username%></h1>
+    <h3><%=user.email%></h3>
+    <div class="col-lg-6 ">   <!--spazio da dedicare alle opzioni da seguire-->
+      <h3>Options:</h3>
+      <div class="container-fluid">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#addPodcastModal">Add Podcast</button>
+            <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#addEpisodeModal">Add Episode</button>
+
+  
+          </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+<main class="container-fluid mt-2">
  
 
 
@@ -109,6 +128,9 @@
                 <input type="hidden" name="episodeID" value="<%- episode.episodeID %>">
                 <button type="submit" class="btn-primary">delete</button>
               </form>
+              <a href = "/episodes/<%- episode.episodeID%>">
+                <button type="submit" class="btn-primary">watch</button>
+              </a>
 
             </td>
           </tr>
@@ -122,20 +144,7 @@
 </div>    
 </div>  
 
-  <div class="col-lg-6 ">   <!--spazio da dedicare alle opzioni da seguire-->
-    <h3>Options:</h3>
-    <div class="container-fluid">
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-          <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#addPodcastModal">Add Podcast</button>
-          <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#updatePodcastModal">Update Podcast</button>
-          <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#addEpisodeModal">Add Episode</button>
-          <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#updateEpisodeModal">Update Episode</button>
 
-        </li>
-      </ul>
-    </div>
-  </div>
    <!--  add Podcast Modal -->
    <div class="modal fade" id="addPodcastModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -344,6 +353,9 @@
   </div>
 
 </main>
+
+
+
 <%}%>
 
 <%- include('footer'); -%>

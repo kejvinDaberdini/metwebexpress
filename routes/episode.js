@@ -17,7 +17,7 @@ const fileDestination = multer({dest: './audiofiles/'});
 
 
 
-router.get('/episode/:episodeID', function(req, res, next) {
+router.get('/episodes/:episodeID', function(req, res, next) {
   let logged = req.isAuthenticated();
   let username;
   if (!logged){
@@ -25,6 +25,8 @@ router.get('/episode/:episodeID', function(req, res, next) {
   }
   else username=req.user.username;
   //const username=req.user.username;
+
+  
   categorydao.getAllCategories()
   .then((categories)=>{
   episodedao.getEpisode(req.params.episodeID)
@@ -32,10 +34,15 @@ router.get('/episode/:episodeID', function(req, res, next) {
      commentdao.getComments(req.params.episodeID)
       .then((comments)=> {
         if(logged){
-          favoritedao.isFavorite(req.user.userID,req.params.episodeID)
+          purchasedao.getPurchaseByUser(req.user.userID)
+          .then((purchase)=>{
+            favoritedao.isFavorite(req.user.userID,req.params.episodeID)
           .then((favorite)=>{
-                  res.render('episode', {title : 'Episode', episode:episode, comments:comments, logged:logged , username:username, favorite:favorite,categories});
+                  res.render('episode', {title : 'Episode', episode:episode, comments:comments, logged:logged , username:username, favorite:favorite,categories, purchase});
             });
+
+          })
+          
         }
         else
             res.render('episode', {title : 'Episode', episode:episode, comments:comments, logged:logged , username:username, categories});
@@ -44,6 +51,8 @@ router.get('/episode/:episodeID', function(req, res, next) {
   });
 });
 });
+
+
 /*
 router.post('/episode/favorite', function(req,res,next){
   favoritedao.favoriteEpisode(req.user.userID,req.body.episodeID)
