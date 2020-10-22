@@ -3,6 +3,7 @@
 3)aggiungere date ai commenti e a tutto penso
 4)fare tutto il css e rimodellare l'html
 
+npx kill-port 3000
 
 
 	

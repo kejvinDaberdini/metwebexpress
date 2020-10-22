@@ -11,20 +11,10 @@ exports.getAllEpisodes = function(id) {
         reject(err);
       }
 
-      const episodes = rows.map((e) => (
-        {
-          episodeID: e.episodeID,
-          title: e.title, 
-          description: e.description, 
-          file: e.file,
-          price: e.price,
-          podcastID: e.podcastID,
-          podcastDescription: e.description
-        }
-      ));
-      resolve(episodes);
+      
+      resolve(rows);
     });
-  });
+  }); 
 };
 
 exports.getEpisode = function(id) {

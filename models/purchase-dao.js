@@ -30,3 +30,18 @@ exports.buyEpisode = function(episodeID,userID,name,surname,cardType,cardNumber,
     })
 
   }
+
+  exports.isBought=function(userID, episodeID){
+    return new Promise((resolve,reject)=>{
+      const sql='SELECT * FROM purchase WHERE userID=? and episodeID=?';
+      db.get(sql,[userID,episodeID],(err,row)=>{
+        if(err){
+          reject(err);
+          return;
+        };
+        resolve(row);
+
+      })
+    })
+
+  }

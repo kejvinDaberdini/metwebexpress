@@ -30,6 +30,7 @@ function deleteLocalFile(file){
 router.get('/episodes/:episodeID', function(req, res, next) {
   let logged = req.isAuthenticated();
   let username;
+  let isbought;
   if (!logged){
      username="";
   }
@@ -44,11 +45,15 @@ router.get('/episodes/:episodeID', function(req, res, next) {
      commentdao.getComments(req.params.episodeID)
       .then((comments)=> {
         if(logged){
-          purchasedao.getPurchaseByUser(req.user.userID)
+          purchasedao.isBought(req.user.userID, req.params.episodeID)
           .then((purchase)=>{
+            console.log(purchase);
+            if(purchase == undefined){ isbought=false;}
+            else   isbought = true;
+            
             favoritedao.isFavorite(req.user.userID,req.params.episodeID)
           .then((favorite)=>{
-                  res.render('episode', {title : 'Episode', episode:episode, comments:comments, logged:logged , username:username, favorite:favorite,categories, purchase});
+                  res.render('episode', {title : 'Episode', episode:episode, comments:comments, logged:logged , username:username, favorite:favorite,categories, isbought});
             });
 
           })

@@ -1,8 +1,8 @@
 const dao = require('../models/user-dao.js');
 const express = require('express');
 const passport = require('passport');
-const validator = require('express-validator');
 const router = express.Router();
+const { check, validationResult } = require('express-validator')
 
 
 router.get('/register', function(req,res,next){
@@ -11,7 +11,19 @@ router.get('/register', function(req,res,next){
 });
 
 /* register ancora da implementare */
-router.post('/register', function(req, res, next){
+router.post('/register', [
+            // username must be an email
+           check('email').isEmail(),
+            // password must be at least 5 chars long
+            check('password').isLength({ min: 5 })
+          ],                  
+           function(req, res, next){
+            
+            const errors = validationResult(req)
+            if (!errors.isEmpty()) {
+              return res.status(422).json({ errors: errors.array() })
+            }
+
   let logged = req.isAuthenticated(); 
     const email = req.body.email;
     const username = req.body.username;
@@ -19,7 +31,7 @@ router.post('/register', function(req, res, next){
     const password2 = req.body.password2;
     const creator = (req.body.creator=='on')? 1:0;
 
-    req.check('email','email non valida').isEmail
+    
 
       const newUser = {
         

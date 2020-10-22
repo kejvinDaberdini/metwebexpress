@@ -6,20 +6,32 @@
       <p class="card-text"><%= episode.sponsor %></p> 
 
 
-    <div>
-      <audio controls>
-        <source src="/<%- episode.file %>" type="audio/mpeg">
-        </audio>
-    </div>
-
-      <%if(logged){%>
-      <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#buyEpisodeModal<%-episode.episodeID%>">buy</button>
+    <%if(logged){%>
+      <%if(episode.price>0){%>
+        <%if(isbought==true){%>
+          <div>
+            <h1>"<%=isbought%>"</h1>
+            <audio controls>
+              <source src="/<%- episode.file %>" type="audio/mpeg">
+              </audio>
+          </div>
+       <%}else{%>
+        <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#buyEpisodeModal<%-episode.episodeID%>">buy</button>
+             <%}%>
       <%}else{%>
-        <a href="/login">
-          <button type="submit" class="btn btn-primary">buy</button>
-        </a>
-        
+        <div>
+          <h1>"<%=isbought%>"</h1>
+          <audio controls>
+            <source src="/<%- episode.file %>" type="audio/mpeg">
+            </audio>
+        </div>
         <%}%>
+    <%}else{%>
+      <a href="/login">
+        <button type="submit" class="btn btn-primary">Login to watch</button>
+      </a>
+     <%}%>
+
 
 
         <%if(logged){%>
