@@ -1,8 +1,11 @@
 
       <%- include('header', { title, active: 'episode'}); -%>
+      <script defer src="/javascripts/comment.js"></script> 
       <h5 class="card-title"><%= episode.title %></h5>
       <p class="card-text"><%= episode.description %></p>
-      <p class="card-text"><%= episode.price %></p>
+      <%if(episode.price!=0){%>
+      <p class="card-text"><%= episode.price %>&#8364</p>
+      <%}%>
       <p class="card-text"><%= episode.sponsor %></p> 
 
 
@@ -94,7 +97,7 @@
 
               <div class="form-group">
                 <label for="inputName">name</label>
-                <input type="text" name="newName" class="form-control" id="inputName" placeholder="Insert your Name" required>
+                <input type="text"  name="newName" class="form-control" id="inputName" placeholder="Insert your Name" required>
               </div>
               <div class="form-group">
                 <label for="inputSurname">surname</label>
@@ -109,8 +112,8 @@
                 <input type="number" name="newCardNumber" class="form-control" id="inputCardNumber" placeholder="Insert your card number" required>
               </div>
               <div class="form-group">
-                <label for="inputCardCCV">card ccv</label>
-                <input type="number" name="newCardCCV" class="form-control" id="inputCardCCV" placeholder="Insert your card CCV" required>
+                <label for="inputCardCVV">card CVV</label>
+                <input type="number" name="newCardCVV" class="form-control" id="inputCardCVV" placeholder="Insert your card CVV" required>
               </div>
 
             </div>

@@ -2,7 +2,9 @@
   <div class="card-body">
     <h5 class="card-title"><%= episode.title %></h5>
     <p class="card-text"><%= episode.description %></p>
-    <p class="card-text"><%= episode.price %></p>
+    <%if(episode.price!=0){%>
+    <p class="card-text"><%= episode.price %>&#8364</p>
+    <%}%>
     <p class="card-text"><%= episode.sponsor %></p> 
     <a href ="/episodes/<%- episode.episodeID%>" >
       <button class="btn btn-primary">Watch</button>

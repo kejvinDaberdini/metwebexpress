@@ -26,6 +26,7 @@ const followRouter = require('./routes/follow');
 const commentRouter = require('./routes/comment');
 const podcastRouter = require('./routes/podcast');
 const methodOverride = require('method-override');
+const flash = require('connect-flash');
 
 const app = express();
 
@@ -40,6 +41,7 @@ app.use(express.static('public'));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/audiofiles', express.static(path.join(__dirname, 'audiofiles')));
 app.use(methodOverride('method'));
+app.use(flash());
 
 // set up the "username and password" login strategy
 // by setting a function to verify username and password

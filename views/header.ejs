@@ -50,20 +50,7 @@
         </ul>
         -->
 
-        <div class="search-container mr-auto">
-          <form class="form-inline" action="/search" method="GET">
-            <select class="custom-select" name="newCategory" id="inputNewCategory">
-              <option value="All" selected>All</option>  
-              <% for(let i=0; i < categories.length; i++){%>
-                <option value ="<%- categories[i].name %>" ><%= categories[i].name%> </option>
-              <%}%>
-            </select>  
-            <input class="form-control mr-sm-2" type="search" name="text" placeholder="Search" aria-label="Search" required>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-              <label for="inputNewCategory"> </label>   
-              
-          </form>
-        </div>
+        
         <% } %>
         <%if(logged){%>
         <div class="user-dropdown ">
@@ -88,8 +75,23 @@
      
       </nav>
 
+      <div class="search-container mr-auto">
+        <form class="form-inline" action="/search" method="GET">
+          <select class="custom-select" name="newCategory" id="inputNewCategory">
+            <option value="All" selected>All</option>  
+            <% for(let i=0; i < categories.length; i++){%>
+              <option value ="<%- categories[i].name %>" ><%= categories[i].name%> </option>
+            <%}%>
+          </select>  
+          <input class="form-control mr-sm-2" type="search" name="text" placeholder="Search" aria-label="Search" required>
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <label for="inputNewCategory"> </label>   
+            
+        </form>
+      </div>
+
       <div id="alert-message">
-        <% if(message) { %>
+        <% if(message!="") { %>
           <div class="alert alert-danger alert-dismissible fade show" role="success">
             <span><%= message %></span> 
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">

@@ -11,8 +11,8 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/stylesheets/style.css">
    
-    <!-- Custom JavaScript -->
-    <script defer src="/javascripts/logout.js"></script> 
+    <!-- Custom JavaScript --> 
+    <script defer src="/javascripts/register.js"></script> 
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script defer src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -23,6 +23,30 @@
   </head>
   <body>
     <header>
+      <nav class="navbar navbar-expand fixed-top navbar-dark bg-dark mr-auto ">
+        <a href="/">
+        <span class="navbar-brand mb-0">PodcastHub
+        
+        </span>
+      </a>
+        <ul class="navbar-nav mr-right">
+          <li class="nav-item">
+            <a class="nav-link" id="login" href="/login">Login</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div id="alert-message">
+        <% if(message!="") { %>
+          <div class="alert alert-danger alert-dismissible fade show" role="success">
+            <span><%= message %></span> 
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+             
+          </div>
+        <% } %>
+      </div>
     </header>
 
 <main class="container-fluid mt-3">
@@ -39,7 +63,7 @@
           </div>
           <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" id = "password" name="password" class="form-control" required />
+            <input type="password"  pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])\S{6,}" id = "password" name="password" class="form-control"  title="minimum 6 character, at least 1 number and 1 uppercase"required />
           </div>
           <div class="form-group">
             <label for="password2">Password</label>

@@ -15,8 +15,8 @@ router.post('/comments', function(req, res, next) {
   });
   
   router.put('/comments/:commentID', function(req, res, next){
-  
-    dao.updateComment(req.body.newText, req.body.commentID)
+    //console.log(req.body);
+    dao.updateComment(req.body.comment, req.params.commentID)
     .then(()=> {
       res.redirect('back');
     });
