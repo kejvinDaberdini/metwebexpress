@@ -7,12 +7,13 @@
 
 
 <main >
+  <div class="col">
   <div class="row">
-    <h3>Podcasts your follow</h3>
+    
      
     <% podcasts.forEach((podcast) => { %>
      
-      <div class="card mt-4 mr-4 ml-2" style="width: 20rem;">
+      <div class="card mt-4 mr-4 ml-2" >
         <div class="card-body">
           <h5 class="card-title"><%= podcast.title %></h5>
           <a href = "/podcasts/<%- podcast.podcastID%>">
@@ -31,9 +32,9 @@
   </div>  
  
   <div class="row">
-    <h3>Your Favorite Episodes</h3>
+   
     <% episodes.forEach((episode) => { %>
-      <div class="card mt-4 mr-4 ml-2" style="width: 20rem;">
+      <div class="card mt-4 mr-4 ml-2" >
         <div class="card-body">
           <h5 class="card-title"><%= episode.title %></h5>
           <p class="card-text"><%= episode.description %></p>
@@ -46,6 +47,7 @@
         </div>
       </div>
     </div>
+  </div>
    <!--   <%- include('episode-partial', {episode}); -%>  -->              
       <% }); %>  
   

@@ -1,7 +1,8 @@
 <div class="card mt-4 mr-4 ml-2">
   <div class="card-body">
     <div class="card-title"><%= podcast.title %></div>
-    <a href = "/podcasts/<%- podcast.podcastID%>">
+    
+    <a href = "/podcasts/<%- podcast.podcastID%>" calls="thumbnail">
     <img src="/<%-podcast.image %>" class="card-img-top" alt="...">
     </a>
   <div class="card-cat"><%= podcast.category %></div>
