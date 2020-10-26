@@ -1,9 +1,13 @@
+/* GLOBAL STYLES
+-------------------------------------------------- */
+/* Padding below the footer and lighter body text */
 
-body{
-    background-color: snow;
-    margin-top: 50px;
-
-}
+body {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    color: #5a5a5a;
+  }
+  
 
 
 aside{
@@ -15,7 +19,10 @@ main{
     width:80%;
 }
 
-
+.navbar {
+    margin-bottom: 20px;
+    
+  }
 
 
 

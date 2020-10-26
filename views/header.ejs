@@ -24,20 +24,78 @@
     <title><%= title ? `PodcastHub | ${title}` : 'PodcastHub'%></title>
   </head>
   <body>
-    <header>
-      <nav class="navbar navbar-expand fixed-top navbar-dark bg-dark mr-auto ">
-        <span class="navbar-brand mb-0">PodcastHub</span>
-        <% if (title !== '') { %>
-        <div class="dropdownMenuButton">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Podcasts</button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="/">All</a>
-            <% for(let i=0; i < categories.length; i++){%>
-            <a class="dropdown-item" href="/categories/<%- categories[i].name %>"><%= categories[i].name %></a>
-            <%}%>
+      <header>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top  bg-dark ">
+        <a class="navbar-brand ">PodcastHub</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto ">
+            <li class="nav-item active"> 
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Podcasts</button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="/">All</a>
+                  <% for(let i=0; i < categories.length; i++){%>
+                  <a class="dropdown-item" href="/categories/<%- categories[i].name %>"><%= categories[i].name %></a>
+                  <%}%>
+                </div>
+              </div>
+            </li>
+            
+            <li>
+            <form class="form-inline mt-2 mt-md-0" action="/search" method="GET">
+              <select class="custom-select" name="newCategory" id="inputNewCategory">
+                <option value="All" selected>All</option>  
+                <% for(let i=0; i < categories.length; i++){%>
+                  <option value ="<%- categories[i].name %>" ><%= categories[i].name%> </option>
+                <%}%>
+              </select>  
+              <input class="form-control mr-sm-2" type="search" name="text" placeholder="Search" aria-label="Search" required>
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <label for="inputNewCategory"> </label>  
+            </form>
+          </li>
+          </ul>
+
+          <%if(logged){%>
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= username%></button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="/homepage">Homepage</a>
+                <a class="dropdown-item" href="/dashboard">Dashboard</a>
+              
+                <a class="dropdown-item" id= "logout" href="#">logout</a>
+              </div>
+            </div>
+            <%}else{%>
+            <ul class="navbar-nav">
+              <li class="nav-item <%= active==='register' ? 'active' : ''%>">
+                <a class="nav-link" id="register" href="/register">Register</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="login" href="/login">Login</a>
+              </li>
+            </ul>
+            <% } %>
+        </div>    
+      </nav>
+      <div id="alert-message">
+        <% if(message!="") { %>
+          <div class="alert alert-danger alert-dismissible fade show" role="success">
+            <span><%= message %></span> 
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
           </div>
-        </div>
-        <div class="search-container ml-auto mr-auto">
+        <% } %>
+      </div>
+    </header>
+
+
+
+   <!--      <div class="search-container ml-auto mr-auto">
           <form class="form-inline" action="/search" method="GET">
             <select class="custom-select" name="newCategory" id="inputNewCategory">
               <option value="All" selected>All</option>  
@@ -51,7 +109,7 @@
               
           </form>
         </div>
-
+-->
               <!--
         <ul class="navbar-nav mr-auto">
           <li class="nav-item <%= active==='dashboard' ? 'active' : ''%>">
@@ -64,44 +122,3 @@
         -->
 
         
-        <% } %>
-        <%if(logged){%>
-        <div class="user-dropdown ">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= username%></button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="/homepage">Homepage</a>
-            <a class="dropdown-item" href="/dashboard">Dashboard</a>
-          
-            <a class="dropdown-item" id= "logout" href="#">logout</a>
-          </div>
-        </div>
-        <%}else{%>
-        <ul class="navbar-nav">
-          <li class="nav-item <%= active==='register' ? 'active' : ''%>">
-            <a class="nav-link" id="register" href="/register">Register</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="login" href="/login">Login</a>
-          </li>
-        </ul>
-        <% } %>
-     
-      </nav>
-
-
-
-      <div id="alert-message">
-        <% if(message!="") { %>
-          <div class="alert alert-danger alert-dismissible fade show" role="success">
-            <span><%= message %></span> 
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        <% } %>
-      </div>
-
-
-    </header>
-
-

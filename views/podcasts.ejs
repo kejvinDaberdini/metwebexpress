@@ -3,8 +3,20 @@
 
 
 
-<aside>
-  <div class="title">
+  <main role="main"> 
+    <div class="row">
+          
+            <tbody>
+              <% podcasts.forEach((podcast) => { %>
+                <%- include('podcast-partial', {podcast}); -%>
+              <% }); %>
+            </tbody>
+          
+      
+    </div>
+  </main>
+  <aside>
+    <div class="title">
     <div class="line"></div>
     <div class="pod">categories</div>
     <div style="clear:both;"></div>
@@ -21,19 +33,6 @@
       </li>
       <%});%>
   </ul> 
-</aside>
-
-<main >
-    <div class="row">
-          
-            <tbody>
-              <% podcasts.forEach((podcast) => { %>
-                <%- include('podcast-partial', {podcast}); -%>
-              <% }); %>
-            </tbody>
-          
-      
-    </div>
-</main>
+  </aside>
 
 <%- include('footer'); -%>
