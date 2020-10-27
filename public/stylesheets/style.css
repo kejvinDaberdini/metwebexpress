@@ -27,7 +27,7 @@ main{
 
 
 .card{
-    background-color:darkgray;
+    background-color:white;
     height:20rem;
     max-width: 20rem;
     overflow:hidden;
@@ -39,11 +39,16 @@ main{
 
 .card-title{
     font-size: x-large;
+    justify-content: center;
+}
+.card-desc{
+    font-size: small;
 }
 
 .card-img-top{
     height:50%;
     width:100%;
+    object-fit: cover;
 }
 
 
@@ -56,7 +61,7 @@ main{
   td
   {
    max-width: 300px;
-  max-height: fit-content;
+   max-height: fit-content;
    overflow:auto;
    text-overflow: ellipsis;
    white-space: nowrap;

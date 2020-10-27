@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
    
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/singin.css">
+    <link rel="stylesheet" href="/stylesheets/singup.css">
    
     <!-- Custom JavaScript --> 
     <script defer src="/javascripts/register.js"></script> 
@@ -21,12 +22,12 @@
  
     <title><%= title ? `PodcastHub | ${title}` : 'PodcastHub'%></title>
   </head>
-  <body>
+  <body class="text-center">
     <header>
       <nav class="navbar navbar-expand fixed-top navbar-dark bg-dark mr-auto ">
         <a href="/">
-        <span class="navbar-brand mb-0">PodcastHub
-        
+        <span class="navbar-brand mb-0">
+          <img  src="smallLogo.png" alt="" height="50" width="200">
         </span>
       </a>
         <ul class="navbar-nav mr-right">
@@ -35,7 +36,6 @@
           </li>
         </ul>
       </nav>
-
       <div id="alert-message">
         <% if(message!="") { %>
           <div class="alert alert-danger alert-dismissible fade show" role="success">
@@ -48,6 +48,36 @@
         <% } %>
       </div>
     </header>
+    <form class="form-signin" method="POST" action="/register" id="register-form" name="register-fom">
+      <img class="mb-4" src="Logo.png" alt="" width="150" height="150">
+      <h1 class="h3 mb-3 font-weight-normal">Register here</h1>
+      <label for="email" class="sr-only">Username</label>
+      <input type="username"  name="username" id="username" class="form-control" placeholder="Username" required autofocus>
+      <label for="email" class="sr-only">Email address</label>
+      <input type="email"  name="email" id="email" class="form-control" placeholder="Email address" required autofocus>
+      <label for="password" class="sr-only">Password</label>
+      <input type="password" pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])\S{6,}" name="password" id="password" class="form-control" placeholder="Password" title="minimum 6 character, at least 1 number and 1 uppercase" required>
+      <label for="password" class="sr-only"> Confirmation Password</label>
+      <input type="password"  name="password2" id="password2" class="form-control" placeholder=" Confirmation Password" required>
+      <label for="creator">Creator</label>
+      <div class="form-check">
+        <input type="checkbox" id = "creator" name="creator" class="form-check-input"/>
+        <label class = "form-check-label" for ="creator"></label>
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+      <p class="mt-5 mb-3 text-muted">&copy; 2020</p>
+    </form>
+
+
+
+
+
+
+
+<%- include('footer'); -%>
+
+
+<!-- 
 
 <main class="container-fluid mt-3">
     <div class="row">
@@ -83,5 +113,4 @@
       </div>
     </div>
 </main>
-
-<%- include('footer'); -%>
+-->

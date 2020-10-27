@@ -7,7 +7,7 @@
 
 
 <main >
-  <div class="col">
+  <div class="col sm-6">
   <div class="row">
     
      
@@ -21,36 +21,39 @@
           </a>
           <p class="card-desc"><%= podcast.description %></p>
           <p class="card-cat"><%= podcast.category %></p>
-          <form method="POST" action="/delete/follow/<%-podcast.podcastID%>?method=DELETE" name="followedDelete">
+          <form method="POST" action="/follows/<%-podcast.followID%>?method=DELETE" name="followedDelete">
             <input type="hidden" name="followID" value="<%- podcast.followID %>">
             <button type="submit" class="btn btn-primary">unfollow</button>
           </form>
         </div>
-      </div>  
- 
+      </div>   
     <% }); %> 
   </div>  
  
   <div class="row">
    
     <% episodes.forEach((episode) => { %>
-      <div class="card mt-4 mr-4 ml-2" >
+      <div class="card mt-4 mr-4 ml-2">
         <div class="card-body">
           <h5 class="card-title"><%= episode.title %></h5>
           <p class="card-text"><%= episode.description %></p>
           <p class="card-text"><%= episode.price %></p>
           <p class="card-text"><%= episode.sponsor %></p> 
-          <p class="card-text"><%= episode.episodeID %></p> 
-          <a href ="/episodes/<%-episode.episodeID%>" >
+          <form method="POST" action="/favorites/<%-episode.favoriteID%>?method=DELETE" name="favoriteDelete">
+            <input type="hidden" name="favoriteID" value="<%- episode.favoriteID %>">
+            <button type="submit" class="btn btn-primary">unfavorite</button>
+          </form>
+          <a href ="/episodes/<%-episode.episodeID%>">
             <button type ="submit" class="btn btn-primary">Watch</button>
           </a>
         </div>
       </div>
+      <% }); %>  
     </div>
   </div>
-   <!--   <%- include('episode-partial', {episode}); -%>  -->              
-      <% }); %>  
+            
+ 
   
-    </main>
+  </main>
 
 <%- include('footer'); -%>

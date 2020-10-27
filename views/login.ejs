@@ -10,6 +10,7 @@
    
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/singin.css">
    
     <!-- Custom JavaScript -->
     <script defer src="/javascripts/logout.js"></script> 
@@ -21,8 +22,20 @@
  
     <title><%= title ? `PodcastHub | ${title}` : 'PodcastHub'%></title>
   </head>
-  <body>
+  <body class="text-center">
     <header>
+      <nav class="navbar navbar-expand fixed-top navbar-dark bg-dark mr-auto ">
+        <a href="/">
+        <span class="navbar-brand mb-0">PodcastHub
+        
+        </span>
+      </a>
+        <ul class="navbar-nav mr-right">
+          <li class="nav-item">
+            <a class="nav-link" id="register" href="/register">register</a>
+          </li>
+        </ul>
+      </nav>
       <div id="alert-message">
         <% if(message!="") { %>
           <div class="alert alert-danger alert-dismissible fade show" role="success">
@@ -35,8 +48,23 @@
       </div>
     </header>
 
-<main class="container-fluid mt-3">
-    <div class="row">
+  
+    <form class="form-signin" method="POST" action="/sessions" id="login-form">
+      <img class="mb-4" src="Logo.png" alt="" width="72" height="72">
+      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+      <label for="email" class="sr-only">Email address</label>
+      <input type="email"  name="username" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+      <label for="password" class="sr-only">Password</label>
+      <input type="password"  name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      <p class="mt-5 mb-3 text-muted">&copy; 2020</p>
+    </form>
+  
+
+<%- include('footer'); -%>
+
+<!-- 
+      <div class="row">
         <div class="col-8 mx-auto">
           <form method="POST" action="/sessions" id="login-form" class="col-6 mx-auto">            
             <div class="form-group">
@@ -53,6 +81,4 @@
           </form>
         </div>
     </div>
-</main>
-
-<%- include('footer'); -%>
+-->
