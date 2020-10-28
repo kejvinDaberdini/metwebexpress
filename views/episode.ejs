@@ -1,6 +1,8 @@
 
       <%- include('header', { title, active: 'episode'}); -%>
       <script defer src="/javascripts/comment.js"></script> 
+
+
       <h5 class="card-title"><%= episode.title %></h5>
       <p class="card-text"><%= episode.description %></p>
       <%if(episode.price!=0){%>
@@ -12,14 +14,13 @@
         <div class="container">
           <h1 class="display-4"><%= episode.title %></h1>
           <p class="lead"><%= episode.description %></p>
-          <p class
         </div>
       </div>
 
 
     <%if(logged){%>
       <%if(episode.price>0){%>
-        <%if(isbought==true){%>
+        <%if(isbought==true || episode.creator==username ){%>
           <div>
             <h1>"<%=isbought%>"</h1>
             <audio controls>

@@ -25,6 +25,7 @@ const favoriteRouter = require('./routes/favorite');
 const followRouter = require('./routes/follow');
 const commentRouter = require('./routes/comment');
 const podcastRouter = require('./routes/podcast');
+const purchaseRouter= require('./routes/purchase');
 const methodOverride = require('method-override');
 const flash = require('connect-flash');
 
@@ -133,7 +134,7 @@ app.use('/',  searchRouter);
 app.use('/',  favoriteRouter);
 app.use('/',  followRouter);
 app.use('/',  commentRouter);
-
+app.use('/', isLoggedIn, purchaseRouter);
 app.use('/',  isLoggedIn, dashboardRouter);
 app.use('/',  isLoggedIn, homepageRouter);
 

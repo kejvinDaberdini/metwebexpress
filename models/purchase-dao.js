@@ -4,8 +4,8 @@ const db = require('../db.js');
 
 exports.buyEpisode = function(episodeID,userID,name,surname,cardType,cardNumber,CVV){
     return new Promise((resolve, reject)=>{
-      //console.log(episodeID,userID);
-      const sql = 'INSERT INTO purchase (episodeID, userID, name, surname, cardType, cardNumber, CVV) VALUES(?, ?, ?, ?, ?, ?, ?)';
+      console.log(episodeID,userID,CVV);
+      const sql = 'INSERT INTO purchase (episodeID, userID, name, surname, cardType, cardNumber, cvv) VALUES(?, ?, ?, ?, ?, ?, ?)';
       db.run(sql,[episodeID,userID, name, surname, cardType, cardNumber, CVV],(err,row)=>{
         if(err){
           reject(err);

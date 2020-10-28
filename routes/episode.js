@@ -136,7 +136,7 @@ router.delete('/episodes/:episodeID', function(req, res, next) {
 })    
 });
 
-
+/*
 router.post('/episode/purchase', function(req, res, next){
 
   purchasedao.buyEpisode(req.body.episodeID, req.user.userID, req.body.newName, req.body.newSurname, req.body.newCardType, req.body.newCardNumber, req.body.newCardCCV)
@@ -144,5 +144,6 @@ router.post('/episode/purchase', function(req, res, next){
     res.redirect('back');
   });
 });
+*/
 
 module.exports = router;

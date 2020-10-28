@@ -5,7 +5,7 @@ const moment = require('moment');
 
 exports.getAllEpisodes = function(id) {
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM episode  WHERE podcastID=?';
+    const sql = 'SELECT episode.episodeID AS episodeID, episode.title AS title, episode.file AS file, episode.uploadDate AS uploadDate, episode.price AS price, episode.podcastID AS podastID, episode.description AS description,episode.sponsor AS sponsor ,  podcast.image AS image , podcast.creator AS creator FROM episode  JOIN podcast ON episode.podcastID=podcast.podcastID WHERE episode.podcastID=?';
     db.all(sql, [id], (err, rows) => {
       if (err) {
         reject(err);
@@ -19,7 +19,7 @@ exports.getAllEpisodes = function(id) {
 
 exports.getEpisode = function(id) {
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM episode WHERE episodeID=?';
+    const sql = 'SELECT episode.episodeID AS episodeID, episode.title AS title, episode.file AS file, episode.uploadDate AS uploadDate, episode.price AS price, episode.podcastID AS podastID, episode.description AS description,episode.sponsor AS sponsor ,  podcast.image AS image , podcast.creator AS creator FROM episode  JOIN podcast ON episode.podcastID=podcast.podcastID WHERE episodeID=?';;
     db.get(sql, [id], (err, row) => {
       if (err) {
         reject(err);
