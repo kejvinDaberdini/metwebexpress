@@ -1,4 +1,4 @@
-1)Buy solo se ce un prezzo!
+
 2) fare i controlli divalidazione inserimenti in tutti i form/modali e in registrazione
 3)aggiungere date ai commenti e a tutto penso
 4)fare tutto il css e rimodellare l'html

@@ -1,38 +1,43 @@
 <%- include('header', {title, active: 'podcasts'}); -%>
-
-
-
-
-  <main role="main"> 
-    <div class="row">
-          
-            <tbody>
-              <% podcasts.forEach((podcast) => { %>
-                <%- include('podcast-partial', {podcast}); -%>
-              <% }); %>
-            </tbody>
-          
-      
+<div class="row">
+  <div class="col-2">
+    <aside>
+      <div class="title">
+      <div class="line"></div>
+      <div class="pod">categories</div>
+      <div style="clear:both;"></div>
+      <div class="b-line"></div>
     </div>
-  </main>
-  <aside>
-    <div class="title">
-    <div class="line"></div>
-    <div class="pod">categories</div>
-    <div style="clear:both;"></div>
-    <div class="b-line"></div>
-  </div>
-  <ul>
-    <li>     
-      <a href="/">All</a>
-    </li>
-    <% categories.forEach((category) => { %>
+    <ul>
       <li>     
-        <a href="/categories/<%-category.name%>"><%=category.name%></a>
-        <input type="hidden" name="category" value="<%- category.name %>">
+        <a href="/">All</a>
       </li>
-      <%});%>
-  </ul> 
-  </aside>
+      <% categories.forEach((category) => { %>
+        <li>     
+          <a href="/categories/<%-category.name%>"><%=category.name%></a>
+          <input type="hidden" name="category" value="<%- category.name %>">
+        </li>
+        <%});%>
+    </ul> 
+    </aside>
+    
+  </div>
+  <div class ="col-8">
+    <main role="main"> 
+      <div class="row">
+            
+              <tbody>
+                <% podcasts.forEach((podcast) => { %>
+                  <%- include('podcast-partial', {podcast}); -%>
+                <% }); %>
+              </tbody>
+            
+        
+      </div>
+    </main>
+  
+  </div>
+</div>
 
+  
 <%- include('footer'); -%>

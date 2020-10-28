@@ -2,76 +2,110 @@
 <link rel="stylesheet" href="/stylesheets/dashboard.css">
 <%if(creator==1){%>
 
-<div class="col"> 
-  <div class="row">
-    <aside>
-      <h1><%=user.username%></h1>
-      <h3><%=user.email%></h3>
-      <div class="col-lg-6 ">   <!--spazio da dedicare alle opzioni da seguire-->
-        <h3>Options:</h3>
-        <div class="container-fluid">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-              <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#addPodcastModal">Add Podcast</button>
-              <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#addEpisodeModal">Add Episode</button>
-  
-    
-            </li>
-          </ul>
-        </div>
+ 
+<div class="container">
+<main role="main" class="col-md-9 ml-sm-auto col-lg-12 px-md-4">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2"><%=username%></h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+      <div class="btn-group mr-2">
+        <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#addPodcastModal">Add Podcast</button>
+        <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#addEpisodeModal">Add Episode</button>
       </div>
-    </aside>
-  </div>
-
-
-  <div class="row">
-    <div class="table-responsive">
-      <table class="table table-striped table-sm">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Image</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Category</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody> 
-          <% podcasts.forEach((podcast) => { %>
-          <tr>
-            <td> <%= podcast.podcastID %></td>
-            <td>
-              <div class="tableimage">        
-                <a href = "/podcasts/<%- podcast.podcastID%>">
-                  <img src="/<%- podcast.image %>" class="img-fluid img-thumbnail" alt="..." height="50">
-                </a> 
-            </div>   
-            </td>
-            <td><%= podcast.title %></td>
-            <td><%= podcast.description%></td>
-            <td><%= podcast.category %></td>
-            <td class="w-25">
-              
-              <a href= "/dashboard/updatePodcast/<%- podcast.podcastID%>">
-                <input hidden="<%- podcast.podcastID%>">
-                <button type="submit" class="btn-primary">edit</button>
-              </a>
-              <form method="POST" action="/podcasts/<%- podcast.podcastID %>?method=DELETE">
-                <input type="hidden" name="oldFile" value="<%-podcast.image%>">
-                <input type="hidden" name="podcastID" value="<%- podcast.podcastID %>">
-                <button type="submit" class="btn-primary">delete</button>
-              </form>   
-            </td>
-          </tr>
-          <% }); %> 
-        </tbody>
-      </table>
     </div>
   </div>
+
+    <h2>Your Podcasts</h2>
+        <div class="table-responsive">
+          <table class="table table-striped table-sm">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody> 
+              <% podcasts.forEach((podcast) => { %>
+              <tr>
+                <td> <%= podcast.podcastID %></td>
+                <td>
+                  <div class="tableimage">        
+                    <a href = "/podcasts/<%- podcast.podcastID%>">
+                      <img src="/<%- podcast.image %>" class="img-fluid img-thumbnail" alt="..." height="50">
+                    </a> 
+                </div>   
+                </td>
+                <td><%= podcast.title %></td>
+                <td><%= podcast.description%></td>
+                <td><%= podcast.category %></td>
+                <td class="w-25">
+                  
+                  <a href= "/dashboard/updatePodcast/<%- podcast.podcastID%>">
+                    <input hidden="<%- podcast.podcastID%>">
+                    <button type="submit" class="btn-primary">edit</button>
+                  </a>
+                  <form method="POST" action="/podcasts/<%- podcast.podcastID %>?method=DELETE">
+                    <input type="hidden" name="oldFile" value="<%-podcast.image%>">
+                    <input type="hidden" name="podcastID" value="<%- podcast.podcastID %>">
+                    <button type="submit" class="btn-primary">
+                      delete
+                    </button>
+                  </form>   
+                </td>
+              </tr>
+              <% }); %> 
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Your Episodes</h2>
+        <div class="table-responsive">
+          <table class="table table-striped table-sm">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Podcast</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Sponsor</th>
+                <th>Price</th>
+                <th>Actions</th>   
+              </tr>
+            </thead>
+            <tbody> 
+              <% episodes.forEach((episode) => { %>
+              <tr>
+                <td> <%= episode.episodeID %></td>
+                <td><%= episode.podcast %></td>
+                <td><%= episode.title %></td>
+                <td><%= episode.description%></td>
+                <td><%= episode.sponsor %></td>
+                <td><%= episode.price%></td>
+                <td class="w-25">
+                  <a href= "/dashboard/updateEpisode/<%- episode.episodeID%>">
+                    <input hidden="<%- episode.episodeID%>">
+                    <button type="submit" class="btn-primary">edit</button>
+                  </a>
+                  <form method="POST" action="/episodes/<%- episode.episodeID %>?method=DELETE">
+                    <input type="hidden" name="oldFile" value="<%-episode.file%>">
+                    <input type="hidden" name="episodeID" value="<%- episode.episodeID %>">
+                    <button type="submit" class="btn-primary">delete</button>
+                  </form> 
+                  <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#updateEpisodeModal">modifica</button>
+                  <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#deleteEpisodeModal">cancella</button>  
+                </td>
+              </tr>
+              <% }); %> 
+            </tbody>
+          </table>
+        </div>
+
+  </main>
 </div>
-
-
 <!--
 
 <main class="container-fluid mt-2">
@@ -196,6 +230,26 @@
   </div>
 </div>    
 </div>  
+
+
+   <aside>
+      <h1><%=user.username%></h1>
+      <h3><%=user.email%></h3>
+      <div class="col-lg-6 ">  
+        <h3>Options:</h3>
+        <div class="container-fluid">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#addPodcastModal">Add Podcast</button>
+              <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#addEpisodeModal">Add Episode</button>
+  
+    
+            </li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+
 
 -->
    <!--  add Podcast Modal -->

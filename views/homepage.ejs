@@ -1,13 +1,13 @@
 <%- include('header', {title, active: 'homepage'}); -%>
+<div class="container">
 
-<aside>
   <h1><%=user.username%></h1>
-  <h3><%=user.email%></h3>
-</aside>
+
 
 
 <main >
   <div class="col sm-6">
+    <h2>Podcasts Your Follow</h2>
   <div class="row">
     
      
@@ -29,7 +29,7 @@
       </div>   
     <% }); %> 
   </div>  
- 
+  <h2>Favorite Episodes</h2>
   <div class="row">
    
     <% episodes.forEach((episode) => { %>
@@ -55,5 +55,5 @@
  
   
   </main>
-
+</div>
 <%- include('footer'); -%>

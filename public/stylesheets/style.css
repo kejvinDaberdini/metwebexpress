@@ -6,25 +6,13 @@ body {
     padding-top: 3rem;
     padding-bottom: 3rem;
     color: #5a5a5a;
+    
+   
   }
   
-
-
-aside{
-    float: left;
-    position: fixed;
-}
-main{
-    float:right;
-    width:80%;
-}
-
 .navbar {
-    margin-bottom: 20px;
-    
+    margin-bottom: 20px;   
   }
-
-
 
 .card{
     background-color:white;
@@ -33,6 +21,7 @@ main{
     overflow:hidden;
     transition: 0.5s ease;
     cursor: pointer;
+    justify-content: center;
     margin:10px;
     border:5px;
 }
@@ -40,6 +29,7 @@ main{
 .card-title{
     font-size: x-large;
     justify-content: center;
+    align-content: center;
 }
 .card-desc{
     font-size: small;
@@ -57,15 +47,6 @@ main{
     box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
   }
 
-
-  td
-  {
-   max-width: 300px;
-   max-height: fit-content;
-   overflow:auto;
-   text-overflow: ellipsis;
-   white-space: nowrap;
-  }
 
 
   

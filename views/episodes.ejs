@@ -5,6 +5,32 @@
 
   <div class="container-fluid mt-3">
     <head>
+
+
+
+
+    <!-- Jumbotron -->
+    <div class="jumbotron text-center">
+    
+      <!-- Title -->
+      <h4 class="card-title h4 pb-2"><strong><%= podcast.title %></strong></h4>
+    
+      <!-- Card image -->
+      <div class="view overlay my-4">
+        <img src="/<%= podcast.image %>"  class="img-fluid" alt="">
+        <a href="#">
+          <div class="mask rgba-white-slight"></div>
+        </a>
+      </div>
+    
+      <h5 class="indigo-text h5 mb-4"><%= podcast.category %></h5>
+    
+      <p class="card-text"><%= podcast.description %></p>   
+  
+    </div>
+    <!-- Jumbotron -->
+
+
       <div class="jumbotron">
         <h1 class="display-4"><%= podcast.title %></h1>
         <p class="lead"><%= podcast.description %></p>
