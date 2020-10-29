@@ -1,7 +1,8 @@
 <%- include('header', {title, active: 'podcasts'}); -%>
-<div class="row">
+<div class="container-fluid">
+  <div class="row  ">
   <div class="col-2">
-    <aside>
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse"></nav>
       <div class="title">
       <div class="line"></div>
       <div class="pod">categories</div>
@@ -19,12 +20,16 @@
         </li>
         <%});%>
     </ul> 
-    </aside>
+  </nav>
     
   </div>
-  <div class ="col-8">
-    <main role="main"> 
-      <div class="row">
+
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+
+
+
+
+      <div class="row justify-content-center">
             
               <tbody>
                 <% podcasts.forEach((podcast) => { %>
@@ -38,6 +43,6 @@
   
   </div>
 </div>
-
+</div>
   
 <%- include('footer'); -%>
