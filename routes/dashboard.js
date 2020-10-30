@@ -28,6 +28,12 @@ router.get('/dashboard', function(req, res, next) {
   });
 });
 
+router.get('/dashboard/addPodcast', function(req,res,next){
+    categorydao.getAllCategories().then((categories)=>{
+    res.render('addPodcast',{categories,userID:req.user.userID})
+    })
+})
+
 
 router.get('/dashboard/updatePodcast/:podcastID', function(req,res,next){
   const podcastID= req.params.podcastID;
@@ -37,6 +43,13 @@ router.get('/dashboard/updatePodcast/:podcastID', function(req,res,next){
     })
   })
 })
+
+
+router.get('/dashboard/:podcastID/addEpisode', function(req,res,next){
+  console.log("ecco lid:",req.params.podcastID);
+    res.render('addEpisode',{podcastID:req.params.podcastID})
+})
+
 
 router.get('/dashboard/updateEpisode/:episodeID', function(req,res,next){
   const episodeID= req.params.episodeID;

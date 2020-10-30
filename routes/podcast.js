@@ -28,13 +28,14 @@ router.post('/podcasts',fileDestination.single('newImg'), function(req, res, nex
       console.log(req.file.path);
       podcastdao.addPodcast(req.body.newTitle, creator,req.body.newDesc,req.body.newCategory,req.file.path, user)
       .then(()=> {
-        res.redirect('back');
+        res.redirect('/dashboard');
       })
     })
   
 
 router.get('/podcasts/:podcastID', function(req, res, next){
     let logged = req.isAuthenticated();
+   
     let username= "";
     if(logged){
         username=req.user.username;

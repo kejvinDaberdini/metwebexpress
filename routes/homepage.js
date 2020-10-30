@@ -15,7 +15,10 @@ router.get('/homepage', function(req, res, next) {
   categorydao.getAllCategories().then((categories)=>{
     followdao.getFollowedPodcasts(req.user.userID).then((podcasts)=>{
         favoritedao.getFavoriteEpisodes(req.user.userID).then((episodes)=>{
-            res.render('homepage', {title: 'Homepage', categories:categories, episodes:episodes, podcasts:podcasts, logged:logged, username:username, user})
+          episodedao.getNewEpisodes(req.user.userID).then((newEpisodes)=>{
+            res.render('homepage', {title: 'Homepage', categories:categories, episodes:episodes, podcasts:podcasts, logged:logged, username:username, user, newEpisodes})
+          })
+            
         });
     });        
   });

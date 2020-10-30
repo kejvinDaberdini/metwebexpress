@@ -1,9 +1,8 @@
 'use strict';
 
 
-/*
+
 const podcasteditbtn = document.getElementsByName('editModalBtn');
-const podcastdeletebutton = document.getElementsByName('deleteModalBtn')
 
 
 if(podcastEditBtn) {
@@ -27,8 +26,10 @@ if(podcastEditBtn) {
             
         });
 }
-*/
+
 /*
+const podcastdeletebutton = document.getElementsByName('deleteModalBtn')
+if(podcastDeleteBtn)
   for(let i = 0; i< button.length; i++){
     podcastdelete[i].addEventListener('click', () => {
     const id = button[i].dataset.id;

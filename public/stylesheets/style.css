@@ -4,9 +4,6 @@
 
 body {
     padding-top: 3rem;
-    background-color:white;
-
-   
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   
   }
@@ -14,13 +11,12 @@ body {
       background-color: whitesmoke;
   }
   aside{
+    background-color: violet;
       margin-top: 2rem;
       font-size: 24px;
 
   }
-  footer{
-      background-color:black;
-  }
+
  #podcastImageTop {  
     max-height: 500px;
     max-width: 100%;
@@ -36,22 +32,29 @@ body {
     
     background-color:white;
     height:20rem;
-    max-width: 20rem;
-    overflow:hidden;
+    max-width: 15rem;
+    overflow:clip;
     transition: 0.5s ease;
     cursor: pointer;
     justify-content: center;
     margin:10px;
     border:5px;
+  
+    
+}
+.card-body{
+  padding: 0%;
+  justify-content: center;
+  
 }
 
 .card-title{
+  align-items: center;
     font-size: x-large;
-    justify-content: center;
-    align-content: center;
 }
 .card-desc{
-    font-size: small;
+    font-size: medium;
+    max-lines: 3;
 }
 
 .card-img-top{
@@ -94,3 +97,35 @@ body {
   #carouselImg{
       object-fit: cover;
   }
+  footer{
+    padding: 25px 0px 20px 0px;
+
+  }
+  .topleft {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+    font-size: 32px;
+    background-color: blanchedalmond;
+
+  }
+  .center-title {
+    position: absolute;
+    top: 0%;
+    width: 100%;
+    text-align: center;
+    font-size: 32px;
+   
+
+  }
+  .cat-name{
+    background-color: #5c1075;
+    width: 100%;
+  }
+
+  .container {
+    max-width: 960px;
+  }
+  
+  .lh-condensed { line-height: 1.25; }
+  

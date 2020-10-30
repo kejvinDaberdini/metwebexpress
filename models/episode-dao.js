@@ -31,7 +31,7 @@ exports.getEpisode = function(id) {
 
 exports.getEpisodesByUser = function(id) {
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT episode.episodeID AS episodeID, episode.title AS title, episode.file AS file, episode.uploadDate AS uploadDate, episode.price AS price, episode.description as description, podcast.title AS podcast, podcast.image AS image  FROM episode JOIN podcast ON episode.podcastID=podcast.podcastID WHERE creatorID=?';
+    const sql = 'SELECT episode.episodeID AS episodeID, episode.title AS title, episode.file AS file, episode.uploadDate AS uploadDate, episode.sponsor AS sponsor, episode.price AS price, episode.description as description, podcast.title AS podcast, podcast.image AS image  FROM episode JOIN podcast ON episode.podcastID=podcast.podcastID WHERE creatorID=?';
     db.all(sql,[id], (err, rows) => {
       if (err) {
         reject(err);
@@ -44,12 +44,12 @@ exports.getEpisodesByUser = function(id) {
   });
 };
 
-exports.addEpisode = function(title, description, file, price, podcastID){
+exports.addEpisode = function(title, description, file, sponsor,price, podcastID){
   return new Promise((resolve, reject)=>{
-    const sql = 'INSERT INTO episode( title, description, file, uploadDate, price, podcastID) VALUES( $title, $description, $file, $date, $price, $podcastID)';
+    const sql = 'INSERT INTO episode( title, description, file, uploadDate, sponsor, price, podcastID) VALUES( $title, $description, $file, $date, $sponsor, $price, $podcastID)';
     const time = moment().format('DD-MM-YYYY');
     
-    const param= {$title:title, $description:description, $file:file, $date:time, $price:price, $podcastID:podcastID};
+    const param= {$title:title, $description:description, $file:file, $date:time, $sponsor:sponsor, $price:price, $podcastID:podcastID};
     db.run(sql, param, function(err){
       if(err){
         reject(err);
@@ -122,3 +122,16 @@ exports.getEpisodesByText = function(text,category) {
     });
   });
 };
+
+exports.getNewEpisodes = function(userID){
+  return new Promise((resolve,reject)=>{
+    const sql="SELECT episode.episodeID AS episodeID, episode.title AS title, podcast.image AS image FROM episode JOIN podcast ON episode.podcastID=podcast.podcastID JOIN follow ON follow.podcastID=podcast.podcastID WHERE follow.userID=? ORDER BY episode.uploadDATE  DESC LIMIT 3";
+    db.all(sql, [userID],(err,rows)=>{
+      if(err){
+        reject(err);
+        return;
+      }
+      resolve(rows);
+    })
+  })
+} 

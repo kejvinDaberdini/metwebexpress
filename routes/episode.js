@@ -109,10 +109,11 @@ router.delete('/delete/comment/:commentID', function(req, res, next){
 })
 */
 
-router.post('/dashboard/addEpisode',fileDestination.single('newFile'), function(req, res, next) {   
-  episodedao.addEpisode(req.body.newTitle, req.body.newDesc, req.file.path, req.body.newPrice, req.body.podcastID)
+router.post('/episodes',fileDestination.single('newFile'), function(req, res, next) {   
+  console.log(req.body);
+  episodedao.addEpisode(req.body.newTitle, req.body.newDesc, req.file.path,req.body.newSponsor, req.body.newPrice, req.body.podcastID)
   .then(()=> {
-    res.redirect('back');
+    res.redirect('/dashboard');
   })
 });
 

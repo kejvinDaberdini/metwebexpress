@@ -1,7 +1,11 @@
 'use strict';
 const dao = require('../models/purchase-dao.js');
+const episodedao = require('../models/episode-dao.js');
 const express = require('express');
 const router = express.Router();
+
+
+
 router.post('/episode/purchase', function(req, res, next){
   
  

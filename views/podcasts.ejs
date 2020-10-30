@@ -1,6 +1,32 @@
 <%- include('header', {title, active: 'podcasts'}); -%>
 <div class="container-fluid">
   <div class="row  ">
+
+
+  <main role="main" class="col">
+
+
+
+    <h1 class="cat-name"><%=pagecat%></h1>
+      <div class="row justify-content-center">
+       
+              <tbody>
+                <% podcasts.forEach((podcast) => { %>
+                  <%- include('podcast-partial', {podcast}); -%>
+                <% }); %>
+              </tbody>
+            
+        
+      </div>
+    </main>
+  
+  </div>
+
+</div>
+  
+<%- include('footer'); -%>
+
+<!--
   <div class="col-2">
     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse"></nav>
       <div class="title">
@@ -23,26 +49,5 @@
   </nav>
     
   </div>
-
-  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-
-
-
-
-      <div class="row justify-content-center">
-            
-              <tbody>
-                <% podcasts.forEach((podcast) => { %>
-                  <%- include('podcast-partial', {podcast}); -%>
-                <% }); %>
-              </tbody>
-            
-        
-      </div>
-    </main>
-  
-  </div>
 </div>
-</div>
-  
-<%- include('footer'); -%>
+-->
