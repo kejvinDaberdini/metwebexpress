@@ -1,5 +1,5 @@
-const password = document.getElementById("password")
-  , confirm_password = document.getElementById("password2");
+const password = document.getElementById("password");
+const confirm_password = document.getElementById("password2");
 
 function validatePassword(){
   if(password.value != password2.value) {

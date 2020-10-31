@@ -5,17 +5,18 @@
 body {
     padding-top: 3rem;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+   
+    background-image: url("../back3.jpg");
   
   }
+  .container{
+    max-width: 90%;
+  }
+
   main{
       background-color: whitesmoke;
   }
-  aside{
-    background-color: violet;
-      margin-top: 2rem;
-      font-size: 24px;
 
-  }
 
  #podcastImageTop {  
     max-height: 500px;
@@ -25,7 +26,8 @@ body {
 }
   
 .navbar {
-    margin-bottom: 20px;   
+    margin-bottom: 20px; 
+    justify-content: space-between;  
   }
 
 .card{
@@ -41,10 +43,12 @@ body {
     border:5px;
   
     
+    
 }
 .card-body{
   padding: 0%;
   justify-content: center;
+ 
   
 }
 
@@ -129,3 +133,13 @@ body {
   
   .lh-condensed { line-height: 1.25; }
   
+  .img-thumbnail{
+    width: 5rem;
+    height: 5rem;
+    object-fit: cover;
+  }
+
+  .media {
+    width: 100%;
+    text-align: left;
+  }

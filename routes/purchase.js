@@ -13,7 +13,8 @@ router.post('/episode/purchase', function(req, res, next){
   dao.buyEpisode(req.body.episodeID, req.user.userID, req.body.newName, req.body.newSurname, req.body.newCardType, req.body.newCardNumber, req.body.newCardCVV)
   .then(()=>{
       res.redirect('back');
-  });
+  })
+  .catch((err)=> res.render('error',{message:"Error purchasing episode"}));
 });
 
 module.exports = router;

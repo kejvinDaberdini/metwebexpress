@@ -1,13 +1,10 @@
-<div class="card mt-4 mr-4 ml-2">
-  <div class="card-body">
+
+
+
+<div class="card text-center mt-4 mr-4 ml-2">
+  <div class="card-body ">
+    <a href = "/episodes/<%- episode.episodeID%>"  calls="thumbnail"><img src="/<%-episode.image %>" class="card-img-top" alt="..."></a> 
     <h5 class="card-title"><%= episode.title %></h5>
-    <p class="card-text"><%= episode.description %></p>
-    <%if(episode.price!=0){%>
-    <p class="card-text"><%= episode.price %>&#8364</p>
-    <%}%>
-    <p class="card-text"><%= episode.sponsor %></p> 
-    <a href ="/episodes/<%- episode.episodeID%>" >
-      <button class="btn btn-primary">Watch</button>
-    </a>
+    <div class="card-desc "><%= episode.description %></div>
   </div>
 </div>

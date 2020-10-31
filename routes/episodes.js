@@ -24,39 +24,18 @@ router.get('/podcasts/:podcastID', function(req, res, next){
             .then((following)=>{  
             
                
-          res.render('episodes', {title: 'Episodes', episodes: episodes,  podcast:podcast, logged:logged, following:following, categories, username});
-         });
+          res.render('episodes', {title: 'Episodes', episodes: episodes,  podcast:podcast, logged:logged, following:following, categories, username,user:req.user});
+         })
+         .catch();
         }else{
           res.render('episodes', {title: 'Episodes', episodes: episodes,  podcast:podcast, logged:logged, categories, username});
         }
-      });    
-  });
-});
-});
-/*
-router.post('/podcast/follow',function(req,res,next){
-  //console.log(req.body.podcastID,req.user.userID);
-    followdao.followPodcast(req.user.userID,req.body.podcastID)
-    .then(() =>{
-      res.redirect(req.get('referer'));
-    }); 
+      })
+      .catch();    
+  })
+  .catch();
+})
+.catch();
 });
 
-router.delete('/delete/follow/:podcastID',function(req,res,next){
-  //console.log(req.body.podcastID,req.user.userID);
-    //followdao.unfollowPodcast(req.user.userID,req.body.podcastID)
-    followdao.unfollowPodcast(req.body.followID)
-    .then(() =>{
-      res.redirect('back');
-    }); 
-});
-
-router.post('/episode/purchase', function(req, res, next){
-
-  purchasedao.buyEpisode(req.body.episodeID, req.user.userID, req.body.newName, req.body.newSurname, req.body.newCardType, req.body.newCardNumber, req.body.newCardCCV)
-  .then(()=>{
-    res.redirect('back');
-  });
-});
-*/
 module.exports = router;

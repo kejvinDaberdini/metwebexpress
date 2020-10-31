@@ -19,7 +19,9 @@ router.get("/search", function(req,res,next){
         .then((resultPodcasts)=>{        
             episodedao.getEpisodesByText(req.query.text, req.query.newCategory)
             .then((resultEpisodes)=>{
-                res.render('search', {title: 'Search', podcasts:resultPodcasts, episodes:resultEpisodes, logged:logged, categories, username:username});
+                if(logged){res.render('search', {title: 'Search', podcasts:resultPodcasts, episodes:resultEpisodes, logged:logged, categories, username:username, user:req.user});}
+                else{res.render('search', {title: 'Search', podcasts:resultPodcasts, episodes:resultEpisodes, logged:logged, categories, username:username});}
+                
              });
          }); 
     });  

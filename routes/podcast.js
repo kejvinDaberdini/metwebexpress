@@ -30,6 +30,7 @@ router.post('/podcasts',fileDestination.single('newImg'), function(req, res, nex
       .then(()=> {
         res.redirect('/dashboard');
       })
+      .catch((err)=> res.render('error',{message:"Error in creating podcast"}));
     })
   
 
@@ -47,11 +48,9 @@ router.get('/podcasts/:podcastID', function(req, res, next){
           if(logged){
              followdao.isFollowing(req.user.userID,req.params.podcastID)
               .then((following)=>{  
-              
-                 
-            res.render('episodes', {title: 'Episodes', episodes: episodes,  podcast:podcast, logged:logged, following:following, categories, username});
-           });
-          }else{
+                 res.render('episodes', {title: 'Episodes', episodes: episodes,  podcast:podcast, logged:logged, following:following, categories, username, user:req.user});
+              });
+              }else{
             res.render('episodes', {title: 'Episodes', episodes: episodes,  podcast:podcast, logged:logged, categories});
           }
         });    
@@ -68,7 +67,8 @@ router.put('/podcasts/:podcastID',fileDestination.single('newImg'), function(req
     deleteLocalFile(oldfile);
    
     res.redirect('/dashboard');
-  })    
+  })
+  .catch((err)=> res.render('error',{message:"Error in updating podcast"}));    
 });
 
 router.delete('/podcasts/:podcastID', function(req, res, next) {  
@@ -78,7 +78,8 @@ router.delete('/podcasts/:podcastID', function(req, res, next) {
   .then(()=> {
     deleteLocalFile(oldfile);
     res.redirect('back');
-  })    
+  })
+  .catch((err)=> res.render('error',{message:"Error in deleting podcast"}));    
 });
 
 

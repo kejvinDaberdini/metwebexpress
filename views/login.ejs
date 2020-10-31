@@ -36,9 +36,9 @@
           </li>
         </ul>
       </nav>
-      <div id="alert-message">
+      <div id="alert-message  ">
         <% if(message!="") { %>
-          <div class="alert alert-danger alert-dismissible fade show" role="success">
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <span><%= message %></span> 
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -48,7 +48,7 @@
       </div>
     </header>
 
-  
+    <div class="container-fluid">
     <form class="form-signin" method="POST" action="/sessions" id="login-form">
       <img class="mb-4" src="Logo.png" alt="" width="72" height="72">
       <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
@@ -59,6 +59,7 @@
       <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       <p class="mt-5 mb-3 text-muted">&copy; 2020</p>
     </form>
+    </div>  
   
 
 <%- include('footer'); -%>

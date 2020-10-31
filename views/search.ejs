@@ -1,37 +1,41 @@
 <%- include('header', {title, active: 'Search'}); -%>
 
 
+<div class="container ">
+  <div class="row  ">
 
 
-<main role="main">
-  <section>
-    <h3>Found podcasts</h3>
-    <div class="row">
-      <div class="col">
-        <% podcasts.forEach((podcast) => { %>
-          <%- include('podcast-partial', {podcast}); -%>
-        <% }); %>
-      </div>
-    </div>
-  </section>
-  <section>
-    <h3>Found episodes</h3>
-                <% episodes.forEach((episode) => { %>
-                  <%- include('episode-partial', {episode}); -%>
+  <main role="main" class="col">
+
+
+
+    <h1 class="cat-name">Search results</h1>
+      <div class="row justify-content-center">
+        <h2>Podcasts</h2>
+       
+                <% podcasts.forEach((podcast) => { %>
+                  <%- include('podcast-partial', {podcast}); -%>
                 <% }); %>
-  </section>
+           
+            
+        
+      </div>
+      <div class="row justify-content-center">
+       
+        <h2>Episodes</h2>
+          <% episodes.forEach((episode) => { %>
+            <%- include('episode-partial', {episode}); -%>
+          <% }); %>
+       
+      
+  
+</div>
 </main>
-<main class="container-fluid mt-3">
-    
-          
-            <tbody>
-              
-            </tbody>
-            <tbody>
-                
-              </tbody>      
-    </div>
-</main>
+  
+</div>
+</div>
+
+
 
 <%- include('footer'); -%>
 

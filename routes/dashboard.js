@@ -23,7 +23,7 @@ router.get('/dashboard', function(req, res, next) {
     podcastdao.getPodcastsByUser(req.user.userID).then((podcasts)=>{
         episodedao.getEpisodesByUser(req.user.userID).then((episodes)=>{
           res.render('dashboard', {title: 'Dashboard', podcasts:podcasts, categories:categories, episodes:episodes, creator:creator, logged:logged, user, username:user.username})
-        }); 
+        });
      });        
   });
 });

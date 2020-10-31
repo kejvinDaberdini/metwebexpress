@@ -23,7 +23,7 @@ categorydao.getAllCategories()
 .then((categories)=>{
   podcastdao.getAllPodcasts()
   .then((podcasts) => { 
-    res.render('podcasts', {title: 'Podcasts', podcasts, categories, logged:logged, username, pagecat});
+    res.render('podcasts', {title: 'Podcasts', podcasts, categories, logged:logged, username, pagecat,user:req.user});
   });
  }); 
 });
@@ -31,10 +31,13 @@ categorydao.getAllCategories()
 router.get('/categories/:category', function(req, res, next){
   let logged = req.isAuthenticated(); 
   let username;
+  
+
   const pagecat= req.params.category;
   console.log(req.params.category)
   if (!logged){
      username="";
+
   }
   else{
     username=req.user.username;
@@ -44,53 +47,15 @@ router.get('/categories/:category', function(req, res, next){
     console.log(req.params.category);
     podcastdao.getPodcastsByCategory(req.params.category)
     .then((podcasts) => {
+      if (!logged){
+        res.render('podcasts', {title: 'Podcasts', podcasts, categories:categories, logged:logged, username, pagecat});
+      }else{
+        res.render('podcasts', {title: 'Podcasts', podcasts, categories:categories, logged:logged, username, pagecat,user:req.user});
+      }
      // console.log(categories.length); 
-      res.render('podcasts', {title: 'Podcasts', podcasts, categories:categories, logged:logged, username, pagecat});
+      
     });
    }); 
   });
-/*
-router.post('/podcast/follow',function(req,res,next){
-  //console.log(req.body.podcastID,req.user.userID);
-  let logged= req.isAuthenticated();
-  
-  if(!logged){
-    res.redirect('/login');
-  }
-  else{
-    followdao.isFollowing(req.user.userID,req.body.podcastID)
-    .then((relation)=>{
-      if(!relation){
-        followdao.followPodcast(req.user.userID,req.body.podcastID)
-        .then((follows) =>{
-          res.redirect('back');
-        });
-      }
-      else{
-          res.redirect('back');
-      }
-    })
-    
-  }
-  
-})
-*/
 
-
-/*
-router.get("/search", function(req,res,next){
-  let logged = req.isAuthenticated();  
-  categorydao.getAllCategories()
-.then((categories)=>{
-  podcastdao.getPodcastsByText(req.query.text, req.query.newCategory)
-      .then((resultPodcasts)=>{     
-          episodedao.getEpisodesByText(req.query.text, req.query.newCategory)
-          .then((resultEpisodes)=>{
-
-              res.render('search', {title: 'Search', podcasts:resultPodcasts, episodes:resultEpisodes, categories:categories, logged:logged});
-              })
-          }) 
-        }) 
-})
-*/
 module.exports = router;

@@ -2,7 +2,7 @@ const dao = require('../models/user-dao.js');
 const express = require('express');
 const passport = require('passport');
 const router = express.Router();
-//const { check, validationResult } = require('express-validator')
+const { check, validationResult } = require('express-validator')
 
 
 router.get('/register', function(req,res,next){
@@ -11,7 +11,10 @@ router.get('/register', function(req,res,next){
 });
 
 /* register ancora da implementare */
-router.post('/register', function(req, res, next){
+router.post('/register',
+[check('email').isEmail()],
+ 
+function(req, res, next){
             
             
 
