@@ -6,7 +6,7 @@
 
  
 
-<main >
+<main class="main">
   <% if(podcasts.length>0){%>
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -53,13 +53,13 @@
      
     <% podcasts.forEach((podcast) => { %>
      
-      <div class="card mt-4 mr-4 ml-2" >
+      <div class="card text-center mt-4 mr-4 ml-2 " >
         <div class="card-body">
-          <h5 class="card-title"><%= podcast.title %></h5>
+         
           <a href = "/podcasts/<%- podcast.podcastID%>">
             <img src="/<%-podcast.image %>" class="card-img-top" alt="...">
           </a>
-          <p class="card-desc"><%= podcast.description %></p>
+          <h5 class="card-title"><%= podcast.title %></h5>
           <p class="card-cat"><%= podcast.category %></p>
           <form method="POST" action="/follows/<%-podcast.followID%>?method=DELETE" name="followedDelete">
             <input type="hidden" name="followID" value="<%- podcast.followID %>">

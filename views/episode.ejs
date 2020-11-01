@@ -91,7 +91,7 @@
                   <a href="/login">
                     <button type="submit" class="btn btn-primary">login to comment</button>
                   </a>
-                  <%}%>
+         <%}%>
 
 
          
@@ -101,6 +101,7 @@
 
       <div class="my-3 p-3 bg-white rounded shadow-sm">
         <h6 class="border-bottom border-gray pb-2 mb-0">Comments</h6>
+        
         <% comments.forEach((comment) => { %>
         <div class="media text-muted pt-3">
           <%- include('comment-partial', {comment}); -%>

@@ -6,16 +6,16 @@ body {
     padding-top: 3rem;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
    
-    background-image: url("../back3.jpg");
+    background-image: url("../35039_abstract.jpg");
+    background-color: white;
   
   }
   .container{
     max-width: 90%;
+    background-color: white;
   }
+ 
 
-  main{
-      background-color: whitesmoke;
-  }
 
 
  #podcastImageTop {  
@@ -142,4 +142,7 @@ body {
   .media {
     width: 100%;
     text-align: left;
+  }
+  .jumbotron{
+    background-color: white;
   }
