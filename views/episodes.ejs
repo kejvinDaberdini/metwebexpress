@@ -49,12 +49,14 @@
           </a>
          <p class="media-body pb-3 mb-0 ml-2  lh-125 border-bottom border-gray">
             <strong class="d-block text-dark"><%=episode.title%></strong>
-            <strong class="d-block text-gray-dark"><%=episode.description%></strong>
-            <%if(episode.sponsor!=''){%>
+            <strong class="d-block text-gray-dark text-sm"><%=episode.description%></strong>
+            <%if(!episode.sponsor==''){%>
             <strong class="d-block text-gray-dark">sponsore by: <%=episode.sponsor%></strong>
             <%}%>
-            <strong class="d-block text-dark"><%=episode.price%>&#8364</strong>
-            <strong class="d-block text-light-gray"><%=episode.uploadDate%></strong>
+            <%if(episode.price > 0){%>
+            <strong class="d-block text-gray-dark">price: <%=episode.price%>&#8364</strong>
+            <%}%>
+            <strong class="d-block text-light-gray">uploaded: <%=episode.uploadDate%></strong>
           </p>
           
         </div>

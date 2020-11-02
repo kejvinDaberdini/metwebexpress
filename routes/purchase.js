@@ -10,7 +10,7 @@ router.post('/episode/purchase', function(req, res, next){
   
  
   
-  dao.buyEpisode(req.body.episodeID, req.user.userID, req.body.newName, req.body.newSurname, req.body.newCardType, req.body.newCardNumber, req.body.newCardCVV)
+  dao.buyEpisode(req.body.episodeID, req.user.userID, req.body.newName, req.body.newSurname, req.body.newCardType,req.body.newCardDate, req.body.newCardNumber, req.body.newCardCVV)
   .then(()=>{
       res.redirect('back');
   })

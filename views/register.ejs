@@ -22,19 +22,14 @@
  
     <title><%= title ? `PodcastHub | ${title}` : 'PodcastHub'%></title>
   </head>
-  <body class="text-center">
+  <body>
     <header>
-      <nav class="navbar navbar-expand fixed-top navbar-dark bg-dark mr-auto ">
-        <a href="/">
-        <span class="navbar-brand mb-0">
-          <img  src="smallLogo.png" alt="" height="50" width="200">
-        </span>
-      </a>
-        <ul class="navbar-nav mr-right">
-          <li class="nav-item">
-            <a class="nav-link" id="login" href="/login">Login</a>
-          </li>
-        </ul>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top   bg-dark ">
+        <a href="/" class="navbar-brand ">PodcastHub <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-mic-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0V3z"/>
+          <path fill-rule="evenodd" d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z"/>
+        </svg></a> 
+        <     
       </nav>
       <div id="alert-message">
         <% if(message!="") { %>
@@ -43,70 +38,303 @@
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
-             
           </div>
         <% } %>
       </div>
     </header>
-    <main class="container-fluid" id="main-cont">
-
+    <main class="container" id="main-cont">
+      <div class="row ">
+        <h1 class="page-name  ">
+          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-plus-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7.5-3a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+          </svg> Registration Page</h1>
+      </div>
+      <div class="my-3 p-3 bg-white rounded shadow-sm " >
+        <img src="logo2.png" class="rounded mx-auto d-block img-fluid" alt="...">
+    
       <form class="form-signin" method="POST" action="/register" id="register-form" name="register-fom">
-        <img class="mb-4" src="Logo.png" alt="" width="150" height="150">
-        <h1 class="h3 mb-3 font-weight-normal ">Register here</h1>
-        <label for="email" class="sr-only">Username</label>
-        <input type="username"  name="username" id="username" class="form-control" placeholder="Username" required autofocus>
-        <label for="email" class="sr-only">Email address</label>
-        <input type="email"  name="email" id="email" class="form-control" placeholder="Email address" required autofocus>
-        <label for="password" class="sr-only">Password</label>
-        <input type="password" pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])\S{6,}" name="password" id="password" class="form-control" placeholder="Password" title="minimum 6 character, at least 1 number and 1 uppercase" required>
-        <label for="password" class="sr-only"> Confirmation Password</label>
+       
+        <h1 class="h3 mb-3 font-weight-normal text-center">Create Account</h1>
+
+        <div class="form-group">
+          <label for="email" class="sr-only">Username</label>
+          <input type="username"  name="username" id="username" class="form-control" placeholder="Username" required autofocus>
+          <small id="passwordHelpInline" class="text-muted">
+            max 50 characters
+          </small>
+        </div>
+        <div class="form-group">        
+          <label for="email" class="sr-only">Email address</label>
+          <input type="email"  name="email" id="email" class="form-control" placeholder="Email address" required autofocus>
+        </div>
+        <div class="form-group">
+          <label for="password" class="sr-only">Password</label>
+          <input type="password" pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])\S{6,}" name="password" id="password" class="form-control" placeholder="Password"  aria-describedby="passwordHelpInline"required>
+            <small id="passwordHelpInline" class="text-muted">
+              minimum 6 character, at least 1 number, 1 uppercase and 1 lowercase 
+            </small>
+        </div>
+        <div class="form-group ">
+          <label for="password" class="sr-only"> Confirmation Password</label>
         <input type="password"  name="password2" id="password2" class="form-control" placeholder=" Confirmation Password" required>
-        <label for="creator">Creator</label>
-        <div class="form-check">
+        </div>
+        <div class="form-group form-inline">
+
           <input type="checkbox" id = "creator" name="creator" class="form-check-input"/>
-          <label class = "form-check-label" for ="creator"></label>
+          <label class = "form-check-label" for ="creator">Check if you are a Creator</label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
       </form>
+      </div>
+    </main>
+    
+
+    <%- include('footer'); -%>
+</body>
+    <!-- ooold
+    <main class="container">
+      <div class="row ">
+        <h1 class="page-name  ">
+          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-grid-3x3-gap-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V2zM1 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V7zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V7zM1 12a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2z"/>
+          </svg> Registration Page</h1>
+      </div>
+      <div class="my-3 p-3 bg-white rounded shadow-sm " >
+    
+      
+      <div class="row">
+        <div class="col-8 mx-auto">
+          <form method="POST" action="/register" id="register-form" name="register-fom" class="col-6 mx-auto">            
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="username"  id ="username" name="username" class="form-control" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input   type="email"  id = "email" name="email" class="form-control" required />
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password"  pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])\S{6,}" id = "password" name="password" class="form-control"  title="minimum 6 character, at least 1 number and 1 uppercase"required />
+            </div>
+            <div class="form-group">
+              <label for="password2">Password</label>
+              <input type="password" id = "password2" name="password2" class="form-control" required />
+            </div>
+            <div class="form-group">
+              <label for="creator">Are you a creator?</label>
+              <div class="form-check">
+                <input type="checkbox" id = "creator" name="creator" class="form-check-input"/>
+                <label class = "form-check-label" for ="creator">
+                </label>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">register</button>
+          </form>
+        </div>
+      </div>
+      </div>
   </main>
+-->
 
-<%- include('footer'); -%>
 
 
-<!-- 
 
-<main class="container-fluid mt-3">
-    <div class="row">
-      <div class="col-8 mx-auto">
-        <form method="POST" action="/register" id="register-form" name="register-fom" class="col-6 mx-auto">            
-          <div class="form-group">
-              <label for="username">Username</label>
-              <input type="username"  id ="username" name="username" class="form-control" required />
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input   type="email"  id = "email" name="email" class="form-control" required />
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password"  pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])\S{6,}" id = "password" name="password" class="form-control"  title="minimum 6 character, at least 1 number and 1 uppercase"required />
-          </div>
-          <div class="form-group">
-            <label for="password2">Password</label>
-            <input type="password" id = "password2" name="password2" class="form-control" required />
-          </div>
-          <div class="form-group">
-            <label for="creator">Creator</label>
-            <div class="form-check">
-              <input type="checkbox" id = "creator" name="creator" class="form-check-input"/>
-              <label class = "form-check-label" for ="creator">
-                checkbox
-              </label>
+
+
+<!-- not so old
+
+<main class="container" id="main-cont">
+  <div class="row ">
+    <h1 class="page-name  ">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-grid-3x3-gap-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V2zM1 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V7zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V7zM1 12a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2z"/>
+      </svg> Registration Page</h1>
+  </div>
+  <div class="my-3 p-3 bg-white rounded shadow-sm " >
+
+  <form class="form-signin" method="POST" action="/register" id="register-form" name="register-fom">
+   
+    <h1 class="h3 mb-3 font-weight-normal ">Create Account</h1>
+    <label for="email" class="sr-only">Username</label>
+    <input type="username"  name="username" id="username" class="form-control" placeholder="Username" required autofocus>
+    <label for="email" class="sr-only">Email address</label>
+    <input type="email"  name="email" id="email" class="form-control" placeholder="Email address" required autofocus>
+    <label for="password" class="sr-only">Password</label>
+    <input type="password" pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])\S{6,}" name="password" id="password" class="form-control" placeholder="Password" title="minimum 6 character, at least 1 number and 1 uppercase" required>
+    <label for="password" class="sr-only"> Confirmation Password</label>
+    <input type="password"  name="password2" id="password2" class="form-control" placeholder=" Confirmation Password" required>
+    <div class="form-check "></div>
+    <label for="creator">Are you a podcas creator?</label>
+    
+      <input type="checkbox" id = "creator" name="creator" class="form-check-input"/>
+      <label class = "form-check-label" for ="creator"></label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+  </form>
+  </div>
+</main>
+-->
+
+<!--
+  <div class="container">
+    <div class="py-5 text-center bg-white">
+      <img class="d-block mx-auto mb-4" src="../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+      <h2>Checkout form</h2>
+      <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
+    </div>
+  
+    <div class="row bg-white">
+      <div class="col-md-8 ">
+        <h4 class="mb-3">Billing address</h4>
+        <form class="needs-validation" novalidate>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="firstName">First name</label>
+              <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+              <div class="invalid-feedback">
+                Valid first name is required.
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="lastName">Last name</label>
+              <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+              <div class="invalid-feedback">
+                Valid last name is required.
+              </div>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary">register</button>
+  
+          <div class="mb-3">
+            <label for="username">Username</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">@</span>
+              </div>
+              <input type="text" class="form-control" id="username" placeholder="Username" required>
+              <div class="invalid-feedback" style="width: 100%;">
+                Your username is required.
+              </div>
+            </div>
+          </div>
+  
+          <div class="mb-3">
+            <label for="email">Email <span class="text-muted">(Optional)</span></label>
+            <input type="email" class="form-control" id="email" placeholder="you@example.com">
+            <div class="invalid-feedback">
+              Please enter a valid email address for shipping updates.
+            </div>
+          </div>
+  
+          <div class="mb-3">
+            <label for="address">Address</label>
+            <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+            <div class="invalid-feedback">
+              Please enter your shipping address.
+            </div>
+          </div>
+  
+          <div class="mb-3">
+            <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
+            <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+          </div>
+  
+          <div class="row">
+            <div class="col-md-5 mb-3">
+              <label for="country">Country</label>
+              <select class="custom-select d-block w-100" id="country" required>
+                <option value="">Choose...</option>
+                <option>United States</option>
+              </select>
+              <div class="invalid-feedback">
+                Please select a valid country.
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="state">State</label>
+              <select class="custom-select d-block w-100" id="state" required>
+                <option value="">Choose...</option>
+                <option>California</option>
+              </select>
+              <div class="invalid-feedback">
+                Please provide a valid state.
+              </div>
+            </div>
+            <div class="col-md-3 mb-3">
+              <label for="zip">Zip</label>
+              <input type="text" class="form-control" id="zip" placeholder="" required>
+              <div class="invalid-feedback">
+                Zip code required.
+              </div>
+            </div>
+          </div>
+          <hr class="mb-4">
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="same-address">
+            <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
+          </div>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="save-info">
+            <label class="custom-control-label" for="save-info">Save this information for next time</label>
+          </div>
+          <hr class="mb-4">
+  
+          <h4 class="mb-3">Payment</h4>
+  
+          <div class="d-block my-3">
+            <div class="custom-control custom-radio">
+              <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
+              <label class="custom-control-label" for="credit">Credit card</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
+              <label class="custom-control-label" for="debit">Debit card</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
+              <label class="custom-control-label" for="paypal">PayPal</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="cc-name">Name on card</label>
+              <input type="text" class="form-control" id="cc-name" placeholder="" required>
+              <small class="text-muted">Full name as displayed on card</small>
+              <div class="invalid-feedback">
+                Name on card is required
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="cc-number">Credit card number</label>
+              <input type="text" class="form-control" id="cc-number" placeholder="" required>
+              <div class="invalid-feedback">
+                Credit card number is required
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3 mb-3">
+              <label for="cc-expiration">Expiration</label>
+              <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+              <div class="invalid-feedback">
+                Expiration date required
+              </div>
+            </div>
+            <div class="col-md-3 mb-3">
+              <label for="cc-cvv">CVV</label>
+              <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+              <div class="invalid-feedback">
+                Security code required
+              </div>
+            </div>
+          </div>
+          <hr class="mb-4">
+          <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
         </form>
       </div>
     </div>
-</main>
+  
+   
+  </div>
+
 -->

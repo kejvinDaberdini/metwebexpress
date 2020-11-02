@@ -69,16 +69,16 @@ router.get('/episodes/:episodeID', function(req, res, next) {
 
 
 router.post('/episodes',fileDestination.single('newFile'),[ 
-  body('newTitle').isLength({min: 1, max:50}).isAlphanumeric(),
-  body('newDesc').isLength({min: 1, max:250}).isAlphanumeric(),
-  body('newSponsor').isLength({min: 1, max: 20}).isAlphanumeric(),
-  body('newPrice').isNumeric({min: 0, max: 999})
+  body('newTitle').isLength({min: 1, max:50}),
+  body('newDesc').isLength({min: 1, max:250}),
+  body('newPrice').isNumeric()
   ], function(req, res, next) {   
     const errors = validationResult(req);
    
 
     if(!errors.isEmpty()){
-      
+      console.log(req.body.newPrice);
+      console.log(errors);
       req.flash('message', "validation error");
       res.redirect('back');
     }
@@ -95,8 +95,7 @@ router.post('/episodes',fileDestination.single('newFile'),[
 router.put('/episodes/:episodeID',fileDestination.single('newFile'),[ 
   body('newTitle').isLength({min: 1, max:50}),
   body('newDesc').isLength({min: 1, max:250}),
-  body('newSponsor').isLength({min: 1, max: 50}),
-  body('newPrice').isNumeric({min: 0, max: 999})
+  body('newPrice').isNumeric()
   ], function(req, res, next) {  
 
     const errors = validationResult(req);
@@ -109,7 +108,7 @@ router.put('/episodes/:episodeID',fileDestination.single('newFile'),[
     }
     else{
   const oldfile= req.body.oldFile;
-  episodedao.updateEpisode(req.body.newTitle, req.body.newDesc, req.file.path, req.body.price, req.body.episodeID, req.body.newSponsor)
+  episodedao.updateEpisode(req.body.newTitle, req.body.newDesc, req.file.path, req.body.newPrice, req.body.episodeID, req.body.newSponsor)
   .then(()=> {
     deleteLocalFile(oldfile);
     res.redirect('/dashboard');

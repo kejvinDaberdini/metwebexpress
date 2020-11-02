@@ -23,8 +23,8 @@ function deleteLocalFile(oldfile){
   }
 
 router.post('/podcasts',fileDestination.single('newImg'),[ 
-  body('newTitle').isLength({min: 1, max:50}).isAlphanumeric(),
-  body('newDesc').isLength({min: 1, max:250}).isAlphanumeric()
+  body('newTitle').isLength({min: 1, max:50}),
+  body('newDesc').isLength({min: 1, max:250})
   ], function(req, res, next) {   
 
     const errors = validationResult(req);
@@ -73,8 +73,8 @@ router.get('/podcasts/:podcastID', function(req, res, next){
 });
 
 router.put('/podcasts/:podcastID',fileDestination.single('newImg'),[ 
-  body('newTitle').isLength({min: 1, max:50}).isAlphanumeric(),
-  body('newDesc').isLength({min: 1, max:250}).isAlphanumeric()
+  body('newTitle').isLength({min: 1, max:50}),
+  body('newDesc').isLength({min: 1, max:250})
   ], function(req, res, next) {  
     const errors = validationResult(req);
     if(!errors.isEmpty()){

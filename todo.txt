@@ -1,10 +1,17 @@
 
-2) fare i controlli divalidazione inserimenti in tutti i form/modali e in registrazione
-3)aggiungere date ai commenti e a tutto penso
-4)fare tutto il css e rimodellare l'html
-5)controllo creatore dashboard
 
 npx kill-port 3000
 
 
 	
+creator1
+email: creator1@email.com
+pw:Q12345we
+
+noncreator1
+email: noncreator1@email.com
+pw-Q12345we
+
+creator2
+email: creator2@email.com
+pw:Q123456we

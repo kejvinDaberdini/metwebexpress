@@ -10,16 +10,19 @@
           <img src="/<%= episode.image %>"  class="figure-img " alt=""  id="podcastImageTop" width="100%" >  
           <h1 class="display-4"><%= episode.title %></h1>
           <p class="lead"><%= episode.description %></p>
+          
           <p class="card-text">podcast: <%= episode.podcast %></p>
+          
           <p class="card-text">creator: <%= episode.creator %></p>
            
-          <%if(episode.price!=0){%>
+          <%if(episode.price > 0){%>
             <p class="card-text">price: <%= episode.price %>&#8364</p>
             <%}%>
-            <%if(episode.sponsor!=''){%>
+            <%if(!episode.sponsor==''){%>
               <p class="card-text">sponsor: <%= episode.sponsor %></p> 
               <%}%>
-              <p class="card-text">uploaded: <%= episode.uploadDate %></p>
+              <p class="card-text">uploaded: <%= episode.uploadDate %> </p>
+              <a href="/podcasts/<%-episode.podcastID%>" class="btn btn-primary btn-sm">podcast episodes</a>
               <hr class="my-4">
               <%if(logged){%>
                 <%if(episode.price>0){%>
@@ -141,15 +144,27 @@
               </div>
               <div class="form-group">
                 <label for="inputCardType">card type</label>
-                <input type="text" name="newCardType" class="form-control" id="inputCardType" placeholder="Insert Card Type" required>
+                
+                <select class="custom-select custom-select mb-3" type="text" name="newCardType" id="inputCardType"required>
+                  <option selected>Visa</option>
+                  <option value="1">Mastercard</option>
+                  <option value="2">American Express</option>
+                </select>
+              </div>
+              <div class="form-group"> 
+                <label for="inputCardDate">expiration date</label>
+                <input type="text" name="newCardDate" class="form-control" id="InputCardDate" pattern="(?:0[1-9]|1[0-2])/[0-9]{2}" placeholder="Expiration date"   required />
+                <small id="dateHelpInline" class="text-muted">
+                  Insert the expiration date as: MM/YY
+                </small>
               </div>
               <div class="form-group">
                 <label for="inputCardNumber">card number</label>
-                <input type="number" name="newCardNumber" class="form-control" id="inputCardNumber" placeholder="Insert your card number" required>
+                <input type="text" name="newCardNumber" class="form-control" id="inputCardNumber" placeholder="Insert your card number" pattern="\d*" maxlength="16" minlength ="15"  required>
               </div>
               <div class="form-group">
                 <label for="inputCardCVV">card CVV</label>
-                <input type="number" name="newCardCVV" class="form-control" id="inputCardCVV" placeholder="Insert your card CVV" required>
+                <input type="text" name="newCardCVV" class="form-control" id="inputCardCVV" pattern="\d*" maxlength="4" minlength ="3" placeholder="Insert your card CVV" required>
               </div>
 
             </div>

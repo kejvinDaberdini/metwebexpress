@@ -11,6 +11,7 @@ body {
   #main-cont{
     min-height: calc(100vh - 87px);
     background-color: #222222;
+    max-width: 95%;
   }
 
  #podcastImageTop {  
@@ -22,7 +23,6 @@ body {
   
 .navbar {
     margin-bottom: 20px; 
-    justify-content: space-between;  
   }
 
 .card{   
@@ -34,8 +34,9 @@ body {
     transition: 0.5s ease;
     cursor: pointer;
     justify-content: center;
-    margin:10px;
-    border:5px;
+
+    margin:2rem;
+    border:1rem;
    
 }
 .card-body{
@@ -91,8 +92,10 @@ body {
   }
   .page-name{
     padding-left: 1rem;
+    margin-bottom: auto;
     text-align: left;
     background-color: whitesmoke;
+    
     width: 100%;
   }
 
