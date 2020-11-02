@@ -2,12 +2,13 @@
 
 
 
-
-<main role="main" class="container">
-      <div class="jumbotron text-center">
+<main class=" container-fluid"  id="main-cont">
+      <div class="jumbotron text-left bg-white rounded shadow-sm">
         <img src="/<%= podcast.image %>"  class="figure-img " alt=""  id="podcastImageTop" width="100%" >  
         <h1 class="display-4"><%= podcast.title %></h1>
         <p class="lead"><%= podcast.description %></p>
+        <p class="card-text">creator: <%= podcast.creator %></p>
+        <p class="card-text">category: <%= podcast.category%></p> 
         <hr class="my-4">
         <%if (logged){%>
          <%if(following == undefined){%>
@@ -18,9 +19,7 @@
                 <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
               </svg> follow</button>
           </form>
-            
-         
-          <%}else{%>
+        <%}else{%>
             <form method="POST" action="/follows/<%-following.followID%>?method=DELETE" name="followedDelete">
               <input type="hidden" name="followID" value="<%- following.followID %>">
               <button type="submit" class="btn btn-danger">
@@ -37,17 +36,7 @@
               </svg> follow</button>
             </a>
           <%}%>
-      </div>
-     
-   
-
-
-
-
-
-
-
-    
+      </div>   
       <div class="my-3 p-3 bg-white rounded shadow-sm">
         <h6 class="border-bottom border-gray pb-2 mb-0">Episodes</h6>
         <% episodes.forEach((episode) => { %>
@@ -58,53 +47,20 @@
               <path d="M11 10a1 1 0 0 1 1-1h2v4a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-3zm-6 0a1 1 0 0 0-1-1H2v4a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-3z"/>
            </svg>
           </a>
-
-          <p class="media-body pb-3 mb-1 small lh-125 border-bottom border-gray">
-            <strong class="d-block text-gray-dark"><%=episode.title%></strong>
+         <p class="media-body pb-3 mb-0 ml-2  lh-125 border-bottom border-gray">
+            <strong class="d-block text-dark"><%=episode.title%></strong>
             <strong class="d-block text-gray-dark"><%=episode.description%></strong>
-            <strong class="d-block text-gray-light"><%=episode.price%>&#8364</strong>
+            <%if(episode.sponsor!=''){%>
+            <strong class="d-block text-gray-dark">sponsore by: <%=episode.sponsor%></strong>
+            <%}%>
+            <strong class="d-block text-dark"><%=episode.price%>&#8364</strong>
+            <strong class="d-block text-light-gray"><%=episode.uploadDate%></strong>
           </p>
           
         </div>
-        <% }); %>
-       
-
+        <% }); %>  
       </div>
     </main>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <%- include('footer'); -%>

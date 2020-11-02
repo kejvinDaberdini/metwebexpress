@@ -3,8 +3,10 @@
 
 <div class="card text-center mt-4 mr-4 ml-2">
   <div class="card-body ">
-    <a href = "/episodes/<%- episode.episodeID%>"  calls="thumbnail"><img src="/<%-episode.image %>" class="card-img-top" alt="..."></a> 
+    <a href = "/episodes/<%- episode.episodeID%>" ><img src="/<%-episode.image %>" class="card-img-top" alt="..."></a> 
     <h5 class="card-title"><%= episode.title %></h5>
-    <div class="card-desc "><%= episode.description %></div>
+    <div class="card-subtitle mb-2 text-muted "><%= episode.podcast%></div>
   </div>
 </div>
+
+

@@ -8,6 +8,7 @@ const categorydao = require('../models/category-dao');
 const express = require('express');
 const { route } = require('./episodes.js');
 const fs= require('fs');
+const { body, validationResult } = require('express-validator')
 const router = express.Router();
 
 const multer = require('multer');
@@ -50,40 +51,71 @@ router.get('/episodes/:episodeID', function(req, res, next) {
               
               favoritedao.isFavorite(req.user.userID,req.params.episodeID)
               .then((favorite)=>{
-                  res.render('episode', {title : 'Episode', episode:episode, comments:comments, logged:logged ,user:req.user, username:username, favorite:favorite,categories, isbought});
+                  res.render('episode', {title : 'Episode', episode:episode, comments:comments, logged:logged ,user:req.user, username:username, favorite:favorite,categories, isbought,message:req.flash('message')});
               })
-              .catch()
+              .catch((err)=> res.render('error',{error:err}));
             })
-            .catch()         
+            .catch((err)=> res.render('error',{error:err}));     
           }
           else
-              res.render('episode', {title : 'Episode', episode:episode, comments:comments, logged:logged , username:username, categories}); 
+              res.render('episode', {title : 'Episode', episode:episode, comments:comments, logged:logged , username:username, categories,message:req.flash('message')}); 
       })
-      .catch();  
+      .catch((err)=> res.render('error',{error:err}));  
     })
-    .catch();
+    .catch((err)=> res.render('error',{error:err}));
   })
-  .catch();
+  .catch((err)=> res.render('error',{error:err}));
 });
 
 
-router.post('/episodes',fileDestination.single('newFile'), function(req, res, next) {   
-  console.log(req.body);
-  episodedao.addEpisode(req.body.newTitle, req.body.newDesc, req.file.path,req.body.newSponsor, req.body.newPrice, req.body.podcastID)
+router.post('/episodes',fileDestination.single('newFile'),[ 
+  body('newTitle').isLength({min: 1, max:50}).isAlphanumeric(),
+  body('newDesc').isLength({min: 1, max:250}).isAlphanumeric(),
+  body('newSponsor').isLength({min: 1, max: 20}).isAlphanumeric(),
+  body('newPrice').isNumeric({min: 0, max: 999})
+  ], function(req, res, next) {   
+    const errors = validationResult(req);
+   
+
+    if(!errors.isEmpty()){
+      
+      req.flash('message', "validation error");
+      res.redirect('back');
+    }
+    else{
+
+  episodedao.addEpisode(req.body.newTitle, req.body.newDesc, req.file.path, req.body.newSponsor, req.body.newPrice, req.body.podcastID)
   .then(()=> {
     res.redirect('/dashboard');
   })
-  .catch((err)=> res.render('error',{message:"Error in episode posting."}));
+  .catch((err)=> res.render('error',{error:err}));
+}
 });
 
-router.put('/episodes/:episodeID',fileDestination.single('newFile'),  function(req, res, next) {  
+router.put('/episodes/:episodeID',fileDestination.single('newFile'),[ 
+  body('newTitle').isLength({min: 1, max:50}),
+  body('newDesc').isLength({min: 1, max:250}),
+  body('newSponsor').isLength({min: 1, max: 50}),
+  body('newPrice').isNumeric({min: 0, max: 999})
+  ], function(req, res, next) {  
+
+    const errors = validationResult(req);
+   
+
+    if(!errors.isEmpty()){
+      
+      req.flash('message', "validation error");
+      res.redirect('back');
+    }
+    else{
   const oldfile= req.body.oldFile;
   episodedao.updateEpisode(req.body.newTitle, req.body.newDesc, req.file.path, req.body.price, req.body.episodeID, req.body.newSponsor)
   .then(()=> {
     deleteLocalFile(oldfile);
     res.redirect('/dashboard');
   })
-  .catch((err)=> res.render('error',{message:"Error in episode update."}));   
+  .catch((err)=> res.render('error',{error:err}));
+} 
 });
 
 router.delete('/episodes/:episodeID', function(req, res, next) {  
@@ -96,7 +128,7 @@ router.delete('/episodes/:episodeID', function(req, res, next) {
     console.log("ho fatto");
     res.redirect('back');
   })
-  .catch((err)=> res.render('error',{message:"Error in episode delete."}));
+  .catch((err)=> res.render('error',{error:err}));
 });
 
 module.exports = router;

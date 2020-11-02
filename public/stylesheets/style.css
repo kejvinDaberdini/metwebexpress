@@ -3,20 +3,15 @@
 /* Padding below the footer and lighter body text */
 
 body {
-    padding-top: 3rem;
+    padding-top: 55px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-   
-    background-image: url("../35039_abstract.jpg");
-    background-color: white;
+    background-color: #222222;
   
   }
-  .container{
-    max-width: 90%;
-    background-color: white;
+  #main-cont{
+    min-height: calc(100vh - 87px);
+    background-color: #222222;
   }
- 
-
-
 
  #podcastImageTop {  
     max-height: 500px;
@@ -30,52 +25,33 @@ body {
     justify-content: space-between;  
   }
 
-.card{
-    
-    background-color:white;
+.card{   
+ 
     height:20rem;
     max-width: 15rem;
+    min-width: 15rem;
     overflow:clip;
     transition: 0.5s ease;
     cursor: pointer;
     justify-content: center;
     margin:10px;
     border:5px;
-  
-    
-    
+   
 }
 .card-body{
   padding: 0%;
-  justify-content: center;
- 
-  
+  justify-content: center; 
 }
-
-.card-title{
-  align-items: center;
-    font-size: x-large;
-}
-.card-desc{
-    font-size: medium;
-    max-lines: 3;
-}
-
 .card-img-top{
-    height:50%;
+    height:70%;
     object-fit: cover;
 }
-
-
 .card:hover {
     transform: scale(1.10);
     box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
   }
 
-
-
-
-  .carousel {
+ .carousel {
     height: 30rem;
     margin-top: 2rem;
     margin-bottom: 4rem;
@@ -101,48 +77,97 @@ body {
   #carouselImg{
       object-fit: cover;
   }
-  footer{
-    padding: 25px 0px 20px 0px;
 
-  }
-  .topleft {
-    position: absolute;
-    top: 8px;
-    left: 16px;
-    font-size: 32px;
-    background-color: blanchedalmond;
 
-  }
+  
   .center-title {
     position: absolute;
     top: 0%;
     width: 100%;
     text-align: center;
-    font-size: 32px;
+    font-size: 2rem;
    
 
   }
-  .cat-name{
-    background-color: #5c1075;
+  .page-name{
+    padding-left: 1rem;
+    text-align: left;
+    background-color: whitesmoke;
     width: 100%;
   }
 
-  .container {
-    max-width: 960px;
-  }
-  
-  .lh-condensed { line-height: 1.25; }
+
+
   
   .img-thumbnail{
     width: 5rem;
     height: 5rem;
     object-fit: cover;
   }
+.media {
+  width: 100%;
+  text-align: left;
+}
 
-  .media {
-    width: 100%;
-    text-align: left;
+
+
+.td{
+ max-width: 20rem;
+ overflow:auto;
+ text-overflow: ellipsis;
+}
+.tableimage{
+  object-fit: cover;
+}
+footer{
+  background-color: #52155e;
+}
+
+
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+.form-signin .checkbox {
+  font-weight: 400;
+}
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="username"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
   }
-  .jumbotron{
-    background-color: white;
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: -1px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.form-signin input[type="password2"] {
+    margin-bottom: -1px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
   }
+.form-signin input[type="creator"] {
+    
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}

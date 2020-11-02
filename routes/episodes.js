@@ -24,18 +24,18 @@ router.get('/podcasts/:podcastID', function(req, res, next){
             .then((following)=>{  
             
                
-          res.render('episodes', {title: 'Episodes', episodes: episodes,  podcast:podcast, logged:logged, following:following, categories, username,user:req.user});
+          res.render('episodes', {title: 'Episodes', episodes: episodes,  podcast:podcast, logged:logged, following:following, categories, username,user:req.user,message:req.flash('message')});
          })
-         .catch();
+         .catch((err)=> res.render('error',{error:err}));
         }else{
-          res.render('episodes', {title: 'Episodes', episodes: episodes,  podcast:podcast, logged:logged, categories, username});
+          res.render('episodes', {title: 'Episodes', episodes: episodes,  podcast:podcast, logged:logged, categories, username,message:req.flash('message')});
         }
       })
-      .catch();    
+      .catch((err)=> res.render('error',{error:err}));  
   })
-  .catch();
+  .catch((err)=> res.render('error',{error:err}));
 })
-.catch();
+.catch((err)=> res.render('error',{error:err}));
 });
 
 module.exports = router;

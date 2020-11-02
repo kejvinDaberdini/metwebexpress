@@ -34,7 +34,7 @@ exports.getComments = function(id){
 
   exports.updateComment = function(newText, commentID){
     return new Promise((resolve, reject)=>{
-      console.log(newText, commentID);
+      console.log('eccolo',newText, commentID);
       const sql = 'UPDATE comment SET commentText= $newText, uploadDate = $date WHERE commentID= $commentID';
       const time = moment().format('DD-MM-YYYY');
       const param={$newText:newText, $commentID:commentID, $date:time};

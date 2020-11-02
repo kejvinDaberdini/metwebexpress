@@ -19,7 +19,7 @@ exports.getAllEpisodes = function(id) {
 
 exports.getEpisode = function(id) {
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT episode.episodeID AS episodeID, episode.title AS title, episode.file AS file, episode.uploadDate AS uploadDate, episode.price AS price, episode.podcastID AS podastID, episode.description AS description,episode.sponsor AS sponsor ,  podcast.image AS image , podcast.creator AS creator FROM episode  JOIN podcast ON episode.podcastID=podcast.podcastID WHERE episodeID=?';;
+    const sql = 'SELECT episode.episodeID AS episodeID, episode.title AS title, episode.file AS file, episode.uploadDate AS uploadDate, episode.price AS price, episode.podcastID AS podastID, episode.description AS description,episode.sponsor AS sponsor ,  podcast.image AS image , podcast.creator AS creator , podcast.title AS podcast FROM episode  JOIN podcast ON episode.podcastID=podcast.podcastID WHERE episodeID=?';;
     db.get(sql, [id], (err, row) => {
       if (err) {
         reject(err);
@@ -104,11 +104,11 @@ exports.getEpisodesByText = function(text,category) {
     if(category=="All"){
       params= {$search:search};
 
-       sql = 'SELECT episode.episodeID AS episodeID, episode.title AS title, episode.description AS description, episode.uploadDate AS uploadDAte ,episode.price AS price, episode.sponsor AS sponsor, podcast.title AS podcast, podcast.image AS image FROM episode JOIN podcast ON episode.podcastID=podcast.podcastID WHERE episode.title LIKE $search OR episode.description LIKE $search ';
+       sql = 'SELECT episode.episodeID AS episodeID, episode.title AS title, episode.description AS description, episode.uploadDate AS uploadDAte ,episode.price AS price, episode.sponsor AS sponsor, podcast.title AS podcast, podcast.image AS image , podcast.title AS podcast FROM episode JOIN podcast ON episode.podcastID=podcast.podcastID WHERE episode.title LIKE $search OR episode.description LIKE $search ';
     }
     else{
       params={$search:search, $category:category}
-       sql = ' SELECT episode.episodeID AS episodeID, episode.title AS title, episode.description AS description, episode.uploadDate AS uploadDAte , episode.price AS price, episode.sponsor AS sponsor, podcast.title AS podcast, podcast.image AS image FROM episode JOIN podcast ON episode.podcastID=podcast.podcastID WHERE podcast.category=$category AND(episode.title LIKE $search OR episode.description LIKE $search) '; 
+       sql = ' SELECT episode.episodeID AS episodeID, episode.title AS title, episode.description AS description, episode.uploadDate AS uploadDAte , episode.price AS price, episode.sponsor AS sponsor, podcast.title AS podcast, podcast.image AS image, podcast.title AS podcast FROM episode JOIN podcast ON episode.podcastID=podcast.podcastID WHERE podcast.category=$category AND(episode.title LIKE $search OR episode.description LIKE $search) '; 
     }   
     db.all(sql, params, (err, rows) => {
       if (err) {

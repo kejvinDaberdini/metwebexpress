@@ -14,7 +14,7 @@ router.post('/episode/purchase', function(req, res, next){
   .then(()=>{
       res.redirect('back');
   })
-  .catch((err)=> res.render('error',{message:"Error purchasing episode"}));
+  .catch((err)=> res.render('error',{error:err}));
 });
 
 module.exports = router;

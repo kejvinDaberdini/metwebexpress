@@ -10,7 +10,7 @@ router.post('/follows',function(req,res,next){
     .then(() =>{
         res.redirect('back');
     })
-    .catch((err)=> res.render('error',{message:"Error in following podcast."}));    
+    .catch((err)=> res.render('error',{error:err}));  
 });
 
 router.delete('/follows/:podcastID',function(req,res,next){
@@ -18,7 +18,7 @@ router.delete('/follows/:podcastID',function(req,res,next){
     .then(() =>{
         res.redirect('back');
     })
-    .catch((err)=> res.render('error',{message:"Error in unfollowing podcast"}));
+    .catch((err)=> res.render('error',{error:err}));
 });
 
 module.exports = router;

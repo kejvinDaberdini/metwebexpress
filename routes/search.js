@@ -22,9 +22,9 @@ router.get("/search", function(req,res,next){
                 if(logged){res.render('search', {title: 'Search', podcasts:resultPodcasts, episodes:resultEpisodes, logged:logged, categories, username:username, user:req.user});}
                 else{res.render('search', {title: 'Search', podcasts:resultPodcasts, episodes:resultEpisodes, logged:logged, categories, username:username});}
                 
-             });
-         }); 
-    });  
+             }).catch((err)=> res.render('error',{error:err}));
+         }).catch((err)=> res.render('error',{error:err}));
+    }).catch((err)=> res.render('error',{error:err})); 
 });
 
 module.exports = router;  

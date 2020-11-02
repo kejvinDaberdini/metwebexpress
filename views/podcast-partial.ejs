@@ -1,8 +1,13 @@
-<div class="card text-center mt-4 mr-4 ml-2">
+<div class="card text-center ">
   <div class="card-body ">
-    <a href = "/podcasts/<%- podcast.podcastID%>" calls="thumbnail"><img src="/<%-podcast.image %>" class="card-img-top" alt="..."></a> 
+    <a href = "/podcasts/<%- podcast.podcastID%>" >
+      <img src="/<%-podcast.image %>" class="card-img-top" alt="...">
+    </a> 
     <h5 class="card-title"><%= podcast.title %></h5>
-    <p class="card-cat"><%= podcast.category %></p>
-    <div class="card-desc text-trunc"><%= podcast.description %></div>
+    <h6 class="card-subtitle mb-2 text-muted">by: <%=podcast.creator%></h6>
+    
+    
+      <p class="card-text">category: <%= podcast.category %></p>
+    
   </div>
 </div>

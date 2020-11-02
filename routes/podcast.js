@@ -7,6 +7,7 @@ const followdao = require('../models/follow-dao');
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
+const { body, validationResult } = require('express-validator')
 const fs= require('fs');
 
 const fileDestination  = multer({ dest: './uploads/' });
@@ -21,8 +22,20 @@ function deleteLocalFile(oldfile){
     };
   }
 
-router.post('/podcasts',fileDestination.single('newImg'), function(req, res, next) {   
+router.post('/podcasts',fileDestination.single('newImg'),[ 
+  body('newTitle').isLength({min: 1, max:50}).isAlphanumeric(),
+  body('newDesc').isLength({min: 1, max:250}).isAlphanumeric()
+  ], function(req, res, next) {   
 
+    const errors = validationResult(req);
+   
+
+    if(!errors.isEmpty()){
+      
+      req.flash('message', "validation error");
+      res.redirect('back');
+    }
+    else{
       const user= req.user.userID;
       const creator =req.user.username;
       console.log(req.file.path);
@@ -31,7 +44,8 @@ router.post('/podcasts',fileDestination.single('newImg'), function(req, res, nex
         res.redirect('/dashboard');
       })
       .catch((err)=> res.render('error',{message:"Error in creating podcast"}));
-    })
+    }
+})
   
 
 router.get('/podcasts/:podcastID', function(req, res, next){
@@ -49,16 +63,26 @@ router.get('/podcasts/:podcastID', function(req, res, next){
              followdao.isFollowing(req.user.userID,req.params.podcastID)
               .then((following)=>{  
                  res.render('episodes', {title: 'Episodes', episodes: episodes,  podcast:podcast, logged:logged, following:following, categories, username, user:req.user});
-              });
+              }).catch((err)=> res.render('error',{error:err}));
               }else{
             res.render('episodes', {title: 'Episodes', episodes: episodes,  podcast:podcast, logged:logged, categories});
           }
-        });    
-    });
-  });
+        }).catch((err)=> res.render('error',{error:err}));    
+    }).catch((err)=> res.render('error',{error:err}));
+  }).catch((err)=> res.render('error',{error:err}));
 });
 
-router.put('/podcasts/:podcastID',fileDestination.single('newImg'), function(req, res, next) {  
+router.put('/podcasts/:podcastID',fileDestination.single('newImg'),[ 
+  body('newTitle').isLength({min: 1, max:50}).isAlphanumeric(),
+  body('newDesc').isLength({min: 1, max:250}).isAlphanumeric()
+  ], function(req, res, next) {  
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+      
+      req.flash('message', "validation error");
+      res.redirect('back');
+    }
+    else{
     //console.log(req.body.newTitle, req.body.newDesc,req.body.newCategory, req.body.oldPodcast);
   const oldfile= req.body.oldFile;
   podcastdao.updatePodcast(req.body.newTitle, req.body.newDesc, req.body.newCategory, req.file.path, req.body.podcastID)
@@ -68,7 +92,8 @@ router.put('/podcasts/:podcastID',fileDestination.single('newImg'), function(req
    
     res.redirect('/dashboard');
   })
-  .catch((err)=> res.render('error',{message:"Error in updating podcast"}));    
+  .catch((err)=> res.render('error',{error:err}));   
+}
 });
 
 router.delete('/podcasts/:podcastID', function(req, res, next) {  
@@ -79,7 +104,7 @@ router.delete('/podcasts/:podcastID', function(req, res, next) {
     deleteLocalFile(oldfile);
     res.redirect('back');
   })
-  .catch((err)=> res.render('error',{message:"Error in deleting podcast"}));    
+  .catch((err)=> res.render('error',{error:err}));   
 });
 
 

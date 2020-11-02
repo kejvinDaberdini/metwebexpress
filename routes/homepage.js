@@ -17,11 +17,10 @@ router.get('/homepage', function(req, res, next) {
         favoritedao.getFavoriteEpisodes(req.user.userID).then((episodes)=>{
           episodedao.getNewEpisodes(req.user.userID).then((newEpisodes)=>{
             res.render('homepage', {title: 'Homepage', categories:categories, episodes:episodes, podcasts:podcasts, logged:logged, username:username, user, newEpisodes})
-          })
-            
-        });
-    });        
-  });
+          }).catch((err)=> res.render('error',{error:err}));           
+        }).catch((err)=> res.render('error',{error:err}));
+    }).catch((err)=> res.render('error',{error:err}));        
+  }).catch((err)=> res.render('error',{error:err}));
 });
 
 module.exports = router;

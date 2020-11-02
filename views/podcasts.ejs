@@ -1,32 +1,24 @@
 <%- include('header', {title, active: 'podcasts'}); -%>
-<div class="container-fluid ">
+<main class="container-fluid " id="main-cont">
   <div class="row">
-    <h1 class="cat-name"><%=pagecat%></h1>
+    <h1 class="page-name "><%=pagecat%></h1>
   </div>
 
-  <div class="row  ">
 
-
-  <main role="main" class="col">
-
-
-
-   
       <div class="row justify-content-center">
        
-              <tbody>
+        <div class="card-deck">
                 <% podcasts.forEach((podcast) => { %>
                   <%- include('podcast-partial', {podcast}); -%>
                 <% }); %>
-              </tbody>
+      </div>
             
         
       </div>
-    </main>
   
-  </div>
+  
 
-</div>
+</main>
   
 <%- include('footer'); -%>
 
