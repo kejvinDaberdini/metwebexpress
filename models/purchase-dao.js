@@ -4,7 +4,7 @@ const db = require('../db.js');
 
 exports.buyEpisode = function(episodeID,userID,name,surname,cardType, cardDate, cardNumber,CVV){
     return new Promise((resolve, reject)=>{
-      console.log(episodeID,userID,CVV);
+
       const sql = 'INSERT INTO purchase (episodeID, userID, name, surname, cardType, cardDate, cardNumber, cvv) VALUES(?, ?, ?, ?, ?, ?, ?, ?)';
       db.run(sql,[episodeID,userID, name, surname, cardType,cardDate, cardNumber, CVV],(err,row)=>{
         if(err){
@@ -12,10 +12,10 @@ exports.buyEpisode = function(episodeID,userID,name,surname,cardType, cardDate, 
           return;
         };
         resolve(row);
-      })    
-    })
-  }
-
+      });    
+    }); 
+  }; 
+//get al purchased episode by user
   exports.getPurchaseByUser=function(userID){
     return new Promise((resolve,reject)=>{
       const sql='SELECT * FROM purchase WHERE userID=?';
@@ -26,11 +26,11 @@ exports.buyEpisode = function(episodeID,userID,name,surname,cardType, cardDate, 
         };
         resolve(rows);
 
-      })
-    })
+      }); 
+    }); 
 
-  }
-
+  }; 
+//check if episode is bought
   exports.isBought=function(userID, episodeID){
     return new Promise((resolve,reject)=>{
       const sql='SELECT * FROM purchase WHERE userID=? and episodeID=?';
@@ -41,7 +41,7 @@ exports.buyEpisode = function(episodeID,userID,name,surname,cardType, cardDate, 
         };
         resolve(row);
 
-      })
-    })
+      }); 
+    }); 
 
-  }
+  }; 

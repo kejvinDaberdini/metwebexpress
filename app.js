@@ -1,19 +1,16 @@
-
+//kejvin daberdini 20021403
 'use strict';
 
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
-const moment = require('moment');
-//const bodyParser = require('body-parser');
-//const expressValidator = require('express-validator');
-
+const moment = require('moment');   
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
 const userDao = require('./models/user-dao.js');
-const indexRouter = require('./routes/index');
+const indexRouter = require('./routes/index');        
 const episodesRouter = require('./routes/episodes');
 const episodeRouter  = require('./routes/episode');
 const sessionsRouter = require('./routes/sessions');
@@ -26,8 +23,8 @@ const followRouter = require('./routes/follow');
 const commentRouter = require('./routes/comment');
 const podcastRouter = require('./routes/podcast');
 const purchaseRouter= require('./routes/purchase');
-const methodOverride = require('method-override');
-const flash = require('connect-flash');
+const methodOverride = require('method-override');    //i used this middleware to launch DEL and PUT requestes from HTML, since HTML5 doesn't have native support for all CRUD operations
+const flash = require('connect-flash');               //i used this middleware for easier errors validation.
 
 const app = express();
 
@@ -39,8 +36,8 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static('public'));
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-app.use('/audiofiles', express.static(path.join(__dirname, 'audiofiles')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));       //linked the folders i use for image storage,
+app.use('/audiofiles', express.static(path.join(__dirname, 'audiofiles'))); //linked the folders i use for audio storage, 
 app.use(methodOverride('method'));
 app.use(flash());
 
@@ -90,30 +87,7 @@ const isLoggedIn = (req, res, next) => {
   else
     res.redirect('/login');
 }
-/*
-// Body Parser Middleware
-// parse application/x-www-form-urlencoded
-  app.use(bodyParser.urlencoded({ extended: false }));
-// parse application/json
-  app.use(bodyParser.json());
-// Express Validator Middleware
-app.use(expressValidator({
-  errorFormatter: function(param, msg, value) {
-      var namespace = param.split('.')
-      , root    = namespace.shift()
-      , formParam = root;
 
-    while(namespace.length) {
-      formParam += '[' + namespace.shift() + ']';
-    }
-    return {
-      param : formParam,
-      msg   : msg,
-      value : value
-    };
-  }
-}));
-*/ 
 
 // define default variables for the views
 app.use(function (req, res, next) {
@@ -134,7 +108,7 @@ app.use('/',  searchRouter);
 app.use('/',  favoriteRouter);
 app.use('/',  followRouter);
 app.use('/',  commentRouter);
-app.use('/', isLoggedIn, purchaseRouter);
+app.use('/',  isLoggedIn, purchaseRouter);
 app.use('/',  isLoggedIn, dashboardRouter);
 app.use('/',  isLoggedIn, homepageRouter);
 

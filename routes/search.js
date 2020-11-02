@@ -5,11 +5,11 @@ const podcastdao = require('../models/podcast-dao.js');
 const express = require('express');
 const router = express.Router();
 
-
+//search in podcasts AND episodes for the input text
 router.get("/search", function(req,res,next){
     let logged = req.isAuthenticated(); 
     let username= "";
-    console.log(req.query.newCategory)
+
     if(logged){
         username=req.user.username;
     }

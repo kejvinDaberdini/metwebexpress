@@ -54,5 +54,5 @@ exports.createUser = function(newUser) {
             }
         });
     });
-}
+}; 
  

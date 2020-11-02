@@ -10,15 +10,15 @@ const multer = require('multer');
 const { body, validationResult } = require('express-validator')
 const fs= require('fs');
 
-const fileDestination  = multer({ dest: './uploads/' });
+const fileDestination  = multer({ dest: './uploads/' });  //is the folder where images will be put
 
 
-function deleteLocalFile(oldfile){
+function deleteLocalFile(oldfile){//deletes olf files when you edit/delete a podcast
   try {
    
       fs.unlinkSync(oldfile)
     } catch(err) {
-      console.error(err)
+ 
     };
   }
 
@@ -38,7 +38,7 @@ router.post('/podcasts',fileDestination.single('newImg'),[
     else{
       const user= req.user.userID;
       const creator =req.user.username;
-      console.log(req.file.path);
+  
       podcastdao.addPodcast(req.body.newTitle, creator,req.body.newDesc,req.body.newCategory,req.file.path, user)
       .then(()=> {
         res.redirect('/dashboard');
@@ -71,7 +71,7 @@ router.get('/podcasts/:podcastID', function(req, res, next){
     }).catch((err)=> res.render('error',{error:err}));
   }).catch((err)=> res.render('error',{error:err}));
 });
-
+//edit podcast
 router.put('/podcasts/:podcastID',fileDestination.single('newImg'),[ 
   body('newTitle').isLength({min: 1, max:50}),
   body('newDesc').isLength({min: 1, max:250})
@@ -83,21 +83,21 @@ router.put('/podcasts/:podcastID',fileDestination.single('newImg'),[
       res.redirect('back');
     }
     else{
-    //console.log(req.body.newTitle, req.body.newDesc,req.body.newCategory, req.body.oldPodcast);
-  const oldfile= req.body.oldFile;
-  podcastdao.updatePodcast(req.body.newTitle, req.body.newDesc, req.body.newCategory, req.file.path, req.body.podcastID)
-  .then(()=> {
-   
-    deleteLocalFile(oldfile);
-   
-    res.redirect('/dashboard');
-  })
-  .catch((err)=> res.render('error',{error:err}));   
-}
-});
 
+      const oldfile= req.body.oldFile;
+      podcastdao.updatePodcast(req.body.newTitle, req.body.newDesc, req.body.newCategory, req.file.path, req.body.podcastID)
+      .then(()=> {
+      
+        deleteLocalFile(oldfile);
+      
+        res.redirect('/dashboard');
+      })
+      .catch((err)=> res.render('error',{error:err}));   
+    };
+});
+//delete podcast
 router.delete('/podcasts/:podcastID', function(req, res, next) {  
-    console.log(req.params.podcastID);
+
     const oldfile= req.body.oldFile;
     podcastdao.deletePodcast(req.params.podcastID )
   .then(()=> {

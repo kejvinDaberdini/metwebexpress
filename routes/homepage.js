@@ -1,13 +1,12 @@
 'use strict';
 
-const userdao = require('../models/user-dao.js');
 const categorydao = require('../models/category-dao.js');
 const episodedao = require('../models/episode-dao.js');
 const favoritedao = require('../models/favorite-dao');
 const followdao = require('../models/follow-dao');
 const express = require('express');
 const router = express.Router();
-
+//get users homepage
 router.get('/homepage', function(req, res, next) {
   let logged = req.isAuthenticated();  
   const username = req.user.username;

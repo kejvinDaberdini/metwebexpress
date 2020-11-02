@@ -2,14 +2,13 @@
 
 const episodedao = require('../models/episode-dao.js');
 const podcastdao = require('../models/podcast-dao.js');
-const purchasedao = require('../models/purchase-dao.js');
 const categorydao = require('../models/category-dao');
 const followdao = require('../models/follow-dao');
 
 const express = require('express');
 const router = express.Router();
 
-
+//get the podcast page
 router.get('/podcasts/:podcastID', function(req, res, next){
   let logged = req.isAuthenticated();
   let username="";
@@ -29,7 +28,7 @@ router.get('/podcasts/:podcastID', function(req, res, next){
          .catch((err)=> res.render('error',{error:err}));
         }else{
           res.render('episodes', {title: 'Episodes', episodes: episodes,  podcast:podcast, logged:logged, categories, username,message:req.flash('message')});
-        }
+        };
       })
       .catch((err)=> res.render('error',{error:err}));  
   })

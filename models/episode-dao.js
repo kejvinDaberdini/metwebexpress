@@ -3,15 +3,14 @@
 const db = require('../db.js');
 const moment = require('moment');
 
+//all episodes of a podcast
 exports.getAllEpisodes = function(id) {
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT episode.episodeID AS episodeID, episode.title AS title, episode.file AS file, episode.uploadDate AS uploadDate, episode.price AS price, episode.podcastID AS podastID, episode.description AS description,episode.sponsor AS sponsor ,  podcast.image AS image , podcast.creator AS creator FROM episode  JOIN podcast ON episode.podcastID=podcast.podcastID WHERE episode.podcastID=?';
+    const sql = 'SELECT episode.episodeID AS episodeID, episode.title AS title, episode.file AS file, episode.uploadDate AS uploadDate, episode.price AS price, episode.podcastID AS podastID, episode.description AS description,episode.sponsor AS sponsor ,  podcast.image AS image , podcast.creator AS creator FROM episode  JOIN podcast ON episode.podcastID=podcast.podcastID WHERE episode.podcastID=? ';
     db.all(sql, [id], (err, rows) => {
       if (err) {
         reject(err);
-      }
-
-      
+      };
       resolve(rows);
     });
   }); 
@@ -23,12 +22,12 @@ exports.getEpisode = function(id) {
     db.get(sql, [id], (err, row) => {
       if (err) {
         reject(err);
-      }
+      };
       resolve(row);
     });
   });
 };
-
+//get episodes by creator 
 exports.getEpisodesByUser = function(id) {
   return new Promise((resolve, reject) => {
     const sql = 'SELECT episode.episodeID AS episodeID, episode.title AS title, episode.file AS file, episode.uploadDate AS uploadDate, episode.sponsor AS sponsor, episode.price AS price, episode.description as description, podcast.title AS podcast, podcast.image AS image  FROM episode JOIN podcast ON episode.podcastID=podcast.podcastID WHERE creatorID=?';
@@ -56,10 +55,10 @@ exports.addEpisode = function(title, description, file, sponsor,price, podcastID
       }
       else{
         resolve(this.lastID);
-      }
+      };
     });
   });
-}
+};
 
 exports.updateEpisode = function(title, description, file, price, episodeID, sponsor){
   return new Promise((resolve, reject)=>{
@@ -86,11 +85,11 @@ exports.deleteEpisode = function(episodeID){
       }
       else{
         resolve(this.lastID);
-      }
+      };
     });
   });
-}
-//function to get all podcasts that contain an input text in their title or description
+};
+// get all episodes that contain an input text in their title or description
 exports.getEpisodesByText = function(text,category) {
   return new Promise((resolve, reject) => {
     let params;
@@ -104,20 +103,17 @@ exports.getEpisodesByText = function(text,category) {
     if(category=="All"){
       params= {$search:search};
 
-       sql = 'SELECT episode.episodeID AS episodeID, episode.title AS title, episode.description AS description, episode.uploadDate AS uploadDAte ,episode.price AS price, episode.sponsor AS sponsor, podcast.title AS podcast, podcast.image AS image , podcast.title AS podcast FROM episode JOIN podcast ON episode.podcastID=podcast.podcastID WHERE episode.title LIKE $search OR episode.description LIKE $search ';
+       sql = 'SELECT episode.episodeID AS episodeID, episode.title AS title, episode.description AS description, episode.uploadDate AS uploadDAte ,episode.price AS price, episode.sponsor AS sponsor, podcast.title AS podcast, podcast.image AS image , podcast.title AS podcast FROM episode JOIN podcast ON episode.podcastID=podcast.podcastID WHERE episode.title LIKE $search OR episode.description LIKE $search ORDER BY title ';
     }
     else{
       params={$search:search, $category:category}
-       sql = ' SELECT episode.episodeID AS episodeID, episode.title AS title, episode.description AS description, episode.uploadDate AS uploadDAte , episode.price AS price, episode.sponsor AS sponsor, podcast.title AS podcast, podcast.image AS image, podcast.title AS podcast FROM episode JOIN podcast ON episode.podcastID=podcast.podcastID WHERE podcast.category=$category AND(episode.title LIKE $search OR episode.description LIKE $search) '; 
+       sql = ' SELECT episode.episodeID AS episodeID, episode.title AS title, episode.description AS description, episode.uploadDate AS uploadDAte , episode.price AS price, episode.sponsor AS sponsor, podcast.title AS podcast, podcast.image AS image, podcast.title AS podcast FROM episode JOIN podcast ON episode.podcastID=podcast.podcastID WHERE podcast.category=$category AND(episode.title LIKE $search OR episode.description LIKE $search) ORDER BY title '; 
     }   
     db.all(sql, params, (err, rows) => {
       if (err) {
         reject(err);
         return;
-      }
-
-      //const podcasts = rows.map((e) => ({title: e.title, description: e.description, category: e.category, image: e.image, podcastID: e.podcastID}));
-      //resolve(podcasts);
+      };
       resolve(rows);
     });
   });
@@ -130,8 +126,8 @@ exports.getNewEpisodes = function(userID){
       if(err){
         reject(err);
         return;
-      }
+      };
       resolve(rows);
-    })
-  })
-} 
+    });
+  });
+} ;
